@@ -87,7 +87,8 @@
      3. ACTIVE NAV LINK
      ========================================================================= */
   const sections = document.querySelectorAll('section[id], [id="mission"], [id="beliefs"]');
-  const navLinks  = document.querySelectorAll('.nav__link');
+  const navLinks = document.querySelectorAll('.nav__link');
+  const mobileNavLinks = document.querySelectorAll('.nav__mobile-link');
 
   function updateActiveLink() {
     let current = '';
@@ -97,6 +98,13 @@
     navLinks.forEach(function (link) {
       const active = link.getAttribute('href') === '#' + current;
       link.style.color = active ? 'var(--color-text-primary)' : '';
+      active
+        ? link.setAttribute('aria-current', 'true')
+        : link.removeAttribute('aria-current');
+    });
+    mobileNavLinks.forEach(function (link) {
+      const active = link.getAttribute('href') === '#' + current;
+      link.style.color = active ? 'var(--color-accent)' : '';
       active
         ? link.setAttribute('aria-current', 'true')
         : link.removeAttribute('aria-current');
