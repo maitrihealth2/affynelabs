@@ -74,6 +74,7 @@
   --container-max:  1160px;
   --side-padding:   clamp(1.25rem, 4.5vw, var(--space-8));
   --touch-target-min: 44px;
+  --rail-width: 0px;
 
   /* Radii */
   --radius-sm: 4px;
@@ -834,6 +835,10 @@ ul, ol { list-style: none; }
    Wide Desktop Layout (>= 1200px) — Full Editorial Rail
    -------------------------------------------------------------------------- */
 @media (min-width: 1200px) {
+  :root {
+    --rail-width: 176px;
+  }
+
   body {
     padding-left: 176px;
   }
@@ -847,6 +852,10 @@ ul, ol { list-style: none; }
    Compact Desktop / Tablet Layout (1025px to 1199px) — Sleek Slim Rail
    -------------------------------------------------------------------------- */
 @media (min-width: 1025px) and (max-width: 1199px) {
+  :root {
+    --rail-width: 68px;
+  }
+
   body {
     padding-left: 68px;
   }
@@ -1228,28 +1237,18 @@ ul, ol { list-style: none; }
 }
 
 .hero__visual-caption {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  padding: 10px 16px;
+  display: block;
+  padding: 11px 16px;
   background-color: var(--color-surface);
   border-top: 1px solid var(--color-border);
-  font-size: var(--text-xs);
-  color: var(--color-text-secondary);
-  line-height: var(--leading-normal);
-}
-
-.caption-index {
-  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--color-text-primary);
-  flex-shrink: 0;
 }
 
 .caption-text {
-  flex: 1;
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  letter-spacing: var(--tracking-base);
 }
 
 /* Vision Media Showcase */
@@ -1291,15 +1290,10 @@ ul, ol { list-style: none; }
 }
 
 .vision__media-caption {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  padding: 9px 14px;
+  display: block;
+  padding: 11px 16px;
   background-color: var(--color-surface);
   border-top: 1px solid var(--color-border);
-  font-size: var(--text-xs);
-  color: var(--color-text-secondary);
-  line-height: var(--leading-normal);
 }
 
 /* ==========================================================================
@@ -1345,8 +1339,8 @@ ul, ol { list-style: none; }
     display: flex;
     gap: var(--space-8);
     will-change: transform;
-    padding-left: max(var(--side-padding), calc((100vw - 68px - 1160px) / 2));
-    padding-right: var(--space-32);
+    padding-left: max(var(--side-padding), calc((100vw - var(--rail-width, 68px) - var(--container-max, 1160px)) / 2 + var(--side-padding)));
+    padding-right: var(--space-20);
     width: max-content;
   }
 
@@ -1604,15 +1598,10 @@ ul, ol { list-style: none; }
 }
 
 .product__architecture-caption {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
-  padding: 9px 14px;
+  display: block;
+  padding: 11px 16px;
   background-color: var(--color-surface);
   border-top: 1px solid var(--color-border);
-  font-size: var(--text-xs);
-  color: var(--color-text-secondary);
-  line-height: var(--leading-normal);
 }
 
 /* --------------------------------------------------------------------------
@@ -2135,13 +2124,13 @@ ul, ol { list-style: none; }
 }
 
 /* --------------------------------------------------------------------------
-   16. Scroll Reveal — base states (JS adds .revealed)
+   16. Cohesive Editorial Scroll Reveal System
    -------------------------------------------------------------------------- */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -2150,19 +2139,46 @@ ul, ol { list-style: none; }
   transform: translateY(0);
 }
 
-/* Stagger delays — set on individual elements via data-delay */
-.reveal[data-delay="1"] { transition-delay: 80ms; }
-.reveal[data-delay="2"] { transition-delay: 160ms; }
-.reveal[data-delay="3"] { transition-delay: 240ms; }
-.reveal[data-delay="4"] { transition-delay: 320ms; }
-.reveal[data-delay="5"] { transition-delay: 400ms; }
+/* Sequence delays (heading -> intro -> body -> action) */
+.reveal--first,  .reveal[data-delay="0"] { transition-delay: 0ms; }
+.reveal--second, .reveal[data-delay="1"] { transition-delay: 75ms; }
+.reveal--third,  .reveal[data-delay="2"] { transition-delay: 150ms; }
+.reveal--fourth, .reveal[data-delay="3"] { transition-delay: 225ms; }
+.reveal--fifth,  .reveal[data-delay="4"] { transition-delay: 300ms; }
 
-/* Reduced motion — skip animation entirely */
-@media (prefers-reduced-motion: reduce) {
+/* Visual media entrance with gentle settling */
+.reveal--media {
+  opacity: 0;
+  transform: translateY(20px) scale(0.99);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal--media.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Mobile: tighter offsets for mobile viewports */
+@media (max-width: 768px) {
   .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+    transform: translateY(10px);
+    transition-duration: 0.45s;
+  }
+  .reveal--media {
+    transform: translateY(12px) scale(1);
+    transition-duration: 0.5s;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--media {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
 

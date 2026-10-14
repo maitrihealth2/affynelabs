@@ -376,10 +376,10 @@
       // Compute total horizontal overflow distance
       const trackWidth = showcaseTrack.scrollWidth;
       const windowWidth = showcaseWindow.clientWidth;
-      const maxTranslate = Math.max(trackWidth - windowWidth + 120, 0);
+      const maxTranslate = Math.max(trackWidth - windowWidth, 0);
 
       // Section height determines how far user must scroll vertically to travel across the cards
-      const pinDistance = maxTranslate * 1.15;
+      const pinDistance = Math.max(maxTranslate * 1.25, window.innerHeight * 1.2);
       showcaseSection.style.height = (pinDistance + window.innerHeight) + 'px';
     }
 
@@ -397,7 +397,7 @@
 
       const trackWidth = showcaseTrack.scrollWidth;
       const windowWidth = showcaseWindow.clientWidth;
-      const maxTranslate = Math.max(trackWidth - windowWidth + 120, 0);
+      const maxTranslate = Math.max(trackWidth - windowWidth, 0);
 
       const translateX = -progress * maxTranslate;
       showcaseTrack.style.transform = 'translate3d(' + translateX + 'px, 0, 0)';
@@ -426,82 +426,86 @@
   }
 
   /* =========================================================================
-     5. SCROLL REVEAL — each element floats in individually
+     5. COHESIVE EDITORIAL SCROLL REVEAL SYSTEM
      ========================================================================= */
   if (!reducedMotion && 'IntersectionObserver' in window) {
 
-    /**
-     * Mark every element inside a group with a stagger delay index.
-     * Pass a CSS selector and the elements will animate in sequence.
-     */
-    function markGroup(parentSelector, childSelector) {
+    // Orchestrated hierarchy of element entrances:
+    // Eyebrow/Category -> Heading -> Intro/Body -> Media/Visual -> Actions
+    const revealGroups = [
+      // Hero
+      { selector: '.hero__eyebrow', cls: 'reveal reveal--first' },
+      { selector: '.hero__headline', cls: 'reveal reveal--second' },
+      { selector: '.hero__body', cls: 'reveal reveal--third' },
+      { selector: '.hero__actions', cls: 'reveal reveal--fourth' },
+      { selector: '.hero__visual', cls: 'reveal--media reveal--fifth' },
+
+      // About
+      { selector: '.about__label', cls: 'reveal reveal--first' },
+      { selector: '.about__content', cls: 'reveal reveal--second' },
+
+      // Vision
+      { selector: '.vision__header .eyebrow', cls: 'reveal reveal--first' },
+      { selector: '.vision__header .heading-xl', cls: 'reveal reveal--second' },
+      { selector: '.vision__intro', cls: 'reveal reveal--third' },
+      { selector: '.vision__build-label', cls: 'reveal reveal--first' },
+      { selector: '.vision__build-heading', cls: 'reveal reveal--second' },
+      { selector: '.vision__build-content .body-base', cls: 'reveal reveal--third' },
+      { selector: '.vision__media', cls: 'reveal--media reveal--fourth' },
+
+      // Showcase intro
+      { selector: '.showcase__header-left', cls: 'reveal reveal--first' },
+      { selector: '.showcase__header-right', cls: 'reveal reveal--second' },
+      { selector: '.showcase__track-window', cls: 'reveal--media reveal--third' },
+
+      // Beliefs
+      { selector: '.principles__header .eyebrow', cls: 'reveal reveal--first' },
+      { selector: '.principles__header .heading-xl', cls: 'reveal reveal--second' },
+
+      // Product
+      { selector: '.product__header .eyebrow', cls: 'reveal reveal--first' },
+      { selector: '.product__header .heading-xl', cls: 'reveal reveal--second' },
+      { selector: '.product__intro', cls: 'reveal reveal--third' },
+      { selector: '.product__preview-badge-row', cls: 'reveal reveal--first' },
+      { selector: '.product__preview-title', cls: 'reveal reveal--second' },
+      { selector: '.product__preview-subtitle', cls: 'reveal reveal--third' },
+      { selector: '.product__architecture-media', cls: 'reveal--media reveal--fourth' },
+
+      // Contact
+      { selector: '.contact-cta__inner .eyebrow', cls: 'reveal reveal--first' },
+      { selector: '.contact-cta__inner .heading-xl', cls: 'reveal reveal--second' },
+      { selector: '.contact-cta__inner .body-lg', cls: 'reveal reveal--third' },
+      { selector: '.contact-cta__inner .btn', cls: 'reveal reveal--fourth' },
+
+      // Footer
+      { selector: '.footer__brand-block', cls: 'reveal reveal--first' },
+      { selector: '.footer__links', cls: 'reveal reveal--second' },
+      { selector: '.footer__legal', cls: 'reveal reveal--third' },
+    ];
+
+    revealGroups.forEach(function (group) {
+      document.querySelectorAll(group.selector).forEach(function (el) {
+        group.cls.split(' ').forEach(function (c) {
+          el.classList.add(c);
+        });
+      });
+    });
+
+    // Stagger sequential cards in grids/lists
+    function staggerGroup(parentSelector, childSelector) {
       document.querySelectorAll(parentSelector).forEach(function (parent) {
         parent.querySelectorAll(childSelector).forEach(function (child, i) {
-          child.setAttribute('data-delay', String(i + 1));
+          child.classList.add('reveal');
+          child.setAttribute('data-delay', String(Math.min(i + 1, 5)));
         });
       });
     }
 
-    // Set stagger on solutions and principles children
-    markGroup('.solutions__grid', '.solution-item');
-    markGroup('.principles__list', '.principle-item');
+    staggerGroup('.solutions__grid', '.solution-item');
+    staggerGroup('.principles__list', '.principle-item');
+    staggerGroup('.product__pipeline', '.pipeline-step');
 
-    // ---- Collect all reveal targets ----
-    // These map to the .reveal class in CSS.
-    // Each element animates independently when it enters the viewport.
-    const REVEAL_SELECTORS = [
-      // Hero
-      '.hero__eyebrow',
-      '.hero__headline',
-      '.hero__body',
-      '.hero__actions',
-      '.hero__visual',
-
-      // About
-      '.about__label',
-      '.about__content',
-
-      // Vision
-      '.vision__header .eyebrow',
-      '.vision__header .heading-xl',
-      '.vision__intro',
-      '.vision__build-label',
-      '.vision__build-heading',
-      '.vision__build-content .body-base',
-      '.vision__media',
-
-      // Beliefs
-      '.principles__header .eyebrow',
-      '.principles__header .heading-xl',
-      '.principle-item',
-
-      // Product
-      '.product__header .eyebrow',
-      '.product__header .heading-xl',
-      '.product__intro',
-      '.solution-item',
-      '.product__preview-card',
-
-      // Contact
-      '.contact-cta__inner .eyebrow',
-      '.contact-cta__inner .heading-xl',
-      '.contact-cta__inner .body-lg',
-      '.contact-cta__inner .btn',
-
-      // Footer
-      '.footer__brand-block',
-      '.footer__links',
-      '.footer__legal',
-    ];
-
-    // Add .reveal to every matched element
-    REVEAL_SELECTORS.forEach(function (selector) {
-      document.querySelectorAll(selector).forEach(function (el) {
-        el.classList.add('reveal');
-      });
-    });
-
-    // ---- Observer ----
+    // IntersectionObserver for elements entering viewport
     const observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
@@ -512,13 +516,19 @@
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: '0px 0px -48px 0px',
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px',
       }
     );
 
-    document.querySelectorAll('.reveal').forEach(function (el) {
-      observer.observe(el);
+    // Initial viewport check: reveal elements already in view without animation delay
+    document.querySelectorAll('.reveal, .reveal--media').forEach(function (el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) {
+        el.classList.add('revealed');
+      } else {
+        observer.observe(el);
+      }
     });
   }
 
