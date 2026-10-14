@@ -106,7 +106,141 @@
   window.addEventListener('scroll', updateActiveLink, { passive: true });
 
   /* =========================================================================
-     4. SCROLL REVEAL — each element floats in individually
+     4. OPAL-STYLE SCROLL-DRIVEN WORD REVEAL (MISSION SECTION)
+     ========================================================================= */
+  const missionTrack = document.getElementById('mission');
+  const missionStickyFrame = missionTrack ? missionTrack.querySelector('.mission__sticky-frame') : null;
+  const missionStatementEl = document.getElementById('mission-statement') || (missionTrack ? missionTrack.querySelector('.mission__statement') : null);
+  const missionBodyEl = document.getElementById('mission-body') || (missionTrack ? missionTrack.querySelector('.mission__body') : null);
+
+  if (missionTrack && missionStickyFrame && missionStatementEl && missionBodyEl && !reducedMotion) {
+    // Helper to tokenize into words while preserving spaces & punctuation
+    function tokenizeToWords(container) {
+      const text = container.textContent.trim();
+      const words = text.split(/\s+/);
+      container.innerHTML = '';
+
+      const spans = [];
+      words.forEach(function (word, index) {
+        const span = document.createElement('span');
+        span.className = 'mission-word';
+        span.textContent = word;
+        container.appendChild(span);
+        spans.push(span);
+
+        if (index < words.length - 1) {
+          const nextWord = words[index + 1];
+          // Use non-breaking space before em-dash so it never begins a line alone
+          if (nextWord === '—') {
+            container.appendChild(document.createTextNode('\u00A0'));
+          } else {
+            container.appendChild(document.createTextNode(' '));
+          }
+        }
+      });
+      return spans;
+    }
+
+    const statementSpans = tokenizeToWords(missionStatementEl);
+    const bodySpans = tokenizeToWords(missionBodyEl);
+
+    // Activate sticky scroll mode on container
+    missionTrack.classList.add('mission-section--active');
+
+    let lastStatementCount = -1;
+    let lastBodyCount = -1;
+
+    function applyWordReveal(statementCount, bodyCount) {
+      if (statementCount !== lastStatementCount) {
+        for (let i = 0; i < statementSpans.length; i++) {
+          if (i < statementCount) {
+            statementSpans[i].classList.add('is-revealed');
+          } else {
+            statementSpans[i].classList.remove('is-revealed');
+          }
+        }
+        lastStatementCount = statementCount;
+      }
+
+      if (bodyCount !== lastBodyCount) {
+        for (let j = 0; j < bodySpans.length; j++) {
+          if (j < bodyCount) {
+            bodySpans[j].classList.add('is-revealed');
+          } else {
+            bodySpans[j].classList.remove('is-revealed');
+          }
+        }
+        lastBodyCount = bodyCount;
+      }
+    }
+
+    function updateMissionScroll() {
+      const siteHeader = document.getElementById('site-header');
+      const headerH = siteHeader ? siteHeader.offsetHeight : 60;
+      const rect = missionTrack.getBoundingClientRect();
+      const totalPinDistance = missionTrack.offsetHeight - missionStickyFrame.offsetHeight;
+
+      if (totalPinDistance <= 0) {
+        applyWordReveal(statementSpans.length, bodySpans.length);
+        return;
+      }
+
+      // Progress goes from 0.0 to 1.0 during pinned range
+      const scrollPinned = headerH - rect.top;
+      const progress = Math.min(Math.max(scrollPinned / totalPinDistance, 0), 1);
+
+      // Phase 1 (0.00 -> 0.08): Pinned settling, 0 words revealed
+      // Phase 2 (0.08 -> 0.48): Mission statement reveal word-by-word
+      // Phase 3 (0.48 -> 0.52): Brief reading pause before supporting text
+      //         (0.52 -> 0.88): Supporting paragraph reveal word-by-word
+      // Phase 4 (0.88 -> 1.00): All text 100% revealed holding plateau
+      // Phase 5 (> 1.00): Natural release
+
+      let statementCount = 0;
+      let bodyCount = 0;
+
+      if (progress < 0.08) {
+        statementCount = 0;
+        bodyCount = 0;
+      } else if (progress < 0.48) {
+        const t = (progress - 0.08) / (0.48 - 0.08);
+        statementCount = Math.min(Math.floor(t * statementSpans.length) + 1, statementSpans.length);
+        bodyCount = 0;
+      } else if (progress < 0.52) {
+        statementCount = statementSpans.length;
+        bodyCount = 0;
+      } else if (progress < 0.88) {
+        statementCount = statementSpans.length;
+        const t = (progress - 0.52) / (0.88 - 0.52);
+        bodyCount = Math.min(Math.floor(t * bodySpans.length) + 1, bodySpans.length);
+      } else {
+        statementCount = statementSpans.length;
+        bodyCount = bodySpans.length;
+      }
+
+      applyWordReveal(statementCount, bodyCount);
+    }
+
+    let isTicking = false;
+    function onScrollOrResize() {
+      if (!isTicking) {
+        window.requestAnimationFrame(function () {
+          updateMissionScroll();
+          isTicking = false;
+        });
+        isTicking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+
+    // Initial evaluation on load
+    updateMissionScroll();
+  }
+
+  /* =========================================================================
+     5. SCROLL REVEAL — each element floats in individually
      ========================================================================= */
   if (!reducedMotion && 'IntersectionObserver' in window) {
 
@@ -140,11 +274,6 @@
       // About
       '.about__label',
       '.about__content',
-
-      // Mission
-      '.mission__inner .eyebrow',
-      '.mission__statement',
-      '.mission__body',
 
       // Vision
       '.vision__header .eyebrow',
@@ -206,7 +335,7 @@
   }
 
   /* =========================================================================
-     5. JS loaded flag
+     6. JS loaded flag
      ========================================================================= */
   document.documentElement.classList.add('js-loaded');
 

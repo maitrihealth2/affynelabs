@@ -677,12 +677,64 @@ ul, ol { list-style: none; }
    New Sections — Mission, Vision, Team
    -------------------------------------------------------------------------- */
 
-/* MISSION */
+/* MISSION — Opal-Style Scroll-Driven Word Reveal */
+.mission-section {
+  position: relative;
+  background-color: var(--color-bg-subtle);
+  margin: 0;
+  padding: 0;
+}
+
+/* Track height during interactive scroll mode */
+.mission-section.mission-section--active {
+  height: 260vh;
+}
+
+@media (max-width: 1024px) {
+  .mission-section.mission-section--active {
+    height: 230vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .mission-section.mission-section--active {
+    height: 190vh;
+  }
+}
+
+/* Fallback when JS is disabled or before activation */
+.mission-section:not(.mission-section--active) {
+  height: auto;
+  padding-block: var(--space-32);
+}
+
+.mission__sticky-frame {
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+  padding-block: var(--space-8);
+  overflow: visible;
+}
+
+.mission-section:not(.mission-section--active) .mission__sticky-frame {
+  position: static;
+  height: auto;
+  min-height: 0;
+  padding-block: 0;
+}
+
 .mission__inner {
   max-width: 800px;
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
+  width: 100%;
 }
 
 .mission__statement {
@@ -697,6 +749,63 @@ ul, ol { list-style: none; }
 
 .mission__body {
   max-width: 620px;
+}
+
+/* Word-by-word reveal typography */
+.mission-word {
+  display: inline-block;
+  white-space: pre;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+/* Unrevealed muted state when interactive */
+.mission-section--active .mission__statement .mission-word {
+  color: var(--color-text-primary);
+  opacity: 0.18;
+}
+
+.mission-section--active .mission__body .mission-word {
+  color: var(--color-text-secondary);
+  opacity: 0.22;
+}
+
+/* Revealed active state */
+.mission-section--active .mission__statement .mission-word.is-revealed {
+  color: var(--color-text-primary);
+  opacity: 1;
+}
+
+.mission-section--active .mission__body .mission-word.is-revealed {
+  color: var(--color-text-secondary);
+  opacity: 1;
+}
+
+/* Fallback for non-interactive state */
+.mission-section:not(.mission-section--active) .mission-word {
+  opacity: 1 !important;
+  color: inherit !important;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .mission-section,
+  .mission-section.mission-section--active {
+    height: auto !important;
+    padding-block: var(--space-32) !important;
+  }
+  .mission__sticky-frame {
+    position: static !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding-block: 0 !important;
+  }
+  .mission-word {
+    opacity: 1 !important;
+    color: inherit !important;
+    transition: none !important;
+  }
 }
 
 /* VISION */
@@ -902,6 +1011,18 @@ ul, ol { list-style: none; }
   .principle-item {
     grid-template-columns: 48px 1fr;
     gap: var(--space-4);
+  }
+
+  /* Mission */
+  .mission-section:not(.mission-section--active) {
+    padding-block: var(--space-20);
+  }
+  .mission__sticky-frame {
+    min-height: 400px;
+    padding-block: var(--space-4);
+  }
+  .mission__inner {
+    gap: var(--space-6);
   }
 
   /* Vision */
