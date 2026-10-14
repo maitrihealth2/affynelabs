@@ -84,7 +84,7 @@
   onHeaderScroll();
 
   /* =========================================================================
-     3. ACTIVE NAV LINK & VERTICAL RAIL TRACKING
+     3. ACTIVE NAV LINK & SECTION TRACKING
      ========================================================================= */
   const sectionData = [
     { id: 'about',    index: '01', name: 'About' },
@@ -99,15 +99,6 @@
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav__link');
   const mobileNavLinks = document.querySelectorAll('.nav__mobile-link');
-  const railLinks = document.querySelectorAll('.nav-rail__link');
-  const navSpineProgress = document.getElementById('nav-spine-progress');
-  const navRailSectionCoord = document.getElementById('nav-rail-section-coord');
-  const navRailPct = document.getElementById('nav-rail-pct');
-  const navRailTopBtn = document.getElementById('nav-rail-top');
-
-  // Legacy fallback handles
-  const railGaugeBar = document.getElementById('nav-rail-bar');
-  const railGaugeVal = document.getElementById('nav-rail-val');
 
   const mobilePill = document.getElementById('mobile-section-pill');
   const mobilePillIdx = document.getElementById('mobile-pill-idx');
@@ -147,45 +138,17 @@
         : link.removeAttribute('aria-current');
     });
 
-    // Update vertical rail links
-    railLinks.forEach(function (link) {
-      const active = link.getAttribute('data-section') === current;
-      if (active) {
-        link.classList.add('is-active');
-        link.setAttribute('aria-current', 'true');
-      } else {
-        link.classList.remove('is-active');
-        link.removeAttribute('aria-current');
-      }
-    });
-
     // Overall document scroll progress
     const maxScroll = docHeight - winHeight;
     const progress = maxScroll > 0 ? Math.min(Math.max(scrollY / maxScroll, 0), 1) : 0;
     const percentInt = Math.round(progress * 100);
     const percentStr = percentInt + '%';
 
-    // Update continuous vertical spine progress line
-    if (navSpineProgress) {
-      navSpineProgress.style.height = (progress * 100) + '%';
-    }
-
-    // Update editorial status coordinates
-    const activeIdx = sectionData.findIndex(function (item) { return item.id === current; });
-    const activeInfo = activeIdx !== -1 ? sectionData[activeIdx] : sectionData[0];
-    if (navRailSectionCoord) {
-      navRailSectionCoord.textContent = activeInfo.index + ' / 07';
-    }
-    if (navRailPct) {
-      navRailPct.textContent = percentStr;
-    }
-
-    // Fallbacks if elements exist
-    if (railGaugeBar) railGaugeBar.style.height = (percentInt < 10 ? '0' : '') + percentStr;
-    if (railGaugeVal) railGaugeVal.textContent = (percentInt < 10 ? '0' : '') + percentStr;
-
     // Update mobile section pill
     if (mobilePill) {
+      const activeIdx = sectionData.findIndex(function (item) { return item.id === current; });
+      const activeInfo = activeIdx !== -1 ? sectionData[activeIdx] : sectionData[0];
+
       if (scrollY < 120 || (navMobile && navMobile.classList.contains('is-open'))) {
         mobilePill.classList.add('is-hidden');
       } else {
@@ -201,14 +164,6 @@
   window.addEventListener('scroll', updateActiveLink, { passive: true });
   window.addEventListener('resize', updateActiveLink, { passive: true });
   updateActiveLink();
-
-  // Scroll to top button in navigation rail
-  if (navRailTopBtn) {
-    navRailTopBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
 
   // Mobile pill tap to scroll to next section
   if (mobilePill) {
