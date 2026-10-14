@@ -100,6 +100,12 @@
   const navLinks = document.querySelectorAll('.nav__link');
   const mobileNavLinks = document.querySelectorAll('.nav__mobile-link');
   const railLinks = document.querySelectorAll('.nav-rail__link');
+  const navSpineProgress = document.getElementById('nav-spine-progress');
+  const navRailSectionCoord = document.getElementById('nav-rail-section-coord');
+  const navRailPct = document.getElementById('nav-rail-pct');
+  const navRailTopBtn = document.getElementById('nav-rail-top');
+
+  // Legacy fallback handles
   const railGaugeBar = document.getElementById('nav-rail-bar');
   const railGaugeVal = document.getElementById('nav-rail-val');
 
@@ -109,14 +115,19 @@
   const mobilePillBar = document.getElementById('mobile-pill-bar');
 
   function updateActiveLink() {
-    let current = '';
     const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight;
+    const winHeight = window.innerHeight;
+    let current = 'about';
 
-    sections.forEach(function (s) {
-      if (scrollY >= s.offsetTop - 140) current = s.id;
-    });
-
-    if (scrollY < 160) current = '';
+    // Check if scrolled near the bottom of document
+    if (scrollY + winHeight >= docHeight - 80) {
+      current = 'contact';
+    } else {
+      sections.forEach(function (s) {
+        if (scrollY >= s.offsetTop - 160) current = s.id;
+      });
+    }
 
     // Update top header links
     navLinks.forEach(function (link) {
@@ -148,33 +159,56 @@
       }
     });
 
-    // Total document scroll percentage
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    // Overall document scroll progress
+    const maxScroll = docHeight - winHeight;
     const progress = maxScroll > 0 ? Math.min(Math.max(scrollY / maxScroll, 0), 1) : 0;
     const percentInt = Math.round(progress * 100);
-    const percentStr = (percentInt < 10 ? '0' : '') + percentInt + '%';
+    const percentStr = percentInt + '%';
 
-    if (railGaugeBar) railGaugeBar.style.height = percentStr;
-    if (railGaugeVal) railGaugeVal.textContent = percentStr;
+    // Update continuous vertical spine progress line
+    if (navSpineProgress) {
+      navSpineProgress.style.height = (progress * 100) + '%';
+    }
+
+    // Update editorial status coordinates
+    const activeIdx = sectionData.findIndex(function (item) { return item.id === current; });
+    const activeInfo = activeIdx !== -1 ? sectionData[activeIdx] : sectionData[0];
+    if (navRailSectionCoord) {
+      navRailSectionCoord.textContent = activeInfo.index + ' / 07';
+    }
+    if (navRailPct) {
+      navRailPct.textContent = percentStr;
+    }
+
+    // Fallbacks if elements exist
+    if (railGaugeBar) railGaugeBar.style.height = (percentInt < 10 ? '0' : '') + percentStr;
+    if (railGaugeVal) railGaugeVal.textContent = (percentInt < 10 ? '0' : '') + percentStr;
 
     // Update mobile section pill
     if (mobilePill) {
-      if (scrollY < 140 || (navMobile && navMobile.classList.contains('is-open'))) {
+      if (scrollY < 120 || (navMobile && navMobile.classList.contains('is-open'))) {
         mobilePill.classList.add('is-hidden');
       } else {
         mobilePill.classList.remove('is-hidden');
       }
 
       if (mobilePillBar) mobilePillBar.style.width = percentStr;
-
-      const activeInfo = sectionData.find(function (item) { return item.id === current; }) || sectionData[0];
       if (mobilePillIdx) mobilePillIdx.textContent = activeInfo.index;
       if (mobilePillName) mobilePillName.textContent = activeInfo.name;
     }
   }
 
   window.addEventListener('scroll', updateActiveLink, { passive: true });
+  window.addEventListener('resize', updateActiveLink, { passive: true });
   updateActiveLink();
+
+  // Scroll to top button in navigation rail
+  if (navRailTopBtn) {
+    navRailTopBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   // Mobile pill tap to scroll to next section
   if (mobilePill) {
@@ -182,7 +216,7 @@
       let currentIdx = -1;
       const scrollY = window.scrollY;
       sections.forEach(function (s, i) {
-        if (scrollY >= s.offsetTop - 140) currentIdx = i;
+        if (scrollY >= s.offsetTop - 160) currentIdx = i;
       });
       const nextIdx = (currentIdx + 1) % sections.length;
       sections[nextIdx].scrollIntoView({ behavior: 'smooth' });

@@ -101,6 +101,23 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Refined, unobtrusive native scrollbar — preserves 100% native scrolling and accessibility */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(26, 25, 21, 0.22) transparent;
+}
+
+html::-webkit-scrollbar {
+  width: 6px;
+}
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb {
+  background: rgba(26, 25, 21, 0.18);
+  border-radius: 999px;
+}
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(26, 25, 21, 0.38);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -456,51 +473,58 @@ ul, ol { list-style: none; }
 }
 
 /* ==========================================================================
-   8b. Vertical Navigation Rail (Desktop)
+   8b. Vertical Navigation Rail (Desktop & Tablet)
    ========================================================================== */
 .nav-rail {
   display: none;
 }
 
+/* --------------------------------------------------------------------------
+   Desktop & Tablet Shared Rail Shell
+   -------------------------------------------------------------------------- */
 @media (min-width: 1025px) {
-  body {
-    padding-left: 68px;
-  }
-
   .nav-rail {
     display: flex;
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 68px;
     height: 100vh;
+    height: 100dvh;
     background-color: var(--color-bg);
     border-right: 1px solid var(--color-border);
     z-index: 900;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-6) 0 var(--space-5);
     user-select: none;
+    box-sizing: border-box;
+    transition: width var(--transition-base), padding var(--transition-base);
   }
 
   .nav-rail__inner {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     height: 100%;
+    width: 100%;
+    padding: var(--space-6) var(--space-4) var(--space-5);
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  /* Rail Header / Brand Mark */
+  .nav-rail__header {
+    display: flex;
+    flex-direction: column;
     width: 100%;
   }
 
   .nav-rail__brand {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 10px;
     text-decoration: none;
     color: var(--color-text-primary);
+    padding: 4px;
+    border-radius: var(--radius-sm);
     transition: transform var(--transition-fast), color var(--transition-fast);
   }
   .nav-rail__brand:hover {
@@ -509,15 +533,33 @@ ul, ol { list-style: none; }
   }
   .nav-rail__brand:focus-visible {
     outline: 2px solid var(--color-accent);
-    outline-offset: 4px;
-    border-radius: var(--radius-sm);
+    outline-offset: 3px;
   }
 
   .nav-rail__monogram {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     color: inherit;
+    transition: transform var(--transition-fast);
+  }
+  .nav-rail__brand:hover .nav-rail__monogram {
+    transform: rotate(4deg);
+  }
+
+  .nav-rail__brand-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    line-height: 1.15;
+  }
+
+  .nav-rail__brand-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
   }
 
   .nav-rail__brand-tag {
@@ -525,87 +567,372 @@ ul, ol { list-style: none; }
     font-size: 8px;
     font-weight: 600;
     letter-spacing: 0.12em;
-    color: var(--color-text-tertiary);
+    color: var(--color-accent);
     text-transform: uppercase;
   }
 
-  .nav-rail__divider {
-    width: 24px;
+  .nav-rail__header-rule {
     height: 1px;
     background-color: var(--color-border);
-    margin: var(--space-3) 0 var(--space-2);
+    width: 100%;
+    margin-top: var(--space-3);
   }
 
+  /* Rail Section Index Nav */
   .nav-rail__nav {
     display: flex;
     flex-direction: column;
+    margin-block: auto;
+    padding-block: var(--space-4);
+    width: 100%;
+  }
+
+  .nav-rail__nav-heading {
+    display: flex;
     align-items: center;
-    flex: 1;
-    justify-content: center;
+    justify-content: space-between;
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+    padding-inline: 6px;
+  }
+
+  .nav-rail__track-wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+  }
+
+  /* Connected Continuous Vertical Spine Guide */
+  .nav-rail__spine {
+    position: absolute;
+    left: 11.5px;
+    top: 14px;
+    bottom: 14px;
+    width: 1px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .nav-rail__spine-guide {
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-border-mid);
+    opacity: 0.7;
+  }
+
+  .nav-rail__spine-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background-color: var(--color-accent);
+    box-shadow: 0 0 6px rgba(45, 106, 79, 0.45);
+    transition: height 0.15s ease-out;
   }
 
   .nav-rail__list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
-    align-items: center;
+    gap: 6px;
+    width: 100%;
     margin: 0;
     padding: 0;
+    z-index: 2;
   }
 
   .nav-rail__item {
     position: relative;
+    width: 100%;
   }
 
   .nav-rail__link {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    padding: 8px 10px;
+    gap: 10px;
+    padding: 6px 6px;
     border-radius: var(--radius-sm);
+    text-decoration: none;
     position: relative;
-    transition: background-color var(--transition-fast);
+    touch-action: manipulation;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
   }
   .nav-rail__link:hover {
     background-color: var(--color-bg-subtle);
   }
   .nav-rail__link:focus-visible {
     outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+    outline-offset: 1px;
+  }
+
+  /* Node Pip on Spine */
+  .nav-rail__node {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border-mid);
+    background-color: var(--color-bg);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 3;
+    transition: transform var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .nav-rail__node-pip {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color var(--transition-fast);
   }
 
   .nav-rail__index {
     font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 500;
     letter-spacing: 0.05em;
     color: var(--color-text-tertiary);
+    min-width: 16px;
     transition: color var(--transition-fast), font-weight var(--transition-fast);
   }
 
-  /* Refined tooltip flyout on hover/focus */
+  .nav-rail__label {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 450;
+    letter-spacing: 0.01em;
+    color: var(--color-text-secondary);
+    opacity: 0.75;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--transition-fast), opacity var(--transition-fast), font-weight var(--transition-fast);
+  }
+
+  .nav-rail__link:hover .nav-rail__label {
+    opacity: 1;
+    color: var(--color-text-primary);
+  }
+  .nav-rail__link:hover .nav-rail__index {
+    color: var(--color-text-primary);
+  }
+  .nav-rail__link:hover .nav-rail__node {
+    border-color: var(--color-text-secondary);
+  }
+
+  /* Active Section Highlight */
+  .nav-rail__link.is-active {
+    background-color: rgba(26, 25, 21, 0.045);
+  }
+
+  .nav-rail__link.is-active .nav-rail__node {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent);
+    box-shadow: 0 0 0 2.5px rgba(45, 106, 79, 0.2);
+    transform: scale(1.15);
+  }
+
+  .nav-rail__link.is-active .nav-rail__node-pip {
+    background-color: #FAF9F5;
+  }
+
+  .nav-rail__link.is-active .nav-rail__index {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .nav-rail__link.is-active .nav-rail__label {
+    color: var(--color-text-primary);
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  /* Rail Footer: Minimal Status Coordinate & Back-to-Top (No Faux Scrollbar) */
+  .nav-rail__footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    margin-top: auto;
+  }
+
+  .nav-rail__footer-rule {
+    height: 1px;
+    background-color: var(--color-border);
+    width: 100%;
+  }
+
+  .nav-rail__status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 4px;
+  }
+
+  .nav-rail__status-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .nav-rail__status-tag {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 7.5px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+  }
+
+  .nav-rail__status-val {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-text-primary);
+  }
+
+  .nav-rail__top-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background-color: transparent;
+    color: var(--color-text-tertiary);
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+  .nav-rail__top-btn:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-text-primary);
+    background-color: var(--color-bg-subtle);
+    transform: translateY(-1px);
+  }
+  .nav-rail__top-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Wide Desktop Layout (>= 1200px) — Full Editorial Rail
+   -------------------------------------------------------------------------- */
+@media (min-width: 1200px) {
+  body {
+    padding-left: 176px;
+  }
+
+  .nav-rail {
+    width: 176px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Compact Desktop / Tablet Layout (1025px to 1199px) — Sleek Slim Rail
+   -------------------------------------------------------------------------- */
+@media (min-width: 1025px) and (max-width: 1199px) {
+  body {
+    padding-left: 68px;
+  }
+
+  .nav-rail {
+    width: 68px;
+  }
+
+  .nav-rail__inner {
+    padding-inline: var(--space-2);
+    align-items: center;
+  }
+
+  .nav-rail__header {
+    align-items: center;
+  }
+
+  .nav-rail__brand {
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    padding: 2px;
+  }
+
+  .nav-rail__brand-meta {
+    display: none;
+  }
+
+  .nav-rail__header-rule {
+    width: 22px;
+    margin-inline: auto;
+  }
+
+  .nav-rail__nav-heading {
+    display: none;
+  }
+
+  .nav-rail__spine {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-rail__list {
+    align-items: center;
+  }
+
+  .nav-rail__link {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 4px;
+    gap: 4px;
+    width: 44px;
+  }
+
+  .nav-rail__node {
+    margin: 0 auto;
+  }
+
+  .nav-rail__index {
+    font-size: 0.625rem;
+    text-align: center;
+  }
+
+  /* Refined flyout tooltip for labels in compact tablet mode */
   .nav-rail__label {
     position: absolute;
-    left: calc(100% + 8px);
+    left: calc(100% + 12px);
     top: 50%;
     transform: translateY(-50%) translateX(-4px);
     background-color: var(--color-text-primary);
     color: #FAFAF9;
-    font-family: var(--font-sans);
     font-size: 0.6875rem;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    padding: 4px 8px;
+    padding: 5px 9px;
     border-radius: var(--radius-sm);
     white-space: nowrap;
+    overflow: visible;
+    text-overflow: unset;
+    line-height: 1;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.18s ease, transform 0.18s ease;
-    box-shadow: 0 4px 12px rgba(26, 25, 21, 0.12);
+    transition: opacity 0.16s ease, transform 0.16s ease;
+    box-shadow: 0 4px 14px rgba(26, 25, 21, 0.22);
     z-index: 1000;
   }
   .nav-rail__label::before {
@@ -623,79 +950,67 @@ ul, ol { list-style: none; }
   .nav-rail__link:focus-visible .nav-rail__label {
     opacity: 1;
     transform: translateY(-50%) translateX(0);
+    color: #FAF9F5 !important;
   }
 
-  /* Active state indicator pip */
-  .nav-rail__indicator {
-    position: absolute;
-    left: -14px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2.5px;
-    height: 0;
-    background-color: var(--color-accent);
-    border-radius: 0 2px 2px 0;
-    transition: height 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  .nav-rail__link.is-active .nav-rail__label {
+    color: #FAF9F5 !important;
   }
 
-  .nav-rail__link.is-active .nav-rail__index {
-    color: var(--color-text-primary);
-    font-weight: 600;
-  }
-  .nav-rail__link.is-active .nav-rail__indicator {
-    height: 18px;
-  }
-  .nav-rail__link.is-active {
-    background-color: var(--color-bg-subtle);
+  .nav-rail__footer-rule {
+    width: 22px;
+    margin-inline: auto;
   }
 
-  /* Footer scroll meter */
+  .nav-rail__status {
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+  }
+
+  .nav-rail__status-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .nav-rail__status-val {
+    font-size: 8px;
+  }
+
+  .nav-rail__top-btn {
+    padding: 4px 6px;
+  }
+  .nav-rail__top-text {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Height-Adaptive Rules for Compact Laptop Displays (< 740px height)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1025px) and (max-height: 740px) {
+  .nav-rail__inner {
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-3);
+  }
+  .nav-rail__nav {
+    padding-block: var(--space-1);
+  }
+  .nav-rail__list {
+    gap: 3px;
+  }
+  .nav-rail__link {
+    padding-block: 4px;
+  }
   .nav-rail__footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    width: 100%;
-    padding-top: var(--space-2);
+    gap: var(--space-2);
   }
+}
 
-  .nav-rail__gauge {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .nav-rail__gauge-track {
-    width: 2px;
-    height: 44px;
-    background-color: var(--color-border);
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .nav-rail__gauge-bar {
-    width: 100%;
-    height: 0%;
-    background-color: var(--color-accent);
-    transition: height 0.1s linear;
-  }
-
-  .nav-rail__gauge-val {
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    color: var(--color-text-tertiary);
-  }
-
-  .nav-rail__spec {
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-    font-size: 7.5px;
-    letter-spacing: 0.12em;
-    color: var(--color-text-tertiary);
-    text-transform: uppercase;
+@media (prefers-reduced-motion: reduce) {
+  .nav-rail__spine-progress {
+    transition: none !important;
   }
 }
 
