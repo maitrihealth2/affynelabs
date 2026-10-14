@@ -17,7 +17,7 @@ const CONTENT = {
     links: [
       { label: "About",    href: "#about"      },
       { label: "Vision",   href: "#vision"     },
-      { label: "Team",     href: "#team"        },
+      { label: "Product",  href: "#product"    },
       { label: "Contact",  href: "#contact"    },
     ],
     cta: { label: "Get in touch", href: "#contact" },
@@ -75,52 +75,27 @@ const CONTENT = {
     ],
   },
 
-  team: {
-    eyebrow: "The team",
-    heading: "Built by people who care about the problem.",
-    intro: "Affyne Labs is founder-led, with a small senior core team covering product, engineering, design, data, and clinical psychology — supported by an advisory layer with deep technical and clinical experience.",
-
-    leadership: {
-      label: "Leadership",
-      members: [
-        {
-          name: "— Name placeholder —",
-          role: "Role title placeholder",
-          owns: "Role responsibility description placeholder. Replace with actual ownership statement.",
-        },
-      ],
-    },
-
-    core: {
-      label: "Core Team",
-      members: [
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-      ],
-    },
-
-    clinical: {
-      label: "Clinical Team",
-      members: [
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-      ],
-    },
-
-    advisors: {
-      label: "Mentors & Advisors",
-      members: [
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-        { name: "— Name placeholder —", role: "Role title placeholder", owns: "Role responsibility description placeholder." },
-      ],
-    },
+  product: {
+    eyebrow: "Our product",
+    heading: "Built for depth, context, and clinical safety.",
+    intro: "A conversational intelligence platform that bridges the gap between what someone experiences and what they can put into words — turning everyday dialogue into structured, clinically relevant understanding.",
+    pillars: [
+      {
+        number: "01",
+        title: "Multimodal Signal Perception",
+        body: "Listens beyond literal vocabulary. Analyzes conversational cadence, acoustic vocal tone, emotional nuance, and deliberate hesitation to understand authentic intent in real time.",
+      },
+      {
+        number: "02",
+        title: "Longitudinal Context Engine",
+        body: "Builds a personalized baseline over days and weeks. Rather than scoring users against generic population averages, it detects meaningful deviations from a person's individual emotional norm.",
+      },
+      {
+        number: "03",
+        title: "Clinical Guardrails & Escalation",
+        body: "Provides empathetic micro-interventions in the moment while maintaining strict safety boundaries. Automatically surfaces longitudinal context to care professionals when human escalation is required.",
+      },
+    ],
   },
 
   contact: {
@@ -135,7 +110,7 @@ const CONTENT = {
     links: [
       { label: "About",   href: "#about"   },
       { label: "Vision",  href: "#vision"  },
-      { label: "Team",    href: "#team"    },
+      { label: "Product", href: "#product" },
       { label: "Contact", href: "#contact" },
     ],
     legal: "© 2025 Affyne Labs. All rights reserved.",

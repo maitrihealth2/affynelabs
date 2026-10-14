@@ -33,7 +33,7 @@
         <ul class="nav__links" role="list">
           <li><a href="#about"   class="nav__link" id="nav-about">About</a></li>
           <li><a href="#vision"  class="nav__link" id="nav-vision">Vision</a></li>
-          <li><a href="#team"    class="nav__link" id="nav-team">Team</a></li>
+          <li><a href="#product" class="nav__link" id="nav-product">Product</a></li>
           <li><a href="#contact" class="nav__link" id="nav-contact">Contact</a></li>
         </ul>
 
@@ -59,7 +59,7 @@
     <nav class="nav__mobile" id="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
       <a href="#about"   class="nav__mobile-link">About</a>
       <a href="#vision"  class="nav__mobile-link">Vision</a>
-      <a href="#team"    class="nav__mobile-link">Team</a>
+      <a href="#product" class="nav__mobile-link">Product</a>
       <a href="#contact" class="nav__mobile-link">Contact</a>
       <a href="#contact" class="btn btn--primary nav__mobile-cta">Get in touch</a>
     </nav>
@@ -282,137 +282,99 @@
 
 
     <!-- -----------------------------------------------------------------
-         TEAM
+         PRODUCT — Core Capabilities & Architecture
          ----------------------------------------------------------------- -->
-    <section class="section" id="team" aria-labelledby="team-heading">
+    <section class="section" id="product" aria-labelledby="product-heading">
       <div class="container">
 
-        <div class="team__header">
-          <p class="eyebrow">The team</p>
-          <h2 class="heading-xl" id="team-heading">
-            Built by people who care<br>about the problem.
+        <div class="product__header">
+          <p class="eyebrow">Our product</p>
+          <h2 class="heading-xl" id="product-heading">
+            Built for depth, context,<br>and clinical safety.
           </h2>
-          <p class="body-lg team__intro">
-            Affyne Labs is founder-led, with a small senior core team covering
-            product, engineering, design, data, and clinical psychology — supported
-            by an advisory layer with deep technical and clinical experience.
+          <p class="body-lg product__intro">
+            A conversational intelligence platform that bridges the gap between what someone experiences and what they can put into words — turning everyday dialogue into structured, clinically relevant understanding.
           </p>
         </div>
 
-        <!-- Leadership -->
-        <div class="team__group">
-          <h3 class="team__group-label">Leadership</h3>
-          <ul class="team__list team__list--leadership" role="list">
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">
-                Role responsibility description placeholder. Replace with actual ownership statement.
-              </p>
-            </li>
-          </ul>
+        <!-- Three Product Pillars -->
+        <div class="solutions__grid">
+
+          <div class="solution-item">
+            <span class="solution-item__number" aria-hidden="true">01</span>
+            <h3 class="solution-item__title">
+              Multimodal Signal Perception
+            </h3>
+            <p class="solution-item__body">
+              Listens beyond literal vocabulary. Analyzes conversational cadence, acoustic vocal tone, emotional nuance, and deliberate hesitation to understand authentic intent in real time.
+            </p>
+          </div>
+
+          <div class="solution-item">
+            <span class="solution-item__number" aria-hidden="true">02</span>
+            <h3 class="solution-item__title">
+              Longitudinal Context Engine
+            </h3>
+            <p class="solution-item__body">
+              Builds a personalized baseline over days and weeks. Rather than scoring users against generic population averages, it detects meaningful deviations from a person's individual emotional norm.
+            </p>
+          </div>
+
+          <div class="solution-item">
+            <span class="solution-item__number" aria-hidden="true">03</span>
+            <h3 class="solution-item__title">
+              Clinical Guardrails &amp; Escalation
+            </h3>
+            <p class="solution-item__body">
+              Provides empathetic micro-interventions in the moment while maintaining strict safety boundaries. Automatically surfaces longitudinal context to care professionals when human escalation is required.
+            </p>
+          </div>
+
         </div>
 
-        <!-- Core Team -->
-        <div class="team__group">
-          <h3 class="team__group-label">Core Team</h3>
-          <ul class="team__list" role="list">
+        <!-- Product Workflow / Architecture Overview -->
+        <div class="product__preview">
+          <div class="product__preview-card">
+            <div class="product__preview-header">
+              <span class="product__preview-tag">System Architecture</span>
+              <h3 class="product__preview-title">How Human Understanding Intelligence works</h3>
+            </div>
+            <div class="product__pipeline">
 
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
+              <div class="pipeline-step">
+                <div class="pipeline-step__indicator">
+                  <span class="pipeline-step__num">1</span>
+                  <div class="pipeline-step__line" aria-hidden="true"></div>
+                </div>
+                <div class="pipeline-step__body">
+                  <h4 class="pipeline-step__title">Signal Ingestion</h4>
+                  <p class="pipeline-step__desc">Captures natural speech acoustics, linguistic semantics, and conversation cadence during check-ins and reflection.</p>
+                </div>
+              </div>
 
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
+              <div class="pipeline-step">
+                <div class="pipeline-step__indicator">
+                  <span class="pipeline-step__num">2</span>
+                  <div class="pipeline-step__line" aria-hidden="true"></div>
+                </div>
+                <div class="pipeline-step__body">
+                  <h4 class="pipeline-step__title">Contextual Inference</h4>
+                  <p class="pipeline-step__desc">Cross-references real-time signals against the individual's personal baseline and multi-session historical patterns.</p>
+                </div>
+              </div>
 
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
+              <div class="pipeline-step">
+                <div class="pipeline-step__indicator">
+                  <span class="pipeline-step__num">3</span>
+                </div>
+                <div class="pipeline-step__body">
+                  <h4 class="pipeline-step__title">Adaptive Action</h4>
+                  <p class="pipeline-step__desc">Offers contextual wellbeing guidance, personalized coping tools, or safe escalation to certified human clinicians.</p>
+                </div>
+              </div>
 
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-          </ul>
-        </div>
-
-        <!-- Clinical Team -->
-        <div class="team__group">
-          <h3 class="team__group-label">Clinical Team</h3>
-          <ul class="team__list" role="list">
-
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-          </ul>
-        </div>
-
-        <!-- Mentors & Advisors -->
-        <div class="team__group">
-          <h3 class="team__group-label">Mentors &amp; Advisors</h3>
-          <ul class="team__list" role="list">
-
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-            <li class="team__member">
-              <div class="team__member-name">— Name placeholder —</div>
-              <div class="team__member-role">Role title placeholder</div>
-              <p class="team__member-owns">Role responsibility description placeholder.</p>
-            </li>
-
-          </ul>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -462,7 +424,7 @@
           <ul class="footer__links" role="list">
             <li><a href="#about"   class="footer__link">About</a></li>
             <li><a href="#vision"  class="footer__link">Vision</a></li>
-            <li><a href="#team"    class="footer__link">Team</a></li>
+            <li><a href="#product" class="footer__link">Product</a></li>
             <li><a href="#contact" class="footer__link">Contact</a></li>
           </ul>
         </nav>

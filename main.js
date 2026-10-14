@@ -288,11 +288,12 @@
       '.principles__header .heading-xl',
       '.principle-item',
 
-      // Team
-      '.team__header .eyebrow',
-      '.team__header .heading-xl',
-      '.team__intro',
-      '.team__group',
+      // Product
+      '.product__header .eyebrow',
+      '.product__header .heading-xl',
+      '.product__intro',
+      '.solution-item',
+      '.product__preview-card',
 
       // Contact
       '.contact-cta__inner .eyebrow',
