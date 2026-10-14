@@ -87,15 +87,16 @@
      3. ACTIVE NAV LINK & VERTICAL RAIL TRACKING
      ========================================================================= */
   const sectionData = [
-    { id: 'about',   index: '01', name: 'About' },
-    { id: 'mission', index: '02', name: 'Mission' },
-    { id: 'vision',  index: '03', name: 'Vision' },
-    { id: 'beliefs', index: '04', name: 'Beliefs' },
-    { id: 'product', index: '05', name: 'Product' },
-    { id: 'contact', index: '06', name: 'Contact' },
+    { id: 'about',    index: '01', name: 'About' },
+    { id: 'mission',  index: '02', name: 'Mission' },
+    { id: 'vision',   index: '03', name: 'Vision' },
+    { id: 'showcase', index: '04', name: 'Exploration' },
+    { id: 'beliefs',  index: '05', name: 'Beliefs' },
+    { id: 'product',  index: '06', name: 'Product' },
+    { id: 'contact',  index: '07', name: 'Contact' },
   ];
 
-  const sections = document.querySelectorAll('section[id], [id="mission"], [id="beliefs"]');
+  const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav__link');
   const mobileNavLinks = document.querySelectorAll('.nav__mobile-link');
   const railLinks = document.querySelectorAll('.nav-rail__link');
@@ -320,6 +321,74 @@
 
     // Initial evaluation on load
     updateMissionScroll();
+  }
+
+  /* =========================================================================
+     4b. SHOWCASE HORIZONTAL SCROLL (DESKTOP)
+     ========================================================================= */
+  const showcaseSection = document.getElementById('showcase');
+  const showcaseSticky  = document.getElementById('showcase-sticky');
+  const showcaseWindow  = document.getElementById('showcase-window');
+  const showcaseTrack   = document.getElementById('showcase-track');
+
+  if (showcaseSection && showcaseSticky && showcaseWindow && showcaseTrack && !reducedMotion) {
+    function updateShowcaseDimensions() {
+      if (window.innerWidth <= 1024) {
+        showcaseSection.style.height = '';
+        showcaseTrack.style.transform = '';
+        return;
+      }
+
+      // Compute total horizontal overflow distance
+      const trackWidth = showcaseTrack.scrollWidth;
+      const windowWidth = showcaseWindow.clientWidth;
+      const maxTranslate = Math.max(trackWidth - windowWidth + 120, 0);
+
+      // Section height determines how far user must scroll vertically to travel across the cards
+      const pinDistance = maxTranslate * 1.15;
+      showcaseSection.style.height = (pinDistance + window.innerHeight) + 'px';
+    }
+
+    function updateShowcaseScroll() {
+      if (window.innerWidth <= 1024) return;
+
+      const rect = showcaseSection.getBoundingClientRect();
+      const totalPinDistance = showcaseSection.offsetHeight - showcaseSticky.offsetHeight;
+
+      if (totalPinDistance <= 0) return;
+
+      // Progress 0.0 -> 1.0 while pinned
+      const scrollPinned = -rect.top;
+      const progress = Math.min(Math.max(scrollPinned / totalPinDistance, 0), 1);
+
+      const trackWidth = showcaseTrack.scrollWidth;
+      const windowWidth = showcaseWindow.clientWidth;
+      const maxTranslate = Math.max(trackWidth - windowWidth + 120, 0);
+
+      const translateX = -progress * maxTranslate;
+      showcaseTrack.style.transform = 'translate3d(' + translateX + 'px, 0, 0)';
+    }
+
+    let isShowcaseTicking = false;
+    function onShowcaseScrollOrResize() {
+      if (!isShowcaseTicking) {
+        window.requestAnimationFrame(function () {
+          updateShowcaseScroll();
+          isShowcaseTicking = false;
+        });
+        isShowcaseTicking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onShowcaseScrollOrResize, { passive: true });
+    window.addEventListener('resize', function () {
+      updateShowcaseDimensions();
+      onShowcaseScrollOrResize();
+    }, { passive: true });
+
+    // Initial calculation
+    updateShowcaseDimensions();
+    updateShowcaseScroll();
   }
 
   /* =========================================================================
