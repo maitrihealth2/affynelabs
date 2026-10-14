@@ -84,17 +84,40 @@
   onHeaderScroll();
 
   /* =========================================================================
-     3. ACTIVE NAV LINK
+     3. ACTIVE NAV LINK & VERTICAL RAIL TRACKING
      ========================================================================= */
+  const sectionData = [
+    { id: 'about',   index: '01', name: 'About' },
+    { id: 'mission', index: '02', name: 'Mission' },
+    { id: 'vision',  index: '03', name: 'Vision' },
+    { id: 'beliefs', index: '04', name: 'Beliefs' },
+    { id: 'product', index: '05', name: 'Product' },
+    { id: 'contact', index: '06', name: 'Contact' },
+  ];
+
   const sections = document.querySelectorAll('section[id], [id="mission"], [id="beliefs"]');
   const navLinks = document.querySelectorAll('.nav__link');
   const mobileNavLinks = document.querySelectorAll('.nav__mobile-link');
+  const railLinks = document.querySelectorAll('.nav-rail__link');
+  const railGaugeBar = document.getElementById('nav-rail-bar');
+  const railGaugeVal = document.getElementById('nav-rail-val');
+
+  const mobilePill = document.getElementById('mobile-section-pill');
+  const mobilePillIdx = document.getElementById('mobile-pill-idx');
+  const mobilePillName = document.getElementById('mobile-pill-name');
+  const mobilePillBar = document.getElementById('mobile-pill-bar');
 
   function updateActiveLink() {
     let current = '';
+    const scrollY = window.scrollY;
+
     sections.forEach(function (s) {
-      if (window.scrollY >= s.offsetTop - 90) current = s.id;
+      if (scrollY >= s.offsetTop - 140) current = s.id;
     });
+
+    if (scrollY < 160) current = '';
+
+    // Update top header links
     navLinks.forEach(function (link) {
       const active = link.getAttribute('href') === '#' + current;
       link.style.color = active ? 'var(--color-text-primary)' : '';
@@ -102,6 +125,8 @@
         ? link.setAttribute('aria-current', 'true')
         : link.removeAttribute('aria-current');
     });
+
+    // Update mobile drawer links
     mobileNavLinks.forEach(function (link) {
       const active = link.getAttribute('href') === '#' + current;
       link.style.color = active ? 'var(--color-accent)' : '';
@@ -109,9 +134,59 @@
         ? link.setAttribute('aria-current', 'true')
         : link.removeAttribute('aria-current');
     });
+
+    // Update vertical rail links
+    railLinks.forEach(function (link) {
+      const active = link.getAttribute('data-section') === current;
+      if (active) {
+        link.classList.add('is-active');
+        link.setAttribute('aria-current', 'true');
+      } else {
+        link.classList.remove('is-active');
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    // Total document scroll percentage
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? Math.min(Math.max(scrollY / maxScroll, 0), 1) : 0;
+    const percentInt = Math.round(progress * 100);
+    const percentStr = (percentInt < 10 ? '0' : '') + percentInt + '%';
+
+    if (railGaugeBar) railGaugeBar.style.height = percentStr;
+    if (railGaugeVal) railGaugeVal.textContent = percentStr;
+
+    // Update mobile section pill
+    if (mobilePill) {
+      if (scrollY < 140 || (navMobile && navMobile.classList.contains('is-open'))) {
+        mobilePill.classList.add('is-hidden');
+      } else {
+        mobilePill.classList.remove('is-hidden');
+      }
+
+      if (mobilePillBar) mobilePillBar.style.width = percentStr;
+
+      const activeInfo = sectionData.find(function (item) { return item.id === current; }) || sectionData[0];
+      if (mobilePillIdx) mobilePillIdx.textContent = activeInfo.index;
+      if (mobilePillName) mobilePillName.textContent = activeInfo.name;
+    }
   }
 
   window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+
+  // Mobile pill tap to scroll to next section
+  if (mobilePill) {
+    mobilePill.addEventListener('click', function () {
+      let currentIdx = -1;
+      const scrollY = window.scrollY;
+      sections.forEach(function (s, i) {
+        if (scrollY >= s.offsetTop - 140) currentIdx = i;
+      });
+      const nextIdx = (currentIdx + 1) % sections.length;
+      sections[nextIdx].scrollIntoView({ behavior: 'smooth' });
+    });
+  }
 
   /* =========================================================================
      4. OPAL-STYLE SCROLL-DRIVEN WORD REVEAL (MISSION SECTION)
@@ -290,6 +365,7 @@
       '.vision__build-label',
       '.vision__build-heading',
       '.vision__build-content .body-base',
+      '.vision__media',
 
       // Beliefs
       '.principles__header .eyebrow',

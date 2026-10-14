@@ -455,6 +455,328 @@ ul, ol { list-style: none; }
   text-align: center;
 }
 
+/* ==========================================================================
+   8b. Vertical Navigation Rail (Desktop)
+   ========================================================================== */
+.nav-rail {
+  display: none;
+}
+
+@media (min-width: 1025px) {
+  body {
+    padding-left: 68px;
+  }
+
+  .nav-rail {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 68px;
+    height: 100vh;
+    background-color: var(--color-bg);
+    border-right: 1px solid var(--color-border);
+    z-index: 900;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-6) 0 var(--space-5);
+    user-select: none;
+  }
+
+  .nav-rail__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .nav-rail__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: var(--color-text-primary);
+    transition: transform var(--transition-fast), color var(--transition-fast);
+  }
+  .nav-rail__brand:hover {
+    color: var(--color-accent);
+    transform: translateY(-1px);
+  }
+  .nav-rail__brand:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+  }
+
+  .nav-rail__monogram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+  }
+
+  .nav-rail__brand-tag {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+  }
+
+  .nav-rail__divider {
+    width: 24px;
+    height: 1px;
+    background-color: var(--color-border);
+    margin: var(--space-3) 0 var(--space-2);
+  }
+
+  .nav-rail__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .nav-rail__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-rail__item {
+    position: relative;
+  }
+
+  .nav-rail__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: var(--radius-sm);
+    position: relative;
+    transition: background-color var(--transition-fast);
+  }
+  .nav-rail__link:hover {
+    background-color: var(--color-bg-subtle);
+  }
+  .nav-rail__link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .nav-rail__index {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--color-text-tertiary);
+    transition: color var(--transition-fast), font-weight var(--transition-fast);
+  }
+
+  /* Refined tooltip flyout on hover/focus */
+  .nav-rail__label {
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    background-color: var(--color-text-primary);
+    color: #FAFAF9;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    box-shadow: 0 4px 12px rgba(26, 25, 21, 0.12);
+    z-index: 1000;
+  }
+  .nav-rail__label::before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent var(--color-text-primary) transparent transparent;
+  }
+
+  .nav-rail__link:hover .nav-rail__label,
+  .nav-rail__link:focus-visible .nav-rail__label {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  /* Active state indicator pip */
+  .nav-rail__indicator {
+    position: absolute;
+    left: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5px;
+    height: 0;
+    background-color: var(--color-accent);
+    border-radius: 0 2px 2px 0;
+    transition: height 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-rail__link.is-active .nav-rail__index {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+  .nav-rail__link.is-active .nav-rail__indicator {
+    height: 18px;
+  }
+  .nav-rail__link.is-active {
+    background-color: var(--color-bg-subtle);
+  }
+
+  /* Footer scroll meter */
+  .nav-rail__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding-top: var(--space-2);
+  }
+
+  .nav-rail__gauge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-rail__gauge-track {
+    width: 2px;
+    height: 44px;
+    background-color: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .nav-rail__gauge-bar {
+    width: 100%;
+    height: 0%;
+    background-color: var(--color-accent);
+    transition: height 0.1s linear;
+  }
+
+  .nav-rail__gauge-val {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--color-text-tertiary);
+  }
+
+  .nav-rail__spec {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 7.5px;
+    letter-spacing: 0.12em;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+  }
+}
+
+/* ==========================================================================
+   8c. Mobile Section Pill (<= 1024px)
+   ========================================================================== */
+.mobile-section-pill {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .mobile-section-pill {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: max(16px, calc(12px + env(safe-area-inset-bottom)));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 85;
+    background-color: rgba(250, 250, 249, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border-mid);
+    border-radius: 999px;
+    padding: 5px 14px 6px;
+    box-shadow: 0 4px 18px rgba(26, 25, 21, 0.08);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    user-select: none;
+    pointer-events: auto;
+  }
+
+  .mobile-section-pill.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(10px);
+    pointer-events: none;
+  }
+
+  .mobile-section-pill__track {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 3px;
+  }
+
+  .mobile-section-pill__bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--color-accent);
+    transition: width 0.1s linear;
+  }
+
+  .mobile-section-pill__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .mobile-section-pill__index {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .mobile-section-pill__sep {
+    color: var(--color-text-tertiary);
+    font-size: 0.6875rem;
+  }
+
+  .mobile-section-pill__name {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    letter-spacing: 0.02em;
+  }
+}
+
 /* --------------------------------------------------------------------------
    9. Hero
    -------------------------------------------------------------------------- */
@@ -488,45 +810,244 @@ ul, ol { list-style: none; }
   flex-wrap: wrap;
 }
 
-/* Hero visual — no border, soft background only */
+/* --------------------------------------------------------------------------
+   9b. Editorial & Technical Badges
+   -------------------------------------------------------------------------- */
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+}
+
+.tech-tag__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  display: inline-block;
+  box-shadow: 0 0 0 2px var(--color-accent-light);
+}
+
+.tech-meta {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.tech-coords {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--color-text-tertiary);
+}
+
+.hero__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.hero__status-badge {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+/* --------------------------------------------------------------------------
+   9c. Hero Media Showcase (AI-Generated Resonance Visual)
+   -------------------------------------------------------------------------- */
 .hero__visual {
-  margin-top: clamp(var(--space-10), 6vw, var(--space-24));
-  background-color: var(--color-bg-subtle);
+  margin-top: clamp(var(--space-10), 5vw, var(--space-20));
+  position: relative;
+}
+
+.hero__visual-frame {
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  aspect-ratio: 16 / 7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  position: relative;
+  box-shadow: 0 8px 30px rgba(26, 25, 21, 0.04);
+  transition: border-color var(--transition-base);
 }
 
-.hero__visual-inner {
+.hero__visual-frame:hover {
+  border-color: var(--color-border-mid);
+}
+
+.hero__visual-badge-bar {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.hero__visual-badge-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.hero__visual-img {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+.hero__visual-caption {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: 10px 16px;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
+}
+
+.caption-index {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-text-primary);
+  flex-shrink: 0;
+}
+
+.caption-text {
+  flex: 1;
+}
+
+/* Vision Media Showcase */
+.vision__media {
+  margin-top: var(--space-8);
+}
+
+.vision__media-frame {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(26, 25, 21, 0.03);
+}
+
+.vision__media-badge-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.vision__media-badge-left {
+  display: flex;
   align-items: center;
   gap: var(--space-3);
-  color: var(--color-text-tertiary);
-  position: relative;
-  z-index: 1;
 }
 
-.hero__visual-label {
+.vision__media-img {
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.vision__media-caption {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: 9px 14px;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
   font-size: var(--text-xs);
-  letter-spacing: var(--tracking-wider);
-  text-transform: uppercase;
-  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
 }
 
-/* Subtle dot grid — no lines, just dots */
-.hero__visual::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle, var(--color-border-mid) 1px, transparent 1px);
-  background-size: 36px 36px;
-  opacity: 0.6;
+/* Product Architecture Media Showcase */
+.product__preview-badge-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+.product__preview-subtitle {
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  max-width: 680px;
+}
+
+.product__architecture-media {
+  margin: var(--space-4) 0 var(--space-6);
+}
+
+.product__architecture-frame {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.product__architecture-badge-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background-color: var(--color-bg-subtle);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.product__architecture-badge-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.product__architecture-img {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  background-color: #E7E5E0;
+  display: block;
+}
+
+.product__architecture-caption {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: 9px 14px;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
 }
 
 /* --------------------------------------------------------------------------
@@ -1135,9 +1656,33 @@ ul, ol { list-style: none; }
   }
 
   .hero__visual {
-    margin-top: var(--space-10);
-    aspect-ratio: 16 / 9;
-    max-height: 200px;
+    margin-top: var(--space-8);
+  }
+  .hero__visual-img {
+    max-height: 260px;
+  }
+  .hero__visual-badge-bar {
+    padding: 8px 12px;
+  }
+  .hero__visual-badge-right {
+    display: none;
+  }
+  .hero__visual-caption {
+    padding: 8px 12px;
+  }
+
+  .vision__media-badge-right {
+    display: none;
+  }
+  .vision__media-img {
+    max-height: 260px;
+  }
+
+  .product__architecture-badge-right {
+    display: none;
+  }
+  .product__architecture-img {
+    max-height: 280px;
   }
 
   .about__inner {

@@ -20,6 +20,100 @@
 <body>
 
   <!-- =====================================================================
+       VERTICAL NAVIGATION RAIL (Desktop Editorial Navigation)
+       ===================================================================== -->
+  <aside class="nav-rail" id="nav-rail" aria-label="Section navigation">
+    <div class="nav-rail__inner">
+
+      <!-- Monogram Mark -->
+      <a href="#" class="nav-rail__brand" aria-label="Affyne Labs — scroll to top">
+        <span class="nav-rail__monogram" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="3.5" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 2" />
+            <path d="M7.5 17L12 7.5L16.5 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9.2 13.5H14.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="nav-rail__brand-tag">AL // LABS</span>
+      </a>
+
+      <div class="nav-rail__divider" aria-hidden="true"></div>
+
+      <!-- Section Index Nav -->
+      <nav class="nav-rail__nav" aria-label="Section index">
+        <ol class="nav-rail__list" role="list">
+          <li class="nav-rail__item">
+            <a href="#about" class="nav-rail__link" data-section="about" id="rail-about" aria-label="Section 01: About">
+              <span class="nav-rail__index">01</span>
+              <span class="nav-rail__label">About</span>
+              <span class="nav-rail__indicator" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="nav-rail__item">
+            <a href="#mission" class="nav-rail__link" data-section="mission" id="rail-mission" aria-label="Section 02: Mission">
+              <span class="nav-rail__index">02</span>
+              <span class="nav-rail__label">Mission</span>
+              <span class="nav-rail__indicator" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="nav-rail__item">
+            <a href="#vision" class="nav-rail__link" data-section="vision" id="rail-vision" aria-label="Section 03: Vision">
+              <span class="nav-rail__index">03</span>
+              <span class="nav-rail__label">Vision</span>
+              <span class="nav-rail__indicator" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="nav-rail__item">
+            <a href="#beliefs" class="nav-rail__link" data-section="beliefs" id="rail-beliefs" aria-label="Section 04: Beliefs">
+              <span class="nav-rail__index">04</span>
+              <span class="nav-rail__label">Beliefs</span>
+              <span class="nav-rail__indicator" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="nav-rail__item">
+            <a href="#product" class="nav-rail__link" data-section="product" id="rail-product" aria-label="Section 05: Product">
+              <span class="nav-rail__index">05</span>
+              <span class="nav-rail__label">Product</span>
+              <span class="nav-rail__indicator" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li class="nav-rail__item">
+            <a href="#contact" class="nav-rail__link" data-section="contact" id="rail-contact" aria-label="Section 06: Contact">
+              <span class="nav-rail__index">06</span>
+              <span class="nav-rail__label">Contact</span>
+              <span class="nav-rail__indicator" aria-hidden="true"></span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Bottom Scroll Gauge -->
+      <div class="nav-rail__footer" aria-hidden="true">
+        <div class="nav-rail__gauge">
+          <div class="nav-rail__gauge-track">
+            <div class="nav-rail__gauge-bar" id="nav-rail-bar"></div>
+          </div>
+          <span class="nav-rail__gauge-val" id="nav-rail-val">00%</span>
+        </div>
+        <span class="nav-rail__spec">HUI-v0.4</span>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- Mobile Bottom Section Pill -->
+  <aside class="mobile-section-pill" id="mobile-section-pill" aria-label="Current section progress">
+    <div class="mobile-section-pill__track">
+      <div class="mobile-section-pill__bar" id="mobile-pill-bar"></div>
+    </div>
+    <div class="mobile-section-pill__content">
+      <span class="mobile-section-pill__index" id="mobile-pill-idx">01</span>
+      <span class="mobile-section-pill__sep">/</span>
+      <span class="mobile-section-pill__name" id="mobile-pill-name">About</span>
+    </div>
+  </aside>
+
+  <!-- =====================================================================
        HEADER
        ===================================================================== -->
   <header class="site-header" id="site-header" role="banner">
@@ -32,6 +126,7 @@
 
         <ul class="nav__links" role="list">
           <li><a href="#about"   class="nav__link" id="nav-about">About</a></li>
+          <li><a href="#mission" class="nav__link" id="nav-mission">Mission</a></li>
           <li><a href="#vision"  class="nav__link" id="nav-vision">Vision</a></li>
           <li><a href="#product" class="nav__link" id="nav-product">Product</a></li>
           <li><a href="#contact" class="nav__link" id="nav-contact">Contact</a></li>
@@ -58,10 +153,12 @@
 
     <nav class="nav__mobile" id="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
       <div class="nav__mobile-links">
-        <a href="#about"   class="nav__mobile-link"><span>About</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#vision"  class="nav__mobile-link"><span>Vision</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#product" class="nav__mobile-link"><span>Product</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#contact" class="nav__mobile-link"><span>Contact</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#about"   class="nav__mobile-link"><span>01 About</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#mission" class="nav__mobile-link"><span>02 Mission</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#vision"  class="nav__mobile-link"><span>03 Vision</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#beliefs" class="nav__mobile-link"><span>04 Beliefs</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#product" class="nav__mobile-link"><span>05 Product</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#contact" class="nav__mobile-link"><span>06 Contact</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
       <div class="nav__mobile-footer">
         <a href="#contact" class="btn btn--primary nav__mobile-cta">Get in touch</a>
@@ -82,7 +179,12 @@
     <section class="section--hero" aria-labelledby="hero-heading">
       <div class="container">
 
-        <p class="eyebrow hero__eyebrow">Affyne Labs</p>
+        <div class="hero__header-row">
+          <p class="eyebrow hero__eyebrow">Affyne Labs</p>
+          <span class="hero__status-badge" aria-hidden="true">
+            <span class="tech-tag"><span class="tech-tag__dot"></span>HUI // IN DEVELOPMENT</span>
+          </span>
+        </div>
 
         <h1 class="hero__headline" id="hero-heading">
           Technology that<br>understands people.
@@ -99,16 +201,33 @@
           <a href="#contact" class="btn btn--outline"   id="hero-cta-secondary">Get in touch</a>
         </div>
 
-        <div class="hero__visual" role="img" aria-label="Affyne Labs — product visual coming soon">
-          <div class="hero__visual-inner">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
-              <path d="M12 8V5M12 19v-3M8 12H5M19 12h-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <span class="hero__visual-label">Product visual — coming soon</span>
+        <!-- Hero Visual Showcase -->
+        <figure class="hero__visual hero__visual--media" aria-label="Acoustic resonance waveforms representing Human Understanding Intelligence">
+          <div class="hero__visual-frame">
+            <div class="hero__visual-badge-bar">
+              <div class="hero__visual-badge-left">
+                <span class="tech-tag"><span class="tech-tag__dot"></span>HUI // SPEC-01</span>
+                <span class="tech-meta">RESONANCE FREQUENCY MAPPING</span>
+              </div>
+              <div class="hero__visual-badge-right">
+                <span class="tech-coords">FREQ 100Hz–8.2kHz // CALIBRATED</span>
+              </div>
+            </div>
+            <img
+              src="assets/hero_resonance.jpg"
+              alt="Sculptural acoustic resonance waveforms in deep charcoal and emerald tones across a tactile warm limestone surface"
+              class="hero__visual-img"
+              width="1600"
+              height="900"
+              loading="eager"
+              decoding="async"
+            />
+            <figcaption class="hero__visual-caption">
+              <span class="caption-index">FIG. 01</span>
+              <span class="caption-text">Multidimensional vocal resonance and speech cadence topology — foundational acoustic signals for Human Understanding Intelligence.</span>
+            </figcaption>
           </div>
-        </div>
+        </figure>
 
       </div>
     </section>
@@ -216,6 +335,35 @@
               conversation — not to replace human care, but to make support more
               contextual, timely, and personal.
             </p>
+
+            <!-- Vision Media Showcase -->
+            <figure class="vision__media" aria-label="Stratified context layers of human dialogue">
+              <div class="vision__media-frame">
+                <div class="vision__media-badge-bar">
+                  <div class="vision__media-badge-left">
+                    <span class="tech-tag"><span class="tech-tag__dot"></span>CTX // LAYERS</span>
+                    <span class="tech-meta">STRATIFIED CONTEXT ANALYSIS</span>
+                  </div>
+                  <div class="vision__media-badge-right">
+                    <span class="tech-coords">PARALINGUISTIC &amp; CADENCE STRATA</span>
+                  </div>
+                </div>
+                <img
+                  src="assets/vision_context.jpg"
+                  alt="Translucent etched glass and architectural vellum panels displaying acoustic frequency graphs and dialogue curvature on warm limestone"
+                  class="vision__media-img"
+                  width="1200"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="vision__media-caption">
+                  <span class="caption-index">FIG. 02</span>
+                  <span class="caption-text">Stratified context analysis: decoupling overt spoken utterance from paralinguistic tone, acoustic inflection, and longitudinal baseline.</span>
+                </figcaption>
+              </div>
+            </figure>
+
           </div>
         </div>
 
@@ -341,9 +489,44 @@
         <div class="product__preview">
           <div class="product__preview-card">
             <div class="product__preview-header">
-              <span class="product__preview-tag">System Architecture</span>
+              <div class="product__preview-badge-row">
+                <span class="tech-tag"><span class="tech-tag__dot"></span>CI // ARCH-001</span>
+                <span class="tech-meta">SYSTEM SPECIFICATION v0.4.2</span>
+              </div>
               <h3 class="product__preview-title">How Human Understanding Intelligence works</h3>
+              <p class="body-base product__preview-subtitle">
+                Acoustic signal decomposition, real-time cadence modulation, and longitudinal emotional baseline trajectory.
+              </p>
             </div>
+
+            <!-- Product Architecture Media Showcase -->
+            <figure class="product__architecture-media" aria-label="System architecture and signal decomposition visualization">
+              <div class="product__architecture-frame">
+                <div class="product__architecture-badge-bar">
+                  <div class="product__architecture-badge-left">
+                    <span class="tech-tag"><span class="tech-tag__dot"></span>SPEC // DECOMPOSITION</span>
+                    <span class="tech-meta">SIGNAL PROCESSING FLOW</span>
+                  </div>
+                  <div class="product__architecture-badge-right">
+                    <span class="tech-coords">TIME-SERIES CADENCE &amp; VALENCE</span>
+                  </div>
+                </div>
+                <img
+                  src="assets/product_architecture.jpg"
+                  alt="Conversational intelligence architectural decomposition showing signal ingestion flow, subtle acoustic waveforms, voice cadence modulation, and longitudinal emotional baseline trajectory"
+                  class="product__architecture-img"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="product__architecture-caption">
+                  <span class="caption-index">FIG. 03</span>
+                  <span class="caption-text">Conversational signal processing pipeline: acoustic waveform capture, cadence modulation, and emotional valence tracking against individual normative baselines.</span>
+                </figcaption>
+              </div>
+            </figure>
+
             <div class="product__pipeline">
 
               <div class="pipeline-step">
