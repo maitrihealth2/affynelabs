@@ -1,198 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Affyne Labs — Technology that understands people.</title>
-  <meta name="description" content="Affyne Labs is a HealthTech innovation company exploring the intersection of artificial intelligence, human understanding, and wellbeing. Starting with mental health." />
+  <meta name="description"
+    content="Affyne Labs is a HealthTech innovation company building Human Understanding Intelligence — exploring the intersection of artificial intelligence, human understanding, and wellbeing." />
   <meta name="robots" content="index, follow" />
 
-  <meta property="og:type"        content="website" />
-  <meta property="og:title"       content="Affyne Labs — Technology that understands people." />
-  <meta property="og:description" content="We are building Human Understanding Intelligence — technology capable of interpreting human communication, context, behaviour, and evolving states." />
-  <meta property="og:url"         content="https://affynelabs.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Affyne Labs — Technology that understands people." />
+  <meta property="og:description"
+    content="We are building Human Understanding Intelligence — technology capable of interpreting human communication, context, behaviour, and evolving states." />
+  <meta property="og:url" content="https://affynelabs.com/" />
+  <meta property="og:image" content="assets/affyne_logo_official.png" />
 
+  <link rel="icon" type="image/svg+xml" href="assets/affyne_mark.svg" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-
-
-  <!-- Mobile Bottom Section Pill -->
-  <aside class="mobile-section-pill" id="mobile-section-pill" aria-label="Current section progress">
-    <div class="mobile-section-pill__track">
-      <div class="mobile-section-pill__bar" id="mobile-pill-bar"></div>
-    </div>
-    <div class="mobile-section-pill__content">
-      <span class="mobile-section-pill__index" id="mobile-pill-idx">01</span>
-      <span class="mobile-section-pill__sep">/</span>
-      <span class="mobile-section-pill__name" id="mobile-pill-name">About</span>
-    </div>
-  </aside>
-
   <!-- =====================================================================
-       HEADER
+       HEADER & NAVIGATION
        ===================================================================== -->
   <header class="site-header" id="site-header" role="banner">
     <div class="container">
       <nav class="nav" aria-label="Main navigation">
 
-        <a href="#" class="nav__brand" aria-label="Affyne Labs — homepage">
-          Affyne Labs
+        <a href="#" class="nav__brand" aria-label="Affyne Labs — Homepage">
+          <img src="assets/affyne_logo_official.png" alt="Affyne Labs — Better Minds. Better Lives."
+            class="nav__brand-img" width="175" height="48" />
         </a>
 
         <ul class="nav__links" role="list">
-          <li><a href="#about"     class="nav__link" id="nav-about">About</a></li>
-          <li><a href="#vision"    class="nav__link" id="nav-vision">Vision</a></li>
-          <li><a href="#showcase"  class="nav__link" id="nav-showcase">Exploration</a></li>
-          <li><a href="#product"   class="nav__link" id="nav-product">Product</a></li>
-          <li><a href="#contact"   class="nav__link" id="nav-contact">Contact</a></li>
+          <li><a href="#about" class="nav__link" id="nav-about">About</a></li>
+          <li><a href="#mission" class="nav__link" id="nav-mission">Mission</a></li>
+          <li><a href="#vision" class="nav__link" id="nav-vision">Vision</a></li>
+          <li><a href="#exploration" class="nav__link" id="nav-exploration">Exploration</a></li>
+          <li><a href="#product" class="nav__link" id="nav-product">Product</a></li>
+          <li><a href="#beliefs" class="nav__link" id="nav-beliefs">Beliefs</a></li>
         </ul>
 
-        <a href="#contact" class="btn btn--primary nav__cta" id="nav-cta">
-          Get in touch
-        </a>
+        <div class="nav__actions">
+          <a href="#contact" class="btn btn--primary nav__cta" id="nav-cta">
+            Get in touch
+          </a>
 
-        <button
-          class="nav__toggle"
-          id="nav-toggle"
-          aria-label="Open navigation menu"
-          aria-expanded="false"
-          aria-controls="nav-mobile"
-        >
-          <span class="nav__toggle-line"></span>
-          <span class="nav__toggle-line"></span>
-          <span class="nav__toggle-line"></span>
-        </button>
+          <button class="nav__toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false"
+            aria-controls="nav-mobile">
+            <span class="nav__toggle-line"></span>
+            <span class="nav__toggle-line"></span>
+            <span class="nav__toggle-line"></span>
+          </button>
+        </div>
 
       </nav>
     </div>
 
-    <nav class="nav__mobile" id="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
-      <div class="nav__mobile-links">
-        <a href="#about"     class="nav__mobile-link"><span>01 About</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#mission"   class="nav__mobile-link"><span>02 Mission</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#vision"    class="nav__mobile-link"><span>03 Vision</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#showcase"  class="nav__mobile-link"><span>04 Exploration</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#beliefs"   class="nav__mobile-link"><span>05 Beliefs</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#product"   class="nav__mobile-link"><span>06 Product</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#contact"   class="nav__mobile-link"><span>07 Contact</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-      <div class="nav__mobile-footer">
-        <a href="#contact" class="btn btn--primary nav__mobile-cta">Get in touch</a>
-        <span class="nav__mobile-brand-note">Affinity + Intelligence</span>
-      </div>
-    </nav>
   </header>
+
+  <!-- Accessible Mobile Navigation Drawer -->
+  <nav class="nav__mobile" id="nav-mobile" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="nav__mobile-links">
+      <a href="#about" class="nav__mobile-link"><span>01 About</span><svg width="14" height="14" viewBox="0 0 16 16"
+          fill="none" aria-hidden="true">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg></a>
+      <a href="#mission" class="nav__mobile-link"><span>02 Mission</span><svg width="14" height="14" viewBox="0 0 16 16"
+          fill="none" aria-hidden="true">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg></a>
+      <a href="#vision" class="nav__mobile-link"><span>03 Vision</span><svg width="14" height="14" viewBox="0 0 16 16"
+          fill="none" aria-hidden="true">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg></a>
+      <a href="#exploration" class="nav__mobile-link"><span>04 Exploration</span><svg width="14" height="14"
+          viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg></a>
+      <a href="#product" class="nav__mobile-link"><span>05 Product</span><svg width="14" height="14" viewBox="0 0 16 16"
+          fill="none" aria-hidden="true">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg></a>
+      <a href="#beliefs" class="nav__mobile-link"><span>06 Beliefs</span><svg width="14" height="14" viewBox="0 0 16 16"
+          fill="none" aria-hidden="true">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg></a>
+      <a href="#contact" class="nav__mobile-link"><span>07 Contact</span><svg width="14" height="14" viewBox="0 0 16 16"
+          fill="none" aria-hidden="true">
+          <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg></a>
+    </div>
+    <div class="nav__mobile-footer">
+      <a href="#contact" class="btn btn--primary nav__mobile-cta">Start a conversation</a>
+      <span class="body-sm" style="text-align: center;">Affinity + Intelligence // Affyne Labs</span>
+    </div>
+  </nav>
 
 
   <!-- =====================================================================
-       MAIN
+       MAIN CONTENT
        ===================================================================== -->
   <main id="main-content">
 
     <!-- -----------------------------------------------------------------
-         HERO
+         SECTION 01: HERO (UNIFIED EDITORIAL COMPOSITION)
          ----------------------------------------------------------------- -->
     <section class="section--hero" aria-labelledby="hero-heading">
       <div class="container">
 
-        <div class="hero__header-row">
-          <p class="eyebrow hero__eyebrow">Affyne Labs</p>
-          <span class="hero__status-badge" aria-hidden="true">
-            <span class="tech-tag"><span class="tech-tag__dot"></span>HUI // IN DEVELOPMENT</span>
-          </span>
-        </div>
-
-        <h1 class="hero__headline" id="hero-heading">
-          Technology that<br>understands people.
-        </h1>
-
-        <p class="hero__body">
-          We are a HealthTech innovation company exploring the intersection
-          of artificial intelligence, human understanding, and wellbeing —
-          starting with mental health, with ambitions that reach further.
-        </p>
-
-        <div class="hero__actions">
-          <a href="#about"   class="btn btn--primary"  id="hero-cta-primary">Explore our approach</a>
-          <a href="#contact" class="btn btn--outline"   id="hero-cta-secondary">Get in touch</a>
-        </div>
-
-        <!-- Hero Visual Showcase -->
-        <figure class="hero__visual hero__visual--media" aria-label="Acoustic resonance waveforms representing Human Understanding Intelligence">
-          <div class="hero__visual-frame">
-            <div class="hero__visual-badge-bar">
-              <div class="hero__visual-badge-left">
-                <span class="tech-tag"><span class="tech-tag__dot"></span>HUI // SPEC-01</span>
-                <span class="tech-meta">RESONANCE FREQUENCY MAPPING</span>
-              </div>
-              <div class="hero__visual-badge-right">
-                <span class="tech-coords">FREQ 100Hz–8.2kHz // CALIBRATED</span>
-              </div>
-            </div>
-            <img
-              src="assets/hero_resonance.jpg"
-              alt="Sculptural acoustic resonance waveforms in deep charcoal and emerald tones across a tactile warm limestone surface"
-              class="hero__visual-img"
-              width="1600"
-              height="900"
-              loading="eager"
-              decoding="async"
-            />
-            <figcaption class="hero__visual-caption">
-              <span class="caption-text">Multidimensional vocal resonance and speech cadence topology — foundational acoustic signals for Human Understanding Intelligence.</span>
-            </figcaption>
+        <!-- Hero Editorial Lead Block -->
+        <div class="hero__lead-block">
+          <div class="hero__kicker">
+            <span class="hero__kicker-brand">Affyne Labs</span>
+            <span class="hero__kicker-sep">/</span>
+            <span class="hero__kicker-context">HealthTech Innovation &bull; Research &amp; Intelligence</span>
           </div>
-        </figure>
+
+          <h1 class="hero__headline" id="hero-heading">
+            Technology that<br>understands people.
+          </h1>
+
+          <div class="hero__sub-row">
+            <p class="hero__body">
+              We are exploring the intersection of artificial intelligence, human understanding,
+              and emotional wellbeing — translating vocal prosody, cadence, and longitudinal context
+              into compassionate, clinical-grade technology.
+            </p>
+            <div class="hero__actions">
+              <a href="#about" class="btn btn--primary" id="hero-cta-primary">Explore our approach</a>
+              <a href="#contact" class="btn btn--outline" id="hero-cta-secondary">Get in touch</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Widescreen Panoramic Stage -->
+        <div class="hero__stage"
+          aria-label="Affyne Labs speech acoustics research laboratory and vocal telemetry workstation">
+          <div class="hero__stage-media">
+            <img src="assets/hero_research_workspace.jpg"
+              alt="Acoustic vocal analysis research workstation with precision microphone, live speech waveform displays, and clinical notebooks"
+              class="hero__stage-img" width="1440" height="800" loading="eager" decoding="async" />
+          </div>
+        </div>
 
       </div>
     </section>
 
 
     <!-- -----------------------------------------------------------------
-         ABOUT
+         SECTION 02: ABOUT AFFYNE LABS (OPEN EDITORIAL ARCHITECTURE)
          ----------------------------------------------------------------- -->
     <section class="section" id="about" aria-labelledby="about-heading">
       <div class="container">
-        <div class="about__inner">
 
-          <div class="about__label" aria-hidden="true">About</div>
-
-          <div class="about__content">
-            <h2 class="heading-xl" id="about-heading">
-              Affinity meets intelligence.
-            </h2>
-            <p class="body-lg">
-              The name Affyne is built from two ideas: <em>Affinity</em> — human connection,
-              trust, and empathy — and <em>Intelligence</em> — the ability to perceive,
-              understand, and recognise patterns in context. Labs reflects how we work:
-              through exploration, experimentation, research, and iteration.
-            </p>
-            <p class="body-lg">
-              We are not defined by a single product. We are defined by a question —
-              how much can technology truly understand about a person?
-            </p>
-            <a href="#vision" class="text-link" id="about-link">
-              Our mission and vision
-              <svg width="13" height="13" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          </div>
-
+        <div class="about__header">
+          <p class="eyebrow">Who we are</p>
+          <h2 class="heading-xl" id="about-heading">
+            Affinity meets intelligence.
+          </h2>
         </div>
+
+        <!-- Open 3-Column Architectural Definition Band (No Boxy Cards) -->
+        <div class="about__definition-band">
+          <div class="about__def-col">
+            <span class="about__def-num">01</span>
+            <h3 class="about__def-term">Affinity</h3>
+            <p class="about__def-desc">Human connection, trust, attachment, and empathy. The essential foundation of all
+              interpersonal understanding.</p>
+          </div>
+          <div class="about__def-col">
+            <span class="about__def-num">02</span>
+            <h3 class="about__def-term">Intelligence</h3>
+            <p class="about__def-desc">The capacity to perceive, interpret, and recognize patterns in context —
+              listening beyond literal vocabulary to vocal cadence and emotional nuance.</p>
+          </div>
+          <div class="about__def-col">
+            <span class="about__def-num">03</span>
+            <h3 class="about__def-term">Labs</h3>
+            <p class="about__def-desc">How we build: through rigorous scientific inquiry, clinical psychologist
+              collaboration, and responsible, iterative engineering.</p>
+          </div>
+        </div>
+
+        <!-- Open Narrative Thesis -->
+        <div class="about__narrative-split">
+          <div class="about__quote-wrap">
+            <blockquote class="about__quote">
+              "We are not defined by a single product. We are defined by a question — how much can technology truly
+              understand about a person?"
+            </blockquote>
+          </div>
+          <div class="about__body-wrap">
+            <p class="body-lg">
+              The name Affyne is built from two foundational ideas: <em>Affinity</em> — human connection,
+              trust, and empathy — and <em>Intelligence</em> — the ability to perceive,
+              understand, and recognise patterns in context. Labs reflects our methodology:
+              grounded exploration, clinical validation, and responsible deployment.
+            </p>
+            <div style="margin-top: 1.5rem;">
+              <a href="#vision" class="text-link" id="about-link">
+                Our vision for Human Understanding Intelligence
+                <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
 
     <!-- -----------------------------------------------------------------
-         MISSION — Opal-style scroll-driven word reveal
+         SECTION 03: MISSION (CALIBRATED OPAL WORD-REVEAL — NO EXCESSIVE WHITESPACE)
          ----------------------------------------------------------------- -->
-    <section class="mission-section section--alt" id="mission" aria-labelledby="mission-label">
+    <section class="mission-section" id="mission" aria-labelledby="mission-label">
       <div class="mission__sticky-frame">
         <div class="container">
           <div class="mission__inner">
@@ -201,7 +239,7 @@
               "To make technology understand people more deeply, and use that
               understanding to support human connection more meaningfully."
             </blockquote>
-            <p class="body-base mission__body" id="mission-body">
+            <p class="mission__body" id="mission-body">
               Technology has become increasingly capable of processing information —
               but people are more than information. Context, emotion, relationships,
               behaviour, and history all shape what someone communicates.
@@ -214,14 +252,14 @@
 
 
     <!-- -----------------------------------------------------------------
-         VISION + WHAT WE'RE BUILDING
+         SECTION 04: VISION (HUMAN UNDERSTANDING INTELLIGENCE)
          ----------------------------------------------------------------- -->
     <section class="section" id="vision" aria-labelledby="vision-heading">
       <div class="container">
 
         <div class="vision__header">
           <p class="eyebrow">Our vision</p>
-          <h2 class="heading-xl" id="vision-heading">
+          <h2 class="heading-display" id="vision-heading">
             Human Understanding Intelligence.
           </h2>
           <p class="body-lg vision__intro">
@@ -233,13 +271,18 @@
           </p>
         </div>
 
-        <div class="vision__build">
-          <div class="vision__build-label">
-            <span class="eyebrow">Where we begin</span>
+        <!-- Open Editorial Split Feature (No Card Borders) -->
+        <div class="vision__feature-split">
+          <div class="vision__feature-media">
+            <img src="assets/vision_research_notes.jpg"
+              alt="Authentic research materials, clinical psychology dialogue profiles, and speech frequency printouts in crisp detail"
+              class="vision__feature-img" width="800" height="520" loading="lazy" decoding="async" />
           </div>
-          <div class="vision__build-content">
-            <h3 class="heading-xl vision__build-heading">
-              Understanding what lies<br>behind a conversation.
+
+          <div class="vision__feature-content">
+            <span class="badge-tag"><span class="badge-tag__dot"></span>WHERE WE BEGIN</span>
+            <h3 class="heading-lg">
+              Understanding what lies behind a conversation.
             </h3>
             <p class="body-base">
               Our first product direction is designed to understand a person's
@@ -255,33 +298,256 @@
               conversation — not to replace human care, but to make support more
               contextual, timely, and personal.
             </p>
+          </div>
+        </div>
 
-            <!-- Vision Media Showcase -->
-            <figure class="vision__media" aria-label="Stratified context layers of human dialogue">
-              <div class="vision__media-frame">
-                <div class="vision__media-badge-bar">
-                  <div class="vision__media-badge-left">
-                    <span class="tech-tag"><span class="tech-tag__dot"></span>CTX // LAYERS</span>
-                    <span class="tech-meta">STRATIFIED CONTEXT ANALYSIS</span>
-                  </div>
-                  <div class="vision__media-badge-right">
-                    <span class="tech-coords">PARALINGUISTIC &amp; CADENCE STRATA</span>
+      </div>
+    </section>
+
+
+    <!-- -----------------------------------------------------------------
+         SECTION 05: THE UNDERSTANDING PIPELINE (HORIZONTAL STORYTELLING SHOWCASE)
+         Pinned sequential storytelling inspired by Opal — native horizontal swipe on mobile
+         ----------------------------------------------------------------- -->
+    <section class="storytelling-section" id="exploration" aria-labelledby="storytelling-heading">
+      <div class="storytelling__sticky-wrapper">
+        <div class="container storytelling__header-container">
+          <div class="storytelling__header">
+            <div class="storytelling__header-left">
+              <p class="eyebrow">The Understanding Pipeline</p>
+              <h2 class="heading-xl" id="storytelling-heading">
+                How technology learns to understand a person.
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horizontal Track Viewport with Infinite Seamless Auto-scroll -->
+        <div class="storytelling__viewport" id="story-viewport" tabindex="0" role="region"
+          aria-label="Understanding Pipeline chapters">
+          <div class="storytelling__track" id="story-track">
+
+            <!-- Primary Group -->
+            <div class="storytelling__track-group">
+
+              <!-- Card 01: Speech Acoustics -->
+              <article class="story-card" data-step="1">
+                <div class="story-card__media">
+                  <img src="assets/exploration_acoustics.jpg"
+                    alt="Speech acoustic research laboratory with high-fidelity microphone and spectrogram frequency monitor"
+                    class="story-card__img" width="720" height="450" loading="eager" decoding="async" />
+                  <div class="story-card__pill">
+                    <span class="story-card__pill-dot"></span>
+                    <span>PHASE 01 // SIGNAL PERCEPTION</span>
                   </div>
                 </div>
-                <img
-                  src="assets/vision_context.jpg"
-                  alt="Translucent etched glass and architectural vellum panels displaying acoustic frequency graphs and dialogue curvature on warm limestone"
-                  class="vision__media-img"
-                  width="1200"
-                  height="900"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption class="vision__media-caption">
-                  <span class="caption-text">Stratified context analysis: decoupling overt spoken utterance from paralinguistic tone, acoustic inflection, and longitudinal baseline.</span>
-                </figcaption>
-              </div>
-            </figure>
+                <div class="story-card__content">
+                  <span class="story-card__num">01 / SIGNAL PERCEPTION</span>
+                  <h3 class="story-card__title">Perceiving vocal cadence and micro-hesitation</h3>
+                  <p class="story-card__body">
+                    Authentic dialogue carries acoustic signals that vocabulary alone obscures. Our speech acoustics
+                    research analyzes fundamental frequency (<em>f</em>₀), pitch trajectory, micro-pauses, and vocal
+                    timbre in real time to perceive genuine emotional state beneath semantic choices.
+                  </p>
+                  <div class="story-card__telemetry">
+                    <span class="story-card__tag">16 kHz Downsample</span>
+                    <span class="story-card__tag">Latency &lt; 40ms</span>
+                    <span class="story-card__tag">f₀ Prosody Tracking</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 02: Longitudinal Baselines -->
+              <article class="story-card" data-step="2">
+                <div class="story-card__media">
+                  <img src="assets/exploration_longitudinal.jpg"
+                    alt="Clinical researchers reviewing longitudinal baseline trend line data on a digital workstation"
+                    class="story-card__img" width="720" height="450" loading="eager" decoding="async" />
+                  <div class="story-card__pill">
+                    <span class="story-card__pill-dot"></span>
+                    <span>PHASE 02 // LONGITUDINAL NORMS</span>
+                  </div>
+                </div>
+                <div class="story-card__content">
+                  <span class="story-card__num">02 / LONGITUDINAL NORMS</span>
+                  <h3 class="story-card__title">Tracking individual baselines over time</h3>
+                  <p class="story-card__body">
+                    People differ profoundly in how they communicate under stress. Rather than measuring individuals
+                    against generic population averages, our engine maps each person's unique multi-week baseline
+                    trajectory to detect statistically significant personal deviations.
+                  </p>
+                  <div class="story-card__telemetry">
+                    <span class="story-card__tag">12-Week Rolling Window</span>
+                    <span class="story-card__tag">&sigma;-Drift Variance Metric</span>
+                    <span class="story-card__tag">Adaptive Trajectory</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 03: Contextual Layers & Intent -->
+              <article class="story-card" data-step="3">
+                <div class="story-card__media">
+                  <img src="assets/vision_research_notes.jpg"
+                    alt="Authentic research materials, clinical psychology dialogue profiles, and speech frequency printouts"
+                    class="story-card__img" width="720" height="450" loading="eager" decoding="async" />
+                  <div class="story-card__pill">
+                    <span class="story-card__pill-dot"></span>
+                    <span>PHASE 03 // CONTEXTUAL INGESTION</span>
+                  </div>
+                </div>
+                <div class="story-card__content">
+                  <span class="story-card__num">03 / CONTEXTUAL INGESTION</span>
+                  <h3 class="story-card__title">Decoupling overt words from unspoken intent</h3>
+                  <p class="story-card__body">
+                    Communication is shaped by relational history, situational pressure, and what someone cannot bring
+                    themselves to say out loud. We build contextual models that account for paralinguistic tension even
+                    when spoken words seem calm.
+                  </p>
+                  <div class="story-card__telemetry">
+                    <span class="story-card__tag">Paralinguistic Detection</span>
+                    <span class="story-card__tag">Latency 82ms</span>
+                    <span class="story-card__tag">&Delta; -2.1&sigma; Sensitivity</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 04: Clinical Safety & Care Handshake -->
+              <article class="story-card" data-step="4">
+                <div class="story-card__media">
+                  <img src="assets/clinical_care_escalation.jpg"
+                    alt="Clinical psychologist in calm consultation setting with patient, reviewing health baseline on a tablet"
+                    class="story-card__img" width="720" height="450" loading="eager" decoding="async" />
+                  <div class="story-card__pill">
+                    <span class="story-card__pill-dot"></span>
+                    <span>PHASE 04 // CLINICAL ESCALATION</span>
+                  </div>
+                </div>
+                <div class="story-card__content">
+                  <span class="story-card__num">04 / CLINICAL ESCALATION</span>
+                  <h3 class="story-card__title">Augmenting human care with ethical boundaries</h3>
+                  <p class="story-card__body">
+                    Software must never replace certified human clinical support. Our architecture enforces strict
+                    real-time safety thresholds, automatically escalating complex risk signals directly to human
+                    clinicians with longitudinal context.
+                  </p>
+                  <div class="story-card__telemetry">
+                    <span class="story-card__tag">Tier 3 Triage Protocol</span>
+                    <span class="story-card__tag">Clinician Handshake</span>
+                    <span class="story-card__tag">&lt; 120ms Guardrail</span>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+
+            <!-- Seamless Duplicate Loop Group -->
+            <div class="storytelling__track-group" aria-hidden="true">
+
+              <!-- Card 01 Duplicate -->
+              <article class="story-card">
+                <div class="story-card__media">
+                  <img src="assets/exploration_acoustics.jpg" alt="" class="story-card__img" width="720" height="450"
+                    loading="lazy" decoding="async" />
+                  <div class="story-card__pill">
+                    <span class="story-card__pill-dot"></span>
+                    <span>PHASE 01 // SIGNAL PERCEPTION</span>
+                  </div>
+                </div>
+                <div class="story-card__content">
+                  <span class="story-card__num">01 / SIGNAL PERCEPTION</span>
+                  <h3 class="story-card__title">Perceiving vocal cadence and micro-hesitation</h3>
+                  <p class="story-card__body">
+                    Authentic dialogue carries acoustic signals that vocabulary alone obscures. Our speech acoustics
+                    research analyzes fundamental frequency (<em>f</em>₀), pitch trajectory, micro-pauses, and vocal
+                    timbre in real time to perceive genuine emotional state beneath semantic choices.
+                  </p>
+                  <div class="story-card__telemetry">
+                    <span class="story-card__tag">16 kHz Downsample</span>
+                    <span class="story-card__tag">Latency &lt; 40ms</span>
+                    <span class="story-card__tag">f₀ Prosody Tracking</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 02 Duplicate -->
+              <article class="story-card">
+                <div class="story-card__media">
+                  <img src="assets/exploration_longitudinal.jpg" alt="" class="story-card__img" width="720" height="450"
+                    loading="lazy" decoding="async" />
+                  <div class="story-card__pill">
+                    <span class="story-card__pill-dot"></span>
+                    <span>PHASE 02 // LONGITUDINAL NORMS</span>
+                  </div>
+                </div>
+                <div class="story-card__content">
+                  <span class="story-card__num">02 / LONGITUDINAL NORMS</span>
+                  <h3 class="story-card__title">Tracking individual baselines over time</h3>
+                  <p class="story-card__body">
+                    People differ profoundly in how they communicate under stress. Rather than measuring individuals
+                    against generic population averages, our engine maps each person's unique multi-week baseline
+                    trajectory to detect statistically significant personal deviations.
+                  </p>
+                  <div class="story-card__telemetry">
+                    <span class="story-card__tag">12-Week Rolling Window</span>
+                    <span class="story-card__tag">&sigma;-Drift Variance Metric</span>
+                    <span class="story-card__tag">Adaptive Trajectory</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 03 Duplicate -->
+              <article class="story-card">
+                <div class="story-card__media">
+                  <img src="assets/vision_research_notes.jpg" alt="" class="story-card__img" width="720" height="450"
+                    loading="lazy" decoding="async" />
+                  <div class="story-card__pill">
+                    <span class="story-card__pill-dot"></span>
+                    <span>PHASE 03 // CONTEXTUAL INGESTION</span>
+                  </div>
+                </div>
+                <div class="story-card__content">
+                  <span class="story-card__num">03 / CONTEXTUAL INGESTION</span>
+                  <h3 class="story-card__title">Decoupling overt words from unspoken intent</h3>
+                  <p class="story-card__body">
+                    Communication is shaped by relational history, situational pressure, and what someone cannot bring
+                    themselves to say out loud. We build contextual models that account for paralinguistic tension even
+                    when spoken words seem calm.
+                  </p>
+                  <div class="story-card__telemetry">
+                    <span class="story-card__tag">Paralinguistic Detection</span>
+                    <span class="story-card__tag">Latency 82ms</span>
+                    <span class="story-card__tag">&Delta; -2.1&sigma; Sensitivity</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 04 Duplicate -->
+              <article class="story-card">
+                <div class="story-card__media">
+                  <img src="assets/clinical_care_escalation.jpg" alt="" class="story-card__img" width="720" height="450"
+                    loading="lazy" decoding="async" />
+                  <div class="story-card__pill">
+                    <span class="story-card__pill-dot"></span>
+                    <span>PHASE 04 // CLINICAL ESCALATION</span>
+                  </div>
+                </div>
+                <div class="story-card__content">
+                  <span class="story-card__num">04 / CLINICAL ESCALATION</span>
+                  <h3 class="story-card__title">Augmenting human care with ethical boundaries</h3>
+                  <p class="story-card__body">
+                    Software must never replace certified human clinical support. Our architecture enforces strict
+                    real-time safety thresholds, automatically escalating complex risk signals directly to human
+                    clinicians with longitudinal context.
+                  </p>
+                  <div class="story-card__telemetry">
+                    <span class="story-card__tag">Tier 3 Triage Protocol</span>
+                    <span class="story-card__tag">Clinician Handshake</span>
+                    <span class="story-card__tag">&lt; 120ms Guardrail</span>
+                  </div>
+                </div>
+              </article>
+
+            </div>
 
           </div>
         </div>
@@ -291,380 +557,136 @@
 
 
     <!-- -----------------------------------------------------------------
-         SHOWCASE — Immersive Horizontal Scrolling Object Gallery
+         SECTION 06: PRODUCT & ARCHITECTURE (CRISP LIGHT TECHNICAL SHOWCASE)
+         Clean, open engineering specification — ~80% light color balance
          ----------------------------------------------------------------- -->
-    <section class="showcase-section" id="showcase" aria-labelledby="showcase-heading">
-      <div class="showcase__sticky" id="showcase-sticky">
+    <section class="section section--light-showcase" id="product" aria-labelledby="product-heading">
+      <div class="container">
 
-        <div class="container showcase__intro">
-          <div class="showcase__header-row">
-            <div class="showcase__header-left">
-              <p class="eyebrow showcase__eyebrow">Visual metaphors</p>
-              <h2 class="heading-xl showcase__heading" id="showcase-heading">
-                Exploring human understanding.
-              </h2>
+        <div class="product__header">
+          <p class="eyebrow">Our product</p>
+          <h2 class="heading-display" id="product-heading">
+            Built for depth, context,<br>and clinical safety.
+          </h2>
+          <p class="body-lg product__intro">
+            A conversational intelligence platform that bridges the gap between what someone experiences and what they
+            can put into words — turning everyday dialogue into structured, longitudinal understanding.
+          </p>
+        </div>
+
+        <!-- Tangible Product Architecture Console (Light Mode Vector Asset) -->
+        <div class="product__arch-box">
+          <div class="product__arch-header">
+            <div>
+              <span class="badge-tag"><span class="badge-tag__dot"></span>SYSTEM SPECIFICATION // v0.4.2</span>
+              <h3 class="product__arch-title" style="margin-top: 8px;">How Human Understanding Intelligence works</h3>
             </div>
-            <div class="showcase__header-right">
-              <span class="tech-tag tech-tag--dark">
-                <span class="tech-tag__dot"></span>EXHIBITION // 06 METAPHORS
-              </span>
-              <p class="body-base showcase__desc">
-                Different perspectives. Connected ideas. A deeper exploration of how technology can better understand people.
+            <p class="body-sm product__arch-header-desc">
+              End-to-end signal ingestion, normative baseline comparison, and real-time clinical escalation protocol.
+            </p>
+          </div>
+
+          <!-- Light Mode Vector Architecture Diagram -->
+          <div class="product__arch-diagram-wrap">
+            <img src="assets/product_architecture.svg"
+              alt="Detailed pipeline architecture of Affyne Labs Human Understanding Intelligence: Signal Ingestion, Longitudinal Engine, and Clinical Guardrails"
+              class="product__arch-svg" width="1200" height="480" loading="lazy" />
+          </div>
+
+          <!-- Open 3-Column Foundation Band -->
+          <div class="product__open-pillars">
+            <div class="product-pillar-item">
+              <span class="product-pillar-item__num">STAGE 01</span>
+              <h4 class="product-pillar-item__title">Multimodal Signal Ingestion</h4>
+              <p class="product-pillar-item__body">
+                Listens beyond literal vocabulary. Analyzes speech intonation, hesitation cadence, vocal timbre, and
+                conversation syntax during everyday check-ins.
+              </p>
+            </div>
+
+            <div class="product-pillar-item">
+              <span class="product-pillar-item__num">STAGE 02</span>
+              <h4 class="product-pillar-item__title">Longitudinal Context Engine</h4>
+              <p class="product-pillar-item__body">
+                Builds an authentic personal baseline over weeks. Detects statistically meaningful deviations from an
+                individual's emotional norm rather than generic population averages.
+              </p>
+            </div>
+
+            <div class="product-pillar-item">
+              <span class="product-pillar-item__num">STAGE 03</span>
+              <h4 class="product-pillar-item__title">Clinical Guardrails &amp; Escalation</h4>
+              <p class="product-pillar-item__body">
+                Maintains strict real-time safety thresholds (&lt; 120ms triage latency). Automatically surfaces rich
+                longitudinal context to licensed human care teams when escalation is required.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="showcase__track-window" id="showcase-window" tabindex="0" role="region" aria-label="Horizontal visual gallery">
-          <div class="showcase__track" id="showcase-track">
-
-            <!-- Card 01 -->
-            <article class="showcase__card">
-              <div class="showcase__media-frame">
-                <img
-                  src="assets/showcase_resonance.jpg"
-                  alt="Translucent frosted glass and limestone ribbon torus representing acoustic resonance and speech cadence"
-                  class="showcase__img"
-                  width="800"
-                  height="800"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="showcase__badge">
-                  <span class="tech-mono">01 // ACOUSTICS</span>
-                </div>
-              </div>
-              <div class="showcase__card-content">
-                <h3 class="showcase__card-title">Resonance</h3>
-                <p class="showcase__card-desc">
-                  Perceiving conversational cadence, micro-pauses, and emotional inflection carried within vocal timbre.
-                </p>
-              </div>
-            </article>
-
-            <!-- Card 02 -->
-            <article class="showcase__card">
-              <div class="showcase__media-frame">
-                <img
-                  src="assets/showcase_context.jpg"
-                  alt="Stratified frosted architectural glass and travertine sheets suspended in balance representing context layers"
-                  class="showcase__img"
-                  width="800"
-                  height="800"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="showcase__badge">
-                  <span class="tech-mono">02 // STRATIFICATION</span>
-                </div>
-              </div>
-              <div class="showcase__card-content">
-                <h3 class="showcase__card-title">Context</h3>
-                <p class="showcase__card-desc">
-                  Unravelling unspoken layers — personal history, relational dynamics, and environmental nuance.
-                </p>
-              </div>
-            </article>
-
-            <!-- Card 03 -->
-            <article class="showcase__card">
-              <div class="showcase__media-frame">
-                <img
-                  src="assets/showcase_empathy.jpg"
-                  alt="Two interlocking sculptural forms of porcelain and jade glass embracing representing attunement and connection"
-                  class="showcase__img"
-                  width="800"
-                  height="800"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="showcase__badge">
-                  <span class="tech-mono">03 // ATTUNEMENT</span>
-                </div>
-              </div>
-              <div class="showcase__card-content">
-                <h3 class="showcase__card-title">Attunement</h3>
-                <p class="showcase__card-desc">
-                  Bridging the gap between subjective lived experience and machine perception with humility.
-                </p>
-              </div>
-            </article>
-
-            <!-- Card 04 -->
-            <article class="showcase__card">
-              <div class="showcase__media-frame">
-                <img
-                  src="assets/showcase_equilibrium.jpg"
-                  alt="Balanced stone and frosted glass spheres suspended along a titanium arc representing emotional equilibrium"
-                  class="showcase__img"
-                  width="800"
-                  height="800"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="showcase__badge">
-                  <span class="tech-mono">04 // HOMEOSTASIS</span>
-                </div>
-              </div>
-              <div class="showcase__card-content">
-                <h3 class="showcase__card-title">Equilibrium</h3>
-                <p class="showcase__card-desc">
-                  Tracking deviations from an individual's unique emotional baseline rather than generic averages.
-                </p>
-              </div>
-            </article>
-
-            <!-- Card 05 -->
-            <article class="showcase__card">
-              <div class="showcase__media-frame">
-                <img
-                  src="assets/showcase_inference.jpg"
-                  alt="Faceted crystalline prism refracting subtle spectral light representing inference and cognitive depth"
-                  class="showcase__img"
-                  width="800"
-                  height="800"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="showcase__badge">
-                  <span class="tech-mono">05 // COGNITION</span>
-                </div>
-              </div>
-              <div class="showcase__card-content">
-                <h3 class="showcase__card-title">Inference</h3>
-                <p class="showcase__card-desc">
-                  Synthesising multimodal conversational signals into structured, clinically relevant insight.
-                </p>
-              </div>
-            </article>
-
-            <!-- Card 06 -->
-            <article class="showcase__card">
-              <div class="showcase__media-frame">
-                <img
-                  src="assets/showcase_sanctuary.jpg"
-                  alt="Protective alabaster and glass cocoon sheltering a polished jade sphere representing safety and trust"
-                  class="showcase__img"
-                  width="800"
-                  height="800"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div class="showcase__badge">
-                  <span class="tech-mono">06 // TRUST</span>
-                </div>
-              </div>
-              <div class="showcase__card-content">
-                <h3 class="showcase__card-title">Sanctuary</h3>
-                <p class="showcase__card-desc">
-                  Maintaining strict safety boundaries, emotional dignity, and timely clinician escalation.
-                </p>
-              </div>
-            </article>
-
-          </div>
-        </div>
-
-        <!-- Mobile horizontal swipe indicator -->
-        <div class="showcase__mobile-hint" aria-hidden="true">
-          <span class="tech-mono">SWIPE HORIZONTALLY TO EXPLORE &rarr;</span>
-        </div>
-
       </div>
     </section>
 
 
     <!-- -----------------------------------------------------------------
-         BELIEFS (formerly Principles)
+         SECTION 07: BELIEFS (ALIGNED EDITORIAL TYPOGRAPHIC ROWS)
+         Replaces the 3-card template with a distinctive editorial list
          ----------------------------------------------------------------- -->
-    <section class="section section--alt" id="beliefs" aria-labelledby="beliefs-heading">
+    <section class="section" id="beliefs" aria-labelledby="beliefs-heading">
       <div class="container">
 
-        <div class="principles__header">
+        <div class="beliefs__header">
           <p class="eyebrow">What we believe</p>
           <h2 class="heading-xl" id="beliefs-heading">
             Three principles that guide everything.
           </h2>
         </div>
 
-        <ol class="principles__list" role="list">
+        <!-- Aligned Editorial Typographic Rows (No Cards) -->
+        <div class="beliefs__editorial-list">
 
-          <li class="principle-item">
-            <span class="principle-item__number" aria-hidden="true">01</span>
-            <div class="principle-item__content">
-              <h3 class="principle-item__title">
-                People are more than the words they say.
-              </h3>
-              <p class="principle-item__body">
+          <article class="belief-row">
+            <div class="belief-row__index">
+              <span class="belief-row__num">01</span>
+            </div>
+            <div class="belief-row__content">
+              <h3 class="belief-row__title">People are more than the words they say.</h3>
+              <p class="belief-row__body">
                 Communication carries layers that spoken or written words alone cannot
                 convey — tone, context, pattern, history, and what is left unsaid.
                 Technology that listens only to words misses what matters most.
               </p>
             </div>
-          </li>
+          </article>
 
-          <li class="principle-item">
-            <span class="principle-item__number" aria-hidden="true">02</span>
-            <div class="principle-item__content">
-              <h3 class="principle-item__title">
-                Understanding should come before intervention.
-              </h3>
-              <p class="principle-item__body">
+          <article class="belief-row">
+            <div class="belief-row__index">
+              <span class="belief-row__num">02</span>
+            </div>
+            <div class="belief-row__content">
+              <h3 class="belief-row__title">Understanding should come before intervention.</h3>
+              <p class="belief-row__body">
                 Acting without understanding risks harm. We believe in building deep
                 contextual awareness first — so that any support offered is appropriate,
                 timely, and genuinely helpful to the individual.
               </p>
             </div>
-          </li>
+          </article>
 
-          <li class="principle-item">
-            <span class="principle-item__number" aria-hidden="true">03</span>
-            <div class="principle-item__content">
-              <h3 class="principle-item__title">
-                Technology should augment human connection, not replace it.
-              </h3>
-              <p class="principle-item__body">
+          <article class="belief-row">
+            <div class="belief-row__index">
+              <span class="belief-row__num">03</span>
+            </div>
+            <div class="belief-row__content">
+              <h3 class="belief-row__title">Technology should augment human connection, not replace it.</h3>
+              <p class="belief-row__body">
                 The goal is not to substitute human care with software. It is to make
                 human care more informed, more accessible, and more responsive — by
                 giving it better context at the right moment.
               </p>
             </div>
-          </li>
+          </article>
 
-        </ol>
-
-      </div>
-    </section>
-
-
-    <!-- -----------------------------------------------------------------
-         PRODUCT — Core Capabilities & Architecture
-         ----------------------------------------------------------------- -->
-    <section class="section" id="product" aria-labelledby="product-heading">
-      <div class="container">
-
-        <div class="product__header">
-          <p class="eyebrow">Our product</p>
-          <h2 class="heading-xl" id="product-heading">
-            Built for depth, context,<br>and clinical safety.
-          </h2>
-          <p class="body-lg product__intro">
-            A conversational intelligence platform that bridges the gap between what someone experiences and what they can put into words — turning everyday dialogue into structured, clinically relevant understanding.
-          </p>
-        </div>
-
-        <!-- Three Product Pillars -->
-        <div class="solutions__grid">
-
-          <div class="solution-item">
-            <span class="solution-item__number" aria-hidden="true">01</span>
-            <h3 class="solution-item__title">
-              Multimodal Signal Perception
-            </h3>
-            <p class="solution-item__body">
-              Listens beyond literal vocabulary. Analyzes conversational cadence, acoustic vocal tone, emotional nuance, and deliberate hesitation to understand authentic intent in real time.
-            </p>
-          </div>
-
-          <div class="solution-item">
-            <span class="solution-item__number" aria-hidden="true">02</span>
-            <h3 class="solution-item__title">
-              Longitudinal Context Engine
-            </h3>
-            <p class="solution-item__body">
-              Builds a personalized baseline over days and weeks. Rather than scoring users against generic population averages, it detects meaningful deviations from a person's individual emotional norm.
-            </p>
-          </div>
-
-          <div class="solution-item">
-            <span class="solution-item__number" aria-hidden="true">03</span>
-            <h3 class="solution-item__title">
-              Clinical Guardrails &amp; Escalation
-            </h3>
-            <p class="solution-item__body">
-              Provides empathetic micro-interventions in the moment while maintaining strict safety boundaries. Automatically surfaces longitudinal context to care professionals when human escalation is required.
-            </p>
-          </div>
-
-        </div>
-
-        <!-- Product Workflow / Architecture Overview -->
-        <div class="product__preview">
-          <div class="product__preview-card">
-            <div class="product__preview-header">
-              <div class="product__preview-badge-row">
-                <span class="tech-tag"><span class="tech-tag__dot"></span>CI // ARCH-001</span>
-                <span class="tech-meta">SYSTEM SPECIFICATION v0.4.2</span>
-              </div>
-              <h3 class="product__preview-title">How Human Understanding Intelligence works</h3>
-              <p class="body-base product__preview-subtitle">
-                Acoustic signal decomposition, real-time cadence modulation, and longitudinal emotional baseline trajectory.
-              </p>
-            </div>
-
-            <!-- Product Architecture Media Showcase -->
-            <figure class="product__architecture-media" aria-label="System architecture and signal decomposition visualization">
-              <div class="product__architecture-frame">
-                <div class="product__architecture-badge-bar">
-                  <div class="product__architecture-badge-left">
-                    <span class="tech-tag"><span class="tech-tag__dot"></span>SPEC // DECOMPOSITION</span>
-                    <span class="tech-meta">SIGNAL PROCESSING FLOW</span>
-                  </div>
-                  <div class="product__architecture-badge-right">
-                    <span class="tech-coords">TIME-SERIES CADENCE &amp; VALENCE</span>
-                  </div>
-                </div>
-                <img
-                  src="assets/product_architecture.jpg"
-                  alt="Conversational intelligence architectural decomposition showing signal ingestion flow, subtle acoustic waveforms, voice cadence modulation, and longitudinal emotional baseline trajectory"
-                  class="product__architecture-img"
-                  width="1600"
-                  height="900"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption class="product__architecture-caption">
-                  <span class="caption-text">Conversational signal processing pipeline: acoustic waveform capture, cadence modulation, and emotional valence tracking against individual normative baselines.</span>
-                </figcaption>
-              </div>
-            </figure>
-
-            <div class="product__pipeline">
-
-              <div class="pipeline-step">
-                <div class="pipeline-step__indicator">
-                  <span class="pipeline-step__num">1</span>
-                  <div class="pipeline-step__line" aria-hidden="true"></div>
-                </div>
-                <div class="pipeline-step__body">
-                  <h4 class="pipeline-step__title">Signal Ingestion</h4>
-                  <p class="pipeline-step__desc">Captures natural speech acoustics, linguistic semantics, and conversation cadence during check-ins and reflection.</p>
-                </div>
-              </div>
-
-              <div class="pipeline-step">
-                <div class="pipeline-step__indicator">
-                  <span class="pipeline-step__num">2</span>
-                  <div class="pipeline-step__line" aria-hidden="true"></div>
-                </div>
-                <div class="pipeline-step__body">
-                  <h4 class="pipeline-step__title">Contextual Inference</h4>
-                  <p class="pipeline-step__desc">Cross-references real-time signals against the individual's personal baseline and multi-session historical patterns.</p>
-                </div>
-              </div>
-
-              <div class="pipeline-step">
-                <div class="pipeline-step__indicator">
-                  <span class="pipeline-step__num">3</span>
-                </div>
-                <div class="pipeline-step__body">
-                  <h4 class="pipeline-step__title">Adaptive Action</h4>
-                  <p class="pipeline-step__desc">Offers contextual wellbeing guidance, personalized coping tools, or safe escalation to certified human clinicians.</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
         </div>
 
       </div>
@@ -672,24 +694,26 @@
 
 
     <!-- -----------------------------------------------------------------
-         CONTACT CTA
+         SECTION 08: CONTACT CTA
          ----------------------------------------------------------------- -->
-    <section class="section--contact section--alt" id="contact" aria-labelledby="contact-heading">
+    <section class="section--contact" id="contact" aria-labelledby="contact-heading">
       <div class="container">
-        <div class="contact-cta__inner">
+        <div class="contact__inner">
 
-          <p class="eyebrow">Get in touch</p>
-          <h2 class="heading-xl" id="contact-heading">
+          <p class="eyebrow contact__eyebrow">Get in touch</p>
+          <h2 class="heading-display contact__heading" id="contact-heading">
             If this resonates,<br>we would like to hear from you.
           </h2>
-          <p class="body-lg">
+          <p class="contact__body">
             Whether you are a potential collaborator, an institution interested in our
             research direction, a clinician with a perspective to share, or someone
             who simply believes in what we are building — reach out.
           </p>
-          <a href="mailto:hello@affynelabs.com" class="btn btn--primary" id="contact-cta">
-            Start a conversation
-          </a>
+          <div class="contact__actions">
+            <a href="mailto:hello@affynelabs.com" class="btn btn--white" id="contact-cta">
+              Start a conversation
+            </a>
+          </div>
 
         </div>
       </div>
@@ -703,23 +727,30 @@
        ===================================================================== -->
   <footer class="site-footer" role="contentinfo">
     <div class="container">
-      <div class="footer__inner">
+      <div class="footer__grid">
 
         <div class="footer__brand-block">
-          <a href="#" class="footer__brand" aria-label="Affyne Labs homepage">Affyne Labs</a>
-          <span class="footer__tagline">Affinity + Intelligence</span>
+          <img src="assets/affyne_mark.svg" alt="Affyne Labs logo mark" width="28" height="28" />
+          <span class="footer__brand-name">Affyne Labs</span>
+          <span class="footer__brand-tagline">Affinity + Intelligence</span>
         </div>
 
         <nav aria-label="Footer navigation">
           <ul class="footer__links" role="list">
-            <li><a href="#about"   class="footer__link">About</a></li>
-            <li><a href="#vision"  class="footer__link">Vision</a></li>
+            <li><a href="#about" class="footer__link">About</a></li>
+            <li><a href="#mission" class="footer__link">Mission</a></li>
+            <li><a href="#vision" class="footer__link">Vision</a></li>
+            <li><a href="#exploration" class="footer__link">Exploration</a></li>
             <li><a href="#product" class="footer__link">Product</a></li>
+            <li><a href="#beliefs" class="footer__link">Beliefs</a></li>
             <li><a href="#contact" class="footer__link">Contact</a></li>
           </ul>
         </nav>
 
-        <p class="footer__legal">&copy; 2025 Affyne Labs. All rights reserved.</p>
+        <div class="footer__legal">
+          <span>&copy; 2026 Affyne Labs. All rights reserved.</span>
+          <span>Psychology with Health Care&bull; Research &amp; Engineering</span>
+        </div>
 
       </div>
     </div>
@@ -728,4 +759,5 @@
   <script src="content.js"></script>
   <script src="main.js"></script>
 </body>
+
 </html>
