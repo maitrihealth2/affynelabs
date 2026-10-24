@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Affyne Labs — Human Understanding Intelligence</title>
+  <meta name="description" content="Discover the mission, vision, and principles behind AFFYNELABS. We explore the intersection of artificial intelligence, human understanding, and well-being.">
+  <meta name="keywords" content="Affyne Labs About, HealthTech mission, responsible AI, privacy-first healthcare, mental health technology">
+  <meta name="theme-color" content="#102858">
+
+  <!-- Google Fonts: Editorial Serif + Modern Clean Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="about-page">
+
+  <!-- Header Navigation (Consistent Across Site) -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      <!-- Logo pairing mark with typography -->
+      <a href="index.html" class="brand-logo" id="brandLogo" aria-label="Affyne Labs Home">
+        <svg class="brand-mark-svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M 22 78 L 52 18 C 55 12 61 12 64 18 L 64 48" stroke="#3478F6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 64 44 L 64 74 C 64 80 68 84 74 84 L 88 84" stroke="#60C5EB" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text">affynelabs</span>
+      </a>
+
+      <!-- Desktop Navigation Bar: Individually Composed Floating Elements -->
+      <div class="nav-cluster">
+        <nav class="floating-nav-links" id="floatingNav" aria-label="Primary Navigation">
+          <a href="index.html" class="nav-item">Home</a>
+          <a href="about.html" class="nav-item active">About</a>
+          <a href="index.html#what-we-do" class="nav-item">What We Do</a>
+          <a href="index.html#contact" class="nav-item">Contact</a>
+        </nav>
+
+        <!-- Top Join Waitlist Button -->
+        <a href="index.html#contact" class="btn-waitlist-outline btn-magnetic" id="headerWaitlistBtn">Join Waitlist</a>
+
+        <!-- Audio Breeze Toggle (Zen Ambiance) -->
+        <button class="zen-toggle-btn" id="zenToggleBtn" title="Toggle Nature Breeze Ambiance" aria-label="Toggle ocean breeze ambiance">
+          <svg class="sound-icon-off" id="soundIconOff" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+          <svg class="sound-icon-on hidden" id="soundIconOn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileDrawer">
+      <a href="index.html" class="mobile-link">Home</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="index.html#what-we-do" class="mobile-link">What We Do</a>
+      <a href="index.html#contact" class="mobile-link">Contact</a>
+      <a href="index.html#contact" class="mobile-waitlist-btn">Join Waitlist</a>
+    </div>
+  </header>
+
+  <div class="page-viewport" id="pageViewport">
+
+  <!-- ========================================================================
+       SECTION 01 — OUR PERSPECTIVE (Scroll-Driven Word Reveal Animation)
+       ======================================================================== -->
+  <section class="section-perspective scroll-reveal-section" id="perspective">
+    <div class="scroll-reveal-pin">
+      <div class="content-container perspective-container">
+        
+        <!-- Bullet Label: Blue Dot + OUR PERSPECTIVE -->
+        <div class="section-bullet-label">
+          <span class="bullet-dot"></span>
+          <span class="bullet-text">OUR PERSPECTIVE</span>
+        </div>
+
+        <!-- Headline -->
+        <h2 class="perspective-headline">
+          Affinity meets intelligence.
+        </h2>
+
+        <!-- Two-Column Layout -->
+        <div class="perspective-grid">
+          
+          <!-- Left: Blue-bordered quote with navy to light-slate text split -->
+          <div class="perspective-quote-col">
+            <blockquote class="perspective-quote scroll-word-target">
+              <span class="quote-navy">&ldquo;We are not defined by a single</span>
+              <span class="quote-muted">product. We are defined by a question &mdash; how much can technology truly understand about a person?&rdquo;</span>
+            </blockquote>
+          </div>
+
+          <!-- Right: Exact Two Paragraphs -->
+          <div class="perspective-text-col scroll-word-target">
+            <p class="perspective-p1">
+              The name Affyne is built from two foundational ideas: Affinity &mdash; human connection, trust, and empathy &mdash; and Intelligence &mdash; the capacity to perceive, understand, and recognise patterns in context.
+            </p>
+            <p class="perspective-p2">
+              Labs reflects our methodology: grounded exploration, clinical collaboration, and responsible engineering. Rather than treating intelligence as an abstract calculation, we anchor our work in the messy, meaningful reality of human conversation.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 02 — OUR MISSION (Scroll-Driven Word Reveal Animation)
+       ======================================================================== -->
+  <section class="section-mission scroll-reveal-section" id="mission">
+    <div class="scroll-reveal-pin">
+      <div class="content-container mission-container">
+        
+        <!-- Bullet Label: Blue Dot + OUR MISSION -->
+        <div class="section-bullet-label">
+          <span class="bullet-dot"></span>
+          <span class="bullet-text">OUR MISSION</span>
+        </div>
+
+        <!-- Massive Statement Quote with Navy to Light-Slate Text Split -->
+        <h2 class="mission-headline scroll-word-target">
+          <span class="mission-navy">&ldquo;To make technology understand people more deeply, and</span>
+          <span class="mission-muted">use that understanding to support human connection more meaningfully.&rdquo;</span>
+        </h2>
+
+        <!-- Exact Supporting Paragraph -->
+        <p class="mission-body scroll-word-target">
+          Technology has become increasingly capable of processing information &mdash; but people are more than information. Context, emotion, relationships, behaviour, and history all shape what someone communicates. Affyne Labs exists to account for these dimensions, responsibly.
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 03 — OUR VISION
+       ======================================================================== -->
+  <section class="about-section about-vision-section reveal-on-scroll" id="vision">
+    <div class="content-container">
+      <div class="about-split-row">
+        <div class="split-col-label">
+          <span class="section-label">03 / OUR VISION</span>
+        </div>
+        <div class="split-col-content">
+          <div class="about-statement-box">
+            <blockquote class="about-statement-text">
+              &ldquo;To build Human Understanding Intelligence — technology capable of interpreting human communication, context, behaviour, and evolving states, in ways that enable more meaningful human experiences and support.&rdquo;
+            </blockquote>
+          </div>
+          <div class="editorial-body">
+            <p>
+              Mental health is our first domain of application. It is not the limit of what we intend to explore as our understanding and capabilities evolve.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 04 — OUR CORE PRINCIPLES
+       ======================================================================== -->
+  <section class="about-section about-principles-section reveal-on-scroll" id="principles">
+    <div class="content-container">
+      <div class="principles-header-block">
+        <span class="section-label">04 / OUR CORE PRINCIPLES</span>
+        <h2 class="editorial-headline">
+          Three principles that guide everything.
+        </h2>
+        <p class="section-intro">
+          Our technical research and design methodologies are rooted in three foundational beliefs from our brand ethos, supported by unwavering commitments to safety and privacy.
+        </p>
+      </div>
+
+      <!-- Three Core Beliefs -->
+      <div class="principles-editorial-matrix">
+        
+        <!-- Belief 01 -->
+        <div class="principle-item">
+          <div class="principle-index">01</div>
+          <h3 class="principle-name">People are more than the words they say.</h3>
+          <p class="principle-text">
+            Human understanding considers context, emotion, behaviour, relationships, and history — not just isolated textual data points.
+          </p>
+        </div>
+
+        <!-- Belief 02 -->
+        <div class="principle-item">
+          <div class="principle-index">02</div>
+          <h3 class="principle-name">Understanding should come before intervention.</h3>
+          <p class="principle-text">
+            Responsible support begins with understanding context before acting, ensuring every interaction is measured, timely, and appropriate.
+          </p>
+        </div>
+
+        <!-- Belief 03 -->
+        <div class="principle-item">
+          <div class="principle-index">03</div>
+          <h3 class="principle-name">Technology should augment human connection, not replace it.</h3>
+          <p class="principle-text">
+            Technology should help enable meaningful human support and care rather than isolate individuals or replace clinical relationships.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Commitments Sub-Matrix -->
+      <div class="commitments-submatrix">
+        <div class="commitments-title">Our Foundational Engineering Commitments</div>
+        <div class="commitments-grid">
+          <div class="commitment-item">
+            <span class="commitment-dot"></span>
+            <span><strong>Privacy:</strong> On-device processing &amp; zero data monetization</span>
+          </div>
+          <div class="commitment-item">
+            <span class="commitment-dot"></span>
+            <span><strong>Safety:</strong> Clinical risk mitigation &amp; strict fail-safes</span>
+          </div>
+          <div class="commitment-item">
+            <span class="commitment-dot"></span>
+            <span><strong>Responsible AI:</strong> Transparent, non-manipulative architectures</span>
+          </div>
+          <div class="commitment-item">
+            <span class="commitment-dot"></span>
+            <span><strong>Accessibility:</strong> Universal, friction-free healthcare design</span>
+          </div>
+          <div class="commitment-item">
+            <span class="commitment-dot"></span>
+            <span><strong>Trust:</strong> Earning confidence through algorithmic clarity</span>
+          </div>
+          <div class="commitment-item">
+            <span class="commitment-dot"></span>
+            <span><strong>Human-Centred:</strong> Calibrated to biological and emotional needs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 05 — OUR CURRENT FOCUS
+       ======================================================================== -->
+  <section class="about-section about-focus-section reveal-on-scroll" id="focus">
+    <div class="content-container">
+      <div class="about-split-row">
+        <div class="split-col-label">
+          <span class="section-label">05 / OUR CURRENT FOCUS</span>
+        </div>
+        <div class="split-col-content">
+          <h2 class="editorial-headline">
+            Beginning with mental health and emotional well-being.
+          </h2>
+          <div class="editorial-body">
+            <p class="lead-paragraph">
+              Mental health is one of the clearest areas where there is a gap between what a person experiences and what they are able or willing to say out loud.
+            </p>
+            <p>
+              Our first exploratory focus is designed to understand a person's communication across conversation, voice, emotion, intent, context, personal baseline, longitudinal patterns, and risk signals — and to use that understanding to provide personalized support, appropriate interventions, and human or professional escalation when required.
+            </p>
+            <p>
+              We explore how technology can understand what lies behind a conversation — not to replace human care, but to make support more contextual, timely, and personal.
+            </p>
+            <p class="strategic-disclaimer">
+              *AFFYNELABS explores these approaches through active research and design. We make no claims that specific products are already validated or clinically effective, nor do we claim diagnostic accuracy or medical device status without verified evidence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 06 — LOOKING AHEAD
+       ======================================================================== -->
+  <section class="about-section about-ahead-section reveal-on-scroll" id="ahead">
+    <div class="content-container">
+      <div class="ahead-card">
+        <span class="section-label dark-mode">06 / LOOKING AHEAD</span>
+        <h2 class="ahead-headline">
+          Technology that understands people.
+        </h2>
+        <p class="ahead-narrative">
+          Our ambition is to research, develop, and commercialise innovative healthcare technologies as our understanding and capabilities evolve. We believe technology should be more than powerful — it must be trustworthy, thoughtful, and centred on human needs.
+        </p>
+        <div class="ahead-cta-wrap">
+          <a href="index.html#contact" class="btn-ahead-primary">
+            <span>Get in Touch With Us</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="index.html" class="btn-ahead-secondary">Return to Home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER (Pale Blue Background - Exact Image 4 Design)
+       ======================================================================== -->
+  <footer class="exact-footer reveal-on-scroll">
+    <div class="content-container footer-exact-container">
+      
+      <!-- Top Row: Brand Lockup & Links -->
+      <div class="footer-top-row">
+        <!-- Left: Logo & Tagline -->
+        <div class="footer-brand-lockup">
+          <svg class="brand-mark-svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M 22 78 L 52 18 C 55 12 61 12 64 18 L 64 48" stroke="#3478F6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 64 44 L 64 74 C 64 80 68 84 74 84 L 88 84" stroke="#60C5EB" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="footer-brand-title">Affyne Labs</span>
+          <span class="footer-pipe-divider">|</span>
+          <span class="footer-brand-subtitle">Affinity + Intelligence</span>
+        </div>
+
+        <!-- Right: Exact Navigation Links -->
+        <nav class="footer-exact-nav" aria-label="Footer Navigation">
+          <a href="#perspective" class="footer-nav-link">The Problem</a>
+          <a href="#perspective" class="footer-nav-link">Perspective</a>
+          <a href="index.html#what-we-do" class="footer-nav-link">Intelligence</a>
+          <a href="#focus" class="footer-nav-link">The Journey</a>
+          <a href="#principles" class="footer-nav-link">Principles</a>
+          <a href="#mission" class="footer-nav-link">Mission</a>
+          <a href="index.html#contact" class="footer-nav-link">Contact</a>
+        </nav>
+      </div>
+
+      <!-- Hairline Divider -->
+      <div class="footer-hairline"></div>
+
+      <!-- Bottom Row: Copyright & Subtag -->
+      <div class="footer-bottom-row">
+        <div class="footer-copyright">
+          &copy; 2026 Affyne Labs. All rights reserved.
+        </div>
+        <div class="footer-subtag">
+          Psychology with Healthcare &bull; Research &amp; Engineering
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  </div><!-- /pageViewport -->
+
+  <script src="script.js"></script>
+</body>
+</html>

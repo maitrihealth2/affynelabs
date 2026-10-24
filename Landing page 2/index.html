@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affyne Labs — Technology That Understands You Deeper</title>
+  <meta name="description" content="AFFYNELABS is a HealthTech innovation company exploring the intersection of artificial intelligence, human understanding, and well-being.">
+  <meta name="keywords" content="Affyne Labs, HealthTech, mental health, responsible AI, privacy-first healthcare">
+  <meta name="theme-color" content="#102858">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Affyne Labs — Technology That Understands You Deeper">
+  <meta property="og:description" content="HealthTech innovation exploring the intersection of artificial intelligence, human understanding, and well-being.">
+
+  <!-- Google Fonts: Editorial Serif + Modern Clean Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Floating Header Navigation (Individual Glass Pills) -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-container">
+      <!-- Logo pairing mark with typography -->
+      <a href="index.html" class="brand-logo" id="brandLogo" aria-label="Affyne Labs Home">
+        <svg class="brand-mark-svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <path d="M 22 78 L 52 18 C 55 12 61 12 64 18 L 64 48" stroke="#3478F6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 64 44 L 64 74 C 64 80 68 84 74 84 L 88 84" stroke="#60C5EB" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text">affynelabs</span>
+      </a>
+
+      <!-- Desktop Navigation Bar: Individually Composed Floating Elements (No Bulky Bar Container) -->
+      <div class="nav-cluster">
+        <nav class="floating-nav-links" id="floatingNav" aria-label="Primary Navigation">
+          <a href="index.html" class="nav-item active">Home</a>
+          <a href="about.html" class="nav-item">About</a>
+          <a href="#what-we-do" class="nav-item">What We Do</a>
+          <a href="#contact" class="nav-item">Contact</a>
+        </nav>
+
+        <!-- Top Join Waitlist Button -->
+        <a href="#contact" class="btn-waitlist-outline btn-magnetic" id="headerWaitlistBtn">Join Waitlist</a>
+
+        <!-- Audio Breeze Toggle (Zen Ambiance) -->
+        <button class="zen-toggle-btn" id="zenToggleBtn" title="Toggle Nature Breeze Ambiance" aria-label="Toggle ocean breeze ambiance">
+          <svg class="sound-icon-off" id="soundIconOff" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <line x1="23" y1="9" x2="17" y2="15"/>
+            <line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+          <svg class="sound-icon-on hidden" id="soundIconOn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open Navigation Menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileDrawer">
+      <a href="index.html" class="mobile-link">Home</a>
+      <a href="about.html" class="mobile-link">About</a>
+      <a href="#what-we-do" class="mobile-link">What We Do</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="#contact" class="mobile-waitlist-btn">Join Waitlist</a>
+    </div>
+  </header>
+
+  <div class="page-viewport" id="pageViewport">
+
+  <!-- ========================================================================
+       SECTION 1 — HERO (Approved, Preserved Visual Identity & SCROLL cue)
+       ======================================================================== -->
+  <div class="hero-wrapper" id="heroWrapper">
+    <!-- Hero Background Video: clouds_1080p.webm -->
+    <video 
+      class="hero-background-video" 
+      id="heroVideo" 
+      autoplay 
+      loop 
+      muted 
+      playsinline
+      poster="assets/sunrise-clouds.png"
+    >
+      <source src="assets/clouds_1080p.webm" type="video/webm">
+    </video>
+
+    <!-- Cinematic Vignette & Readability Gradient Overlay (Preserved) -->
+    <div class="hero-overlay"></div>
+
+    <!-- Main Content Area / Hero Layout -->
+    <main class="hero-main">
+      <div class="hero-container">
+        
+        <!-- Left Side: Editorial Typography & Email Waitlist Pill -->
+        <div class="hero-copy-column">
+          <h1 class="hero-headline">
+            we&rsquo;re building technology that understands you <span class="headline-italic">deeper.</span>
+          </h1>
+
+          <!-- Waitlist Input Bar -->
+          <form class="waitlist-form-pill" id="waitlistForm" novalidate>
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                id="emailInput" 
+                name="email" 
+                placeholder="Enter your email" 
+                required 
+                autocomplete="email"
+                spellcheck="false"
+              />
+            </div>
+            <button type="submit" class="btn-waitlist-submit" id="submitWaitlistBtn">
+              <span class="btn-label">Join Waitlist</span>
+              <span class="btn-spinner hidden" id="btnSpinner"></span>
+            </button>
+          </form>
+          <div class="form-feedback hidden" id="formFeedback"></div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ========================================================================
+       SECTION 2 — WHO WE ARE
+       ======================================================================== -->
+  <section class="section-who-we-are reveal-on-scroll" id="who-we-are">
+    <div class="content-container">
+      <div class="who-we-are-grid">
+        
+        <!-- Left Column: Section Label & Headline & CTA -->
+        <div class="who-we-are-col-header">
+          <div class="section-bullet-label">
+            <span class="bullet-dot"></span>
+            <span class="bullet-text">WHO WE ARE</span>
+          </div>
+          <h2 class="who-we-are-headline">
+            Affinity meets intelligence.
+          </h2>
+          <div class="who-we-are-cta-desktop">
+            <a href="about.html" class="btn-approach">
+              <span>Learn About Us</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Editorial Narrative -->
+        <div class="who-we-are-col-content">
+          <p class="who-lead">
+            AFFYNELABS is a HealthTech innovation company exploring the intersection of artificial intelligence, human understanding, and well-being.
+          </p>
+          <p class="who-body">
+            We explore, research, and build technologies that help us understand people more deeply and enable better forms of support.
+          </p>
+          <p class="who-body">
+            Our name brings together two ideas: affinity, representing human connection, trust, and empathy, and intelligence, representing the ability to understand patterns and context.
+          </p>
+          <div class="who-we-are-cta-mobile">
+            <a href="about.html" class="btn-approach">
+              <span>Learn About Us</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 3 — WHAT WE DO (Pale Blue Background)
+       ======================================================================== -->
+  <section class="section-what-we-do reveal-on-scroll" id="what-we-do">
+    <div class="what-we-do-bg-scrim"></div>
+    <div class="content-container">
+      
+      <!-- Section Header: 2-Column Split Layout -->
+      <div class="what-we-do-header-row">
+        <div class="what-we-do-header-left">
+          <div class="section-bullet-label">
+            <span class="bullet-dot"></span>
+            <span class="bullet-text">WHAT WE DO</span>
+          </div>
+          <h2 class="what-we-do-headline">
+            Technology that<br>
+            understands people<br>
+            <span class="headline-blue-italic">more deeply.</span>
+          </h2>
+        </div>
+        <div class="what-we-do-header-right">
+          <p class="what-we-do-intro">
+            We explore responsible AI and emerging technologies to address real-world healthcare challenges while prioritising privacy, safety, trust, and accessibility.
+          </p>
+        </div>
+      </div>
+
+      <!-- Connected Guiding Areas Timeline Layout -->
+      <div class="guiding-areas-grid">
+        
+        <!-- Area 01 -->
+        <div class="guiding-area-item">
+          <div class="area-timeline-header">
+            <div class="area-counter-row">
+              <span class="area-counter-num">01</span>
+              <span class="area-counter-dot"></span>
+            </div>
+          </div>
+          <h3 class="area-title">Privacy-First Technology</h3>
+          <p class="area-description">
+            Respecting personal information, privacy, and user trust throughout the development of technology.
+          </p>
+          <div class="area-divider-line"></div>
+          <ul class="area-bullet-list">
+            <li>On-device processing</li>
+            <li>Zero-knowledge integrity</li>
+            <li>Privacy by design</li>
+          </ul>
+        </div>
+
+        <!-- Area 02 -->
+        <div class="guiding-area-item">
+          <div class="area-timeline-header">
+            <div class="area-counter-row">
+              <span class="area-counter-num">02</span>
+              <span class="area-counter-dot"></span>
+            </div>
+          </div>
+          <h3 class="area-title">Safety-Centred AI</h3>
+          <p class="area-description">
+            Exploring responsible, human-centred technological approaches that prioritise safety and appropriate safeguards.
+          </p>
+          <div class="area-divider-line"></div>
+          <ul class="area-bullet-list">
+            <li>Cognitive guardrails</li>
+            <li>Evidence-informed boundaries</li>
+            <li>Human oversight</li>
+          </ul>
+        </div>
+
+        <!-- Area 03 -->
+        <div class="guiding-area-item">
+          <div class="area-timeline-header">
+            <div class="area-counter-row">
+              <span class="area-counter-num">03</span>
+              <span class="area-counter-dot"></span>
+            </div>
+          </div>
+          <h3 class="area-title">Mental Healthcare Innovation</h3>
+          <p class="area-description">
+            Our current focus is exploring technological approaches that may support mental well-being and address challenges through responsible, human-centred solutions.
+          </p>
+          <div class="area-divider-line"></div>
+          <ul class="area-bullet-list">
+            <li>Empathetic resonance</li>
+            <li>Exploratory initiative</li>
+            <li>Accessible by design</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Strategic Clarification & CTA -->
+      <div class="what-we-do-cta-block">
+        <p class="strategic-disclaimer">
+          *These are areas of focus, not claims of existing validated products or proven clinical outcomes.
+        </p>
+        <a href="about.html#principles" class="btn-explore-approach btn-magnetic">
+          <span>Explore Our Approach</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECTION 4 — GET IN TOUCH (Deep Solid Navy Background - Exact Image 3)
+       ======================================================================== -->
+  <section class="section-get-in-touch reveal-on-scroll" id="contact">
+    <div class="content-container get-in-touch-container">
+      
+      <!-- Centered Bullet Label: Blue Dot + GET IN TOUCH -->
+      <div class="section-bullet-label centered">
+        <span class="bullet-dot"></span>
+        <span class="bullet-text">GET IN TOUCH</span>
+      </div>
+
+      <!-- Centered 3-line Headline -->
+      <h2 class="get-in-touch-headline">
+        If this resonates,<br>
+        we would like to hear<br>
+        from you.
+      </h2>
+
+      <!-- Centered Narrative -->
+      <p class="get-in-touch-narrative">
+        Whether you are a potential collaborator, an institution interested in our research direction, a clinician with a perspective to share, or someone who simply believes in what we are building &mdash; reach out.
+      </p>
+
+      <!-- Centered Start a Conversation Button -->
+      <div class="get-in-touch-cta">
+        <button type="button" class="btn-start-conversation btn-magnetic" id="startConversationBtn">
+          Start a conversation
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Contact Dialog Modal (Triggered by Start a conversation) -->
+  <div class="contact-modal" id="contactModal" aria-hidden="true" role="dialog" aria-labelledby="contactModalTitle">
+    <div class="contact-modal-backdrop" id="contactModalBackdrop"></div>
+    <div class="contact-dialog-card">
+      <button class="modal-close-btn" id="contactModalCloseBtn" aria-label="Close Contact Dialog">&times;</button>
+      <div class="section-bullet-label">
+        <span class="bullet-dot"></span>
+        <span class="bullet-text">GET IN TOUCH</span>
+      </div>
+      <h3 class="contact-dialog-title" id="contactModalTitle">Start a conversation with Affyne Labs</h3>
+      <p class="contact-dialog-sub">We welcome thoughtful conversations, research collaborations, partnerships, and enquiries.</p>
+      
+      <form class="institutional-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="contactName">Full Name</label>
+            <input type="text" id="contactName" name="name" placeholder="Dr. Sarah Jenkins" required>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Work Email</label>
+            <input type="email" id="contactEmail" name="email" placeholder="sarah@institution.org" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="contactOrg">Organization / Institutional Affiliation</label>
+          <input type="text" id="contactOrg" name="organization" placeholder="University, Health System, or Research Lab">
+        </div>
+        <div class="form-group">
+          <label for="contactMessage">Message / Topic of Collaboration</label>
+          <textarea id="contactMessage" name="message" rows="4" placeholder="Share your perspective, research interest, or inquiry..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit-contact btn-magnetic" id="contactSubmitBtn">
+          <span>Send Message</span>
+        </button>
+        <div class="contact-form-status hidden" id="contactStatus"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       FOOTER (Pale Blue Background - Exact Image 4 Design)
+       ======================================================================== -->
+  <footer class="exact-footer reveal-on-scroll">
+    <div class="content-container footer-exact-container">
+      
+      <!-- Top Row: Brand Lockup & Links -->
+      <div class="footer-top-row">
+        <!-- Left: Logo & Tagline -->
+        <div class="footer-brand-lockup">
+          <svg class="brand-mark-svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+            <path d="M 22 78 L 52 18 C 55 12 61 12 64 18 L 64 48" stroke="#3478F6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 64 44 L 64 74 C 64 80 68 84 74 84 L 88 84" stroke="#60C5EB" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="footer-brand-title">Affyne Labs</span>
+          <span class="footer-pipe-divider">|</span>
+          <span class="footer-brand-subtitle">Affinity + Intelligence</span>
+        </div>
+
+        <!-- Right: Exact Navigation Links -->
+        <nav class="footer-exact-nav" aria-label="Footer Navigation">
+          <a href="about.html#perspective" class="footer-nav-link">The Problem</a>
+          <a href="about.html#perspective" class="footer-nav-link">Perspective</a>
+          <a href="#what-we-do" class="footer-nav-link">Intelligence</a>
+          <a href="about.html#focus" class="footer-nav-link">The Journey</a>
+          <a href="about.html#principles" class="footer-nav-link">Principles</a>
+          <a href="about.html#mission" class="footer-nav-link">Mission</a>
+          <a href="#contact" class="footer-nav-link">Contact</a>
+        </nav>
+      </div>
+
+      <!-- Hairline Divider -->
+      <div class="footer-hairline"></div>
+
+      <!-- Bottom Row: Copyright & Subtag -->
+      <div class="footer-bottom-row">
+        <div class="footer-copyright">
+          &copy; 2026 Affyne Labs. All rights reserved.
+        </div>
+        <div class="footer-subtag">
+          Psychology with Healthcare &bull; Research &amp; Engineering
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Interactive Modal for Waitlist Success -->
+  <div class="modal-backdrop hidden" id="waitlistModal">
+    <div class="modal-glass-card">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close Modal">&times;</button>
+      <div class="modal-sparkle">&#10024;</div>
+      <h3 class="modal-title">You're on the list!</h3>
+      <p class="modal-body">
+        Thank you for believing in technology that understands you deeper. We've reserved your priority access ticket to Affyne Labs.
+      </p>
+      <div class="modal-badge-wrapper">
+        <div class="early-access-badge">
+          <span class="badge-num" id="badgeTicketNumber">#1,428</span>
+          <span class="badge-label">Priority Early Access</span>
+        </div>
+      </div>
+      <button class="modal-primary-btn" id="modalDismissBtn">Done</button>
+    </div>
+  </div>
+  </div><!-- /pageViewport -->
+
+  <script src="script.js"></script>
+</body>
+</html>

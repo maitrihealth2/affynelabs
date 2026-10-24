@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Background Grid Pattern -->
+    <pattern id="archGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E2EDF9" stroke-width="1"/>
+    </pattern>
+    <!-- Waveform Gradient -->
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#246DF8" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#246DF8" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#67C6FC" stop-opacity="0.8"/>
+    </linearGradient>
+    <!-- Baseline Band Gradient -->
+    <linearGradient id="bandGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#246DF8" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#67C6FC" stop-opacity="0.04"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Container Base -->
+  <rect width="1200" height="480" rx="16" fill="#F8FAFE" stroke="#D4E5F9" stroke-width="1.5"/>
+  <rect width="1200" height="480" rx="16" fill="url(#archGrid)" opacity="0.65"/>
+
+  <!-- Architecture Header Bar -->
+  <rect x="0" y="0" width="1200" height="56" rx="16" fill="#FFFFFF" stroke="#D4E5F9" stroke-width="1"/>
+  <rect x="0" y="44" width="1200" height="12" fill="#FFFFFF"/>
+  <circle cx="32" cy="28" r="5" fill="#246DF8"/>
+  <circle cx="48" cy="28" r="5" fill="#67C6FC"/>
+  <circle cx="64" cy="28" r="5" fill="#D4E5F9"/>
+  <text x="86" y="32" font-family="'Instrument Sans', sans-serif" font-size="13" font-weight="600" fill="#001B52" letter-spacing="0.04em">HUMAN UNDERSTANDING INTELLIGENCE — PIPELINE ARCHITECTURE</text>
+  <rect x="990" y="16" width="180" height="24" rx="4" fill="#EDF5FD" stroke="#D4E5F9"/>
+  <text x="1002" y="32" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="600" fill="#246DF8" letter-spacing="0.05em">SIGNAL DECOMPOSITION</text>
+
+  <!-- Three Processing Columns -->
+
+  <!-- ================= STAGE 1: SIGNAL INGESTION ================= -->
+  <g transform="translate(40, 80)">
+    <!-- Column Card -->
+    <rect width="345" height="360" rx="12" fill="#FFFFFF" stroke="#D4E5F9" stroke-width="1.2"/>
+    <!-- Stage Header -->
+    <rect x="18" y="18" width="28" height="28" rx="6" fill="#EDF5FD"/>
+    <text x="27" y="37" font-family="'General Sans', sans-serif" font-size="13" font-weight="700" fill="#246DF8">01</text>
+    <text x="56" y="32" font-family="'General Sans', sans-serif" font-size="15" font-weight="600" fill="#001B52">Multimodal Signal Ingestion</text>
+    <text x="56" y="46" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="500" fill="#5A759E">Acoustic &amp; lexical feature extraction</text>
+
+    <!-- Waveform Graphic Box -->
+    <rect x="18" y="66" width="309" height="130" rx="8" fill="#F4F8FD" stroke="#E2EDF9"/>
+    <text x="30" y="86" font-family="'Instrument Sans', sans-serif" font-size="10" font-weight="600" fill="#5A759E" letter-spacing="0.06em">ACOUSTIC PROSODY // 16kHz DOWNSAMPLE</text>
+    
+    <!-- Waveform Lines -->
+    <path d="M 30 140 Q 45 110 60 140 T 90 140 T 120 90 T 140 175 T 160 140 T 180 120 T 200 155 T 220 140 T 250 100 T 275 160 T 305 140" fill="none" stroke="url(#waveGrad)" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M 30 140 Q 50 130 70 140 T 110 120 T 140 150 T 170 140 T 210 130 T 240 145 T 280 135 T 305 140" fill="none" stroke="#67C6FC" stroke-width="1.2" stroke-dasharray="3 3"/>
+
+    <!-- Metrics Readout -->
+    <g transform="translate(18, 210)">
+      <rect width="148" height="60" rx="6" fill="#F8FAFE" stroke="#E2EDF9"/>
+      <text x="12" y="22" font-family="'Instrument Sans', sans-serif" font-size="10" font-weight="500" fill="#5A759E">VOCAL TIMBRE</text>
+      <text x="12" y="44" font-family="'General Sans', sans-serif" font-size="16" font-weight="600" fill="#001B52">142 Hz <tspan font-size="11" font-weight="400" fill="#246DF8">FUNDAMENTAL</tspan></text>
+      
+      <rect x="161" y="0" width="148" height="60" rx="6" fill="#F8FAFE" stroke="#E2EDF9"/>
+      <text x="173" y="22" font-family="'Instrument Sans', sans-serif" font-size="10" font-weight="500" fill="#5A759E">MICRO-PAUSE RATE</text>
+      <text x="173" y="44" font-family="'General Sans', sans-serif" font-size="16" font-weight="600" fill="#001B52">0.38s <tspan font-size="11" font-weight="400" fill="#67C6FC">LATENCY</tspan></text>
+    </g>
+
+    <!-- Pipeline Description Tag -->
+    <rect x="18" y="284" width="309" height="56" rx="6" fill="#EDF5FD"/>
+    <text x="30" y="306" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="600" fill="#001B52">Signal Streams</text>
+    <text x="30" y="324" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="400" fill="#3B5278">Captures speech intonation, hesitation cadence &amp; verbal syntax.</text>
+  </g>
+
+  <!-- Flow Connector 1 -> 2 -->
+  <g transform="translate(390, 240)">
+    <line x1="0" y1="0" x2="30" y2="0" stroke="#246DF8" stroke-width="2" stroke-dasharray="4 3"/>
+    <polygon points="30,-4 38,0 30,4" fill="#246DF8"/>
+  </g>
+
+  <!-- ================= STAGE 2: LONGITUDINAL ENGINE ================= -->
+  <g transform="translate(428, 80)">
+    <!-- Column Card -->
+    <rect width="345" height="360" rx="12" fill="#FFFFFF" stroke="#246DF8" stroke-width="1.5"/>
+    <rect x="18" y="18" width="28" height="28" rx="6" fill="#001B52"/>
+    <text x="27" y="37" font-family="'General Sans', sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">02</text>
+    <text x="56" y="32" font-family="'General Sans', sans-serif" font-size="15" font-weight="600" fill="#001B52">Longitudinal Context Engine</text>
+    <text x="56" y="46" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="500" fill="#246DF8">Personalized baseline vs population norm</text>
+
+    <!-- Graph Box: Normative Baseline Band -->
+    <rect x="18" y="66" width="309" height="130" rx="8" fill="#F4F8FD" stroke="#D4E5F9"/>
+    <text x="30" y="86" font-family="'Instrument Sans', sans-serif" font-size="10" font-weight="600" fill="#5A759E" letter-spacing="0.06em">INDIVIDUAL BASELINE TRAJECTORY (12 WEEKS)</text>
+
+    <!-- Individual Baseline Shaded Band -->
+    <path d="M 30 115 C 80 110, 140 120, 190 112 C 240 106, 280 118, 305 114 L 305 145 C 280 148, 240 140, 190 146 C 140 152, 80 142, 30 145 Z" fill="url(#bandGrad)"/>
+    <path d="M 30 130 C 80 126, 140 136, 190 129 C 240 123, 280 133, 305 129" fill="none" stroke="#67C6FC" stroke-width="1.2" stroke-dasharray="4 2"/>
+
+    <!-- Actual Observed Signal with Deviation -->
+    <path d="M 30 128 L 75 131 L 115 126 L 155 132 L 185 162 L 210 166 L 240 138 L 275 130 L 305 128" fill="none" stroke="#001B52" stroke-width="2.2" stroke-linecap="round"/>
+    
+    <!-- Deviation Marker -->
+    <circle cx="195" cy="164" r="5" fill="#246DF8"/>
+    <circle cx="195" cy="164" r="9" fill="#246DF8" fill-opacity="0.25"/>
+    <rect x="160" y="100" width="70" height="20" rx="4" fill="#001B52"/>
+    <text x="167" y="114" font-family="'Instrument Sans', sans-serif" font-size="9.5" font-weight="600" fill="#FFFFFF">-2.4σ DEVIATION</text>
+    <line x1="195" y1="120" x2="195" y2="155" stroke="#001B52" stroke-width="1" stroke-dasharray="2 2"/>
+
+    <!-- Metrics Readout -->
+    <g transform="translate(18, 210)">
+      <rect width="148" height="60" rx="6" fill="#F8FAFE" stroke="#E2EDF9"/>
+      <text x="12" y="22" font-family="'Instrument Sans', sans-serif" font-size="10" font-weight="500" fill="#5A759E">BASELINE DRIFT</text>
+      <text x="12" y="44" font-family="'General Sans', sans-serif" font-size="16" font-weight="600" fill="#001B52">Δ -0.42 <tspan font-size="11" font-weight="400" fill="#5A759E">SIGNIFICANT</tspan></text>
+      
+      <rect x="161" y="0" width="148" height="60" rx="6" fill="#F8FAFE" stroke="#E2EDF9"/>
+      <text x="173" y="22" font-family="'Instrument Sans', sans-serif" font-size="10" font-weight="500" fill="#5A759E">CONFIDENCE</text>
+      <text x="173" y="44" font-family="'General Sans', sans-serif" font-size="16" font-weight="600" fill="#001B52">98.4% <tspan font-size="11" font-weight="400" fill="#246DF8">VERIFIED</tspan></text>
+    </g>
+
+    <!-- Pipeline Description Tag -->
+    <rect x="18" y="284" width="309" height="56" rx="6" fill="#EDF5FD"/>
+    <text x="30" y="306" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="600" fill="#001B52">Contextual Processing</text>
+    <text x="30" y="324" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="400" fill="#3B5278">Tracks authentic individual shifts rather than generic population averages.</text>
+  </g>
+
+  <!-- Flow Connector 2 -> 3 -->
+  <g transform="translate(778, 240)">
+    <line x1="0" y1="0" x2="30" y2="0" stroke="#246DF8" stroke-width="2" stroke-dasharray="4 3"/>
+    <polygon points="30,-4 38,0 30,4" fill="#246DF8"/>
+  </g>
+
+  <!-- ================= STAGE 3: CLINICAL GUARDRAILS & ACTION ================= -->
+  <g transform="translate(815, 80)">
+    <!-- Column Card -->
+    <rect width="345" height="360" rx="12" fill="#FFFFFF" stroke="#D4E5F9" stroke-width="1.2"/>
+    <rect x="18" y="18" width="28" height="28" rx="6" fill="#EDF5FD"/>
+    <text x="27" y="37" font-family="'General Sans', sans-serif" font-size="13" font-weight="700" fill="#246DF8">03</text>
+    <text x="56" y="32" font-family="'General Sans', sans-serif" font-size="15" font-weight="600" fill="#001B52">Clinical Guardrails &amp; Escalation</text>
+    <text x="56" y="46" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="500" fill="#5A759E">Safe, responsive human care handoff</text>
+
+    <!-- Guardrail Display Box -->
+    <rect x="18" y="66" width="309" height="130" rx="8" fill="#F4F8FD" stroke="#E2EDF9"/>
+    <text x="30" y="86" font-family="'Instrument Sans', sans-serif" font-size="10" font-weight="600" fill="#5A759E" letter-spacing="0.06em">ESCALATION TRIAGE MATRIX</text>
+
+    <!-- Tier 1: Supportive Guidance -->
+    <rect x="30" y="96" width="285" height="26" rx="4" fill="#FFFFFF" stroke="#D4E5F9"/>
+    <circle cx="44" cy="109" r="4" fill="#67C6FC"/>
+    <text x="56" y="113" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="500" fill="#001B52">Level 1: Reflective Dialogue &amp; Coping Support</text>
+
+    <!-- Tier 2: Boundary Verification -->
+    <rect x="30" y="128" width="285" height="26" rx="4" fill="#FFFFFF" stroke="#D4E5F9"/>
+    <circle cx="44" cy="141" r="4" fill="#246DF8"/>
+    <text x="56" y="145" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="500" fill="#001B52">Level 2: Contextual Risk Taxonomy Check</text>
+
+    <!-- Tier 3: Human Clinician Handshake -->
+    <rect x="30" y="160" width="285" height="26" rx="4" fill="#001B52"/>
+    <circle cx="44" cy="173" r="4" fill="#FFFFFF"/>
+    <text x="56" y="177" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Level 3: Structured Clinician Escalation</text>
+
+    <!-- Metrics Readout -->
+    <g transform="translate(18, 210)">
+      <rect width="148" height="60" rx="6" fill="#F8FAFE" stroke="#E2EDF9"/>
+      <text x="12" y="22" font-family="'Instrument Sans', sans-serif" font-size="10" font-weight="500" fill="#5A759E">TRIAGE LATENCY</text>
+      <text x="12" y="44" font-family="'General Sans', sans-serif" font-size="16" font-weight="600" fill="#001B52">&lt; 120 ms <tspan font-size="11" font-weight="400" fill="#246DF8">REALTIME</tspan></text>
+      
+      <rect x="161" y="0" width="148" height="60" rx="6" fill="#F8FAFE" stroke="#E2EDF9"/>
+      <text x="173" y="22" font-family="'Instrument Sans', sans-serif" font-size="10" font-weight="500" fill="#5A759E">SAFETY BOUNDARY</text>
+      <text x="173" y="44" font-family="'General Sans', sans-serif" font-size="16" font-weight="600" fill="#001B52">100% <tspan font-size="11" font-weight="400" fill="#67C6FC">ENFORCED</tspan></text>
+    </g>
+
+    <!-- Pipeline Description Tag -->
+    <rect x="18" y="284" width="309" height="56" rx="6" fill="#EDF5FD"/>
+    <text x="30" y="306" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="600" fill="#001B52">Clinical Action</text>
+    <text x="30" y="324" font-family="'Instrument Sans', sans-serif" font-size="11" font-weight="400" fill="#3B5278">Surfaces rich longitudinal context to licensed human care teams.</text>
+  </g>
+
+</svg>
