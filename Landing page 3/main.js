@@ -3,6 +3,8 @@
  */
 
 window.initHomePage = function () {
+  if (!document.getElementById('hero')) return;
+
   const toggleBtn = document.getElementById('mobileMenuToggle');
   const overlay = document.getElementById('mobileOverlay');
 

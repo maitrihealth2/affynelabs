@@ -11,22 +11,54 @@
 
   // Map of routes to their heavy assets
   const PAGE_ASSETS = {
+    'home': [
+      'assets/Hero%20image.png'
+    ],
     'index.html': [
       'assets/Hero%20image.png'
+    ],
+    'about': [
+      'assets/about-loop.webm',
+      'assets/about%20image.png'
     ],
     'about.html': [
       'assets/about-loop.webm',
       'assets/about%20image.png'
     ],
+    'products': [
+      'assets/Prodcuts%20page.png'
+    ],
     'products.html': [
       'assets/Prodcuts%20page.png'
+    ],
+    'contact': [
+      'assets/contact.png'
     ],
     'contact.html': [
       'assets/contact.png'
     ]
   };
 
-  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  function getPageKey(urlStr) {
+    try {
+      const url = new URL(urlStr, window.location.href);
+      let p = url.pathname.toLowerCase();
+      while (p.endsWith('/') && p.length > 1) {
+        p = p.slice(0, -1);
+      }
+      const segment = p.split('/').pop() || '';
+      const clean = segment.replace(/\.html$/, '');
+      if (!clean || clean === 'index' || clean === 'landing page 3') return 'home';
+      if (clean === 'about') return 'about';
+      if (clean === 'products') return 'products';
+      if (clean === 'contact') return 'contact';
+      return clean;
+    } catch (e) {
+      return 'home';
+    }
+  }
+
+  const currentKey = getPageKey(window.location.href);
   const preloaded = new Set();
 
   // Helper to preload an image
@@ -59,37 +91,42 @@
     }
   }
 
-  function preloadPage(page) {
-    const assets = PAGE_ASSETS[page];
+  function preloadPage(pageKey) {
+    const assets = PAGE_ASSETS[pageKey];
     if (assets) {
       assets.forEach(preloadAsset);
     }
     // Also prefetch the HTML itself
-    if (!preloaded.has(page)) {
-      preloaded.add(page);
+    const htmlFile = pageKey.endsWith('.html') ? pageKey : `${pageKey}.html`;
+    if (!preloaded.has(htmlFile)) {
+      preloaded.add(htmlFile);
       const link = document.createElement('link');
       link.rel = 'prefetch';
-      link.href = page;
+      link.href = htmlFile;
       document.head.appendChild(link);
     }
   }
 
   // Preload everything during idle time
   function idlePreloadAll() {
-    Object.keys(PAGE_ASSETS).forEach((page) => {
-      if (page !== currentPath) {
-        preloadPage(page);
+    ['home', 'about', 'products', 'contact'].forEach((key) => {
+      if (key !== currentKey) {
+        preloadPage(key);
       }
     });
   }
 
   // Hook hover / touch on navigation links for instant zero-latency loading
   function hookNavigationLinks() {
-    const navLinks = document.querySelectorAll('a[href$=".html"]');
+    const navLinks = document.querySelectorAll('a[href]');
     navLinks.forEach((link) => {
-      const targetPage = link.getAttribute('href');
-      if (targetPage && PAGE_ASSETS[targetPage]) {
-        const trigger = () => preloadPage(targetPage);
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+        return;
+      }
+      const targetKey = getPageKey(href);
+      if (PAGE_ASSETS[targetKey]) {
+        const trigger = () => preloadPage(targetKey);
         link.addEventListener('mouseenter', trigger, { passive: true, once: true });
         link.addEventListener('touchstart', trigger, { passive: true, once: true });
         link.addEventListener('focus', trigger, { passive: true, once: true });
