@@ -5,3 +5,7 @@ desktop.ini
 
 # Reference artifacts
 opal_reference.png
+
+# Test artifacts & browser profiles
+test_screens/
+**/test_screens/

@@ -1,0 +1,609 @@
+/* ==========================================================================
+   AffyneLabs - About Page
+   Cinematic Wall Perspective & Scroll-Controlled Camera Push-In
+   ========================================================================== */
+
+/* ── Page variables ── */
+:root {
+  --about-navy:        #0e1e2e;
+  --about-navy-muted:  rgba(14, 30, 46, 0.70);
+  --about-blue:        #2b6cb0;
+  --about-cream:       #f6f1ea;
+}
+
+/* ── Hide scrollbar globally on this page ── */
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+/* ── Body reset for about ── */
+body.about-page {
+  background-color: var(--about-cream);
+  color: var(--about-navy);
+  overflow-x: clip;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════════════════════ */
+body.about-page .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 200;
+  padding: clamp(1.4rem, 3vh, 2.2rem) var(--header-padding-x);
+  background: transparent;
+  /* Allow clicks on header children but not the transparent bg */
+  pointer-events: none;
+}
+
+body.about-page .brand-wordmark,
+body.about-page .nav-link,
+body.about-page .mobile-nav-toggle {
+  pointer-events: auto;
+}
+
+/* Dark navy text on cream wall */
+body.about-page .brand-wordmark { color: var(--about-navy); }
+body.about-page .nav-link        { color: var(--about-navy); opacity: 0.82; font-weight: 500; }
+body.about-page .nav-link:hover  { opacity: 1; }
+body.about-page .nav-link::after { background-color: var(--about-navy); }
+body.about-page .mobile-nav-toggle { color: var(--about-navy); }
+
+/* Decorative rule under wordmark */
+body.about-page .brand-wordmark::after {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--about-navy);
+  margin-top: 5px;
+  opacity: 0.55;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL TRACK  &  STICKY SCENE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* The tall scroll runway — JS reads its height to derive progress */
+.about-scroll-track {
+  position: relative;
+  width: 100%;
+  /* 
+    5 phases × roughly 100vh each  +  generous reading plateau
+    Breakdown: Phase A (push-in) ~1.5 screens, 4 content sections × ~1.5 screens,
+    final reading pause.  Total ≈ 800vh.
+  */
+  height: 800vh;
+}
+
+/* The sticky cinematic viewport */
+.about-sticky-scene {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background-color: var(--about-cream);
+  z-index: 10;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CINEMA BACKDROP  (the video layer)
+   ═══════════════════════════════════════════════════════════════ */
+.cinema-backdrop {
+  position: absolute;
+  inset: 0;
+  /*
+    transform-origin anchored ~25% from left edge, ~42% from top.
+    This keeps the cream wall centred during scale push-in.
+    Tune these values if the video crop changes.
+  */
+  transform-origin: 25% 42%;
+  will-change: transform;
+  /* Start slightly scaled so scale(1) = comfortable initial framing */
+  transform: scale(1);
+}
+
+.scene-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Keep focus on wall + window; shift right clips less of the room */
+  object-position: 30% center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.video-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 30% center;
+  z-index: 0;
+}
+
+/* Very subtle warm vignette — does not alter the scene noticeably */
+.scene-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 22% 44%,
+    rgba(255,255,255, 0.02) 0%,
+    rgba(14, 30, 46, 0.06) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WALL STAGE  (perspective container)
+   ═══════════════════════════════════════════════════════════════ */
+.wall-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  /* Left-heavy padding: text sits on the cream wall in the video */
+  padding-left: clamp(2.5rem, 8vw, 9rem);
+  padding-right: clamp(1.5rem, 5vw, 4rem);
+  padding-top: 4.5rem; /* clear header */
+  /* Perspective depth for rotateY */
+  perspective: 1400px;
+  pointer-events: none;
+}
+
+/* ── Wall Plane ── the flat surface that gets skewed then straightens ── */
+.wall-plane {
+  position: relative;
+  /*
+    Height so absolute-positioned sections have a containing block.
+    The plane itself is never taller than the viewport.
+  */
+  width: 100%;
+  max-width: 600px;   /* Initial: text fits inside perspective-angled view */
+  min-height: clamp(340px, 60vh, 560px);
+  transform-style: preserve-3d;
+  will-change: transform, max-width;
+  pointer-events: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WALL SECTIONS
+   ═══════════════════════════════════════════════════════════════ */
+.wall-section {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* NO CSS transition — JS drives opacity directly for precise control */
+}
+
+.wall-section.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ── Small label ── */
+.wall-label {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--about-navy);
+  margin-bottom: 1rem;
+  text-shadow:
+    0 1px 3px rgba(0,0,0, 0.35),
+    0 2px 8px rgba(0,0,0, 0.15);
+}
+
+/* ── Main headline ── */
+.wall-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 3.5vw, 4rem);
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--about-navy);
+  letter-spacing: -0.015em;
+  margin-bottom: 1.5rem;
+  text-shadow:
+    0 1px 2px rgba(0,0,0, 0.60),
+    0 3px 10px rgba(0,0,0, 0.32),
+    0 8px 28px rgba(0,0,0, 0.14);
+}
+
+.wall-headline .hl-line  { display: block; }
+.wall-headline .hl-accent {
+  font-style: italic;
+  color: var(--about-blue);
+  text-shadow:
+    0 1px 2px rgba(0,0,0, 0.55),
+    0 3px 10px rgba(43,108,176, 0.40),
+    0 8px 24px rgba(0,0,0, 0.14);
+}
+
+/* ── Body text wrapper ── */
+.wall-body-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1.6rem;
+}
+
+/* ── Supporting paragraphs ── */
+.wall-subtext {
+  font-family: var(--font-sans);
+  font-size: clamp(0.93rem, 1.0vw, 1.08rem);
+  font-weight: 500;
+  line-height: 1.68;
+  color: var(--about-navy);
+  text-shadow:
+    0 1px 2px rgba(0,0,0, 0.45),
+    0 2px 8px rgba(0,0,0, 0.20);
+}
+
+.wall-subtext-secondary {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9rem, 0.95vw, 1.02rem);
+  font-weight: 500;
+  line-height: 1.65;
+  color: var(--about-navy);
+  opacity: 0.82;
+  text-shadow:
+    0 1px 2px rgba(0,0,0, 0.40),
+    0 2px 8px rgba(0,0,0, 0.18);
+}
+
+/* ── Callout card ── */
+.wall-callout-card {
+  padding-left: 1.2rem;
+  border-left: 2px solid var(--about-blue);
+}
+
+.wall-subtext-highlight {
+  font-family: var(--font-sans);
+  font-size: clamp(0.93rem, 1.0vw, 1.06rem);
+  font-weight: 500;
+  line-height: 1.62;
+  color: var(--about-navy);
+  text-shadow:
+    0 1px 2px rgba(0,0,0, 0.45),
+    0 2px 8px rgba(0,0,0, 0.20);
+}
+
+/* ── CTA button ── */
+.btn-wall-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255,255,255, 0.88);
+  color: var(--about-navy);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.68rem 1.55rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(14,30,46, 0.1);
+  box-shadow: 0 4px 16px rgba(14,30,46, 0.08);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+}
+.btn-wall-cta svg { transition: transform 0.22s ease; }
+.btn-wall-cta:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(14,30,46, 0.13);
+}
+.btn-wall-cta:hover svg { transform: translateX(3px); }
+
+/* ═══════════════════════════════════════════════════════════════
+   WORD-BY-WORD REVEAL (Sections 2 & 3)
+   ═══════════════════════════════════════════════════════════════ */
+.wall-reveal-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Each word starts hidden; JS adds .is-revealed progressively */
+.wall-sec-reveal .reveal-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(5px);
+  filter: blur(2px);
+  transition:
+    opacity  0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    filter   0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.wall-sec-reveal .reveal-word.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Callout card in reveal sections: starts faint, brightens on activation */
+.wall-sec-reveal .wall-callout-card {
+  border-left-color: rgba(43,108,176, 0.22);
+  transition: border-left-color 0.4s ease;
+}
+.wall-sec-reveal .wall-callout-card.is-active {
+  border-left-color: var(--about-blue);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .about-scroll-track {
+    height: 700vh;
+  }
+
+  .cinema-backdrop {
+    transform-origin: 28% 44%;
+  }
+
+  .scene-video,
+  .video-fallback {
+    object-position: 28% center;
+  }
+
+  .wall-stage {
+    padding-left: clamp(2rem, 6vw, 4rem);
+    padding-right: clamp(1.5rem, 5vw, 3rem);
+    padding-top: 5.5rem;
+    padding-bottom: 3rem;
+    align-items: center;
+    perspective: 1200px;
+  }
+
+  .wall-plane {
+    max-width: 520px;
+    min-height: clamp(380px, 60vh, 540px);
+  }
+
+  .wall-section {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+
+  .wall-headline {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .about-scroll-track {
+    height: 600vh;
+  }
+
+  .scene-video,
+  .video-fallback {
+    object-position: 28% center;
+  }
+
+  .cinema-backdrop {
+    transform-origin: 28% 44%;
+  }
+
+  .wall-stage {
+    padding-left: clamp(1.25rem, 5vw, 2.25rem);
+    padding-right: clamp(1.25rem, 5vw, 2.25rem);
+    /* Guarantees safe clearance below the fixed header */
+    padding-top: 6rem;
+    padding-bottom: 3.5rem;
+    align-items: center;
+    perspective: 900px;
+    box-sizing: border-box;
+  }
+
+  .wall-plane {
+    width: 100%;
+    max-width: 440px;
+    min-height: clamp(360px, 58vh, 500px);
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  .wall-section {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+
+  .wall-headline {
+    font-size: clamp(1.85rem, 6.2vw, 2.45rem);
+    line-height: 1.16;
+    margin-bottom: 1rem;
+  }
+
+  .wall-body-wrap {
+    margin-bottom: 1.3rem;
+    gap: 0.85rem;
+  }
+
+  .wall-subtext {
+    font-size: clamp(0.92rem, 3.8vw, 1.02rem);
+    line-height: 1.58;
+  }
+
+  .wall-subtext-secondary {
+    font-size: clamp(0.88rem, 3.5vw, 0.96rem);
+    line-height: 1.54;
+  }
+
+  .wall-callout-card {
+    padding-left: 1rem;
+  }
+
+  .wall-subtext-highlight {
+    font-size: clamp(0.9rem, 3.6vw, 1.0rem);
+    line-height: 1.55;
+  }
+
+  .btn-wall-cta {
+    padding: 0.62rem 1.35rem;
+    font-size: 0.86rem;
+  }
+
+  .scroll-progress {
+    display: none;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .scene-video,
+  .video-fallback {
+    object-position: 26% center;
+  }
+
+  .cinema-backdrop {
+    transform-origin: 26% 44%;
+  }
+
+  .wall-stage {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    padding-top: 5.75rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .wall-plane {
+    max-width: 380px;
+    min-height: clamp(340px, 56vh, 460px);
+  }
+
+  .wall-headline {
+    font-size: clamp(1.7rem, 6.8vw, 2.15rem);
+    margin-bottom: 0.85rem;
+  }
+
+  .wall-subtext {
+    font-size: 0.90rem;
+    line-height: 1.54;
+  }
+
+  .wall-subtext-secondary {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .btn-wall-cta {
+    width: auto;
+    padding: 0.58rem 1.25rem;
+    font-size: 0.84rem;
+  }
+}
+
+/* Micro mobile */
+@media (max-width: 374px) {
+  .wall-stage {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 5.25rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .wall-plane {
+    max-width: 330px;
+  }
+
+  .wall-headline {
+    font-size: clamp(1.55rem, 7.2vw, 1.85rem);
+  }
+
+  .wall-label {
+    margin-bottom: 0.6rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REDUCED MOTION
+   ═══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .about-scroll-track   { height: auto; }
+
+  .about-sticky-scene {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .cinema-backdrop {
+    position: relative;
+    height: 100vh;
+    transform: none !important;
+  }
+
+  .wall-stage {
+    position: relative;
+    height: auto;
+  }
+
+  .wall-plane {
+    position: relative;
+    max-width: 100%;
+    min-height: auto;
+    transform: none !important;
+  }
+
+  .wall-section {
+    position: relative;
+    top: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid rgba(14,30,46, 0.08);
+  }
+
+  .wall-sec-reveal .reveal-word {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .scroll-progress { display: none; }
+}
+

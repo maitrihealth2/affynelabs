@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products — AffyneLabs</title>
+  <meta name="description" content="Discover AffyneLabs: building privacy-first, AI-driven technologies to understand people deeper and support mental wellbeing.">
+  
+  <!-- Google Fonts: Cormorant Garamond & Manrope (Consistent with Home and About) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Shared Style & Dedicated Products Style -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="products.css?v=9">
+</head>
+<body class="products-page">
+
+  <!-- Fixed Architectural Background Room (Supplied Asset) -->
+  <div class="products-backdrop" aria-hidden="true">
+    <img 
+      src="assets/Prodcuts%20page.png" 
+      alt="AffyneLabs modern sunlit architectural interior" 
+      class="products-bg-img"
+    >
+    <div class="products-backdrop-overlay"></div>
+  </div>
+
+  <!-- Site Header (White on Ceiling/Wall) -->
+  <header class="site-header" id="header" role="banner">
+    <!-- Top-left Branding -->
+    <a href="index.html" class="brand-wordmark" aria-label="AffyneLabs Home">affynelabs</a>
+
+    <!-- Exactly 3 Navigation Links: Home, About, Contact Us -->
+    <nav class="main-nav" id="desktopNav" aria-label="Primary Navigation">
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mobile Menu Toggle Button -->
+    <button class="mobile-nav-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileOverlay">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mobile Menu Drawer Overlay -->
+  <div class="mobile-menu-overlay" id="mobileOverlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="mobile-menu-card" id="mobileMenuCard">
+      <div class="mobile-menu-header">
+        <span class="mobile-menu-title">Navigation</span>
+      </div>
+      <ul class="mobile-nav-list">
+        <li>
+          <a href="index.html" class="mobile-nav-link">
+            <span>Home</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4-4-4-4"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="about.html" class="mobile-nav-link">
+            <span>About</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4-4-4-4"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="contact.html" class="mobile-nav-link">
+            <span>Contact Us</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4-4-4-4"/></svg>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-menu-footer">
+        <span class="mobile-brand-tag">AffyneLabs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Wall Stage: Situated in the middle of the cream wall (Fixed & Static in viewport) -->
+  <div class="products-wall-stage" id="productsWallStage" aria-live="polite">
+    
+    <!-- Section 1: What We Build -->
+    <section class="wall-section-block is-active" id="sectionWhatWeBuild" data-index="0" aria-label="What We Build">
+      <span class="wall-label">OUR PRODUCTS</span>
+      <h1 class="wall-headline">
+        <span class="hl-line">Intelligent tools,</span>
+        <span class="hl-line hl-accent">guided by human understanding.</span>
+      </h1>
+
+      <div class="wall-copy-container">
+        <p class="wall-subtext">
+          Affyne Labs is building privacy-first technologies that explore the intersection of artificial intelligence, human context, and wellbeing.
+        </p>
+        <p class="wall-subtext-secondary">
+          We are not defining the company by a single off-the-shelf product. We experiment, research, and build thoughtfully through iteration, exploring multiple technologies as our understanding of human needs deepens.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 2: First Domain of Focus -->
+    <section class="wall-section-block" id="sectionDomain" data-index="1" aria-label="Our Focus">
+      <span class="wall-label">INITIAL FOCUS</span>
+      <h2 class="wall-headline">
+        <span class="hl-line">Mental health</span>
+        <span class="hl-line hl-accent">& emotional wellbeing.</span>
+      </h2>
+
+      <div class="wall-copy-container">
+        <p class="wall-subtext">
+          Mental health and emotional wellbeing is our first domain of application. That is where we start, not where we stop.
+        </p>
+        <p class="wall-subtext-secondary">
+          We are creating assistive intelligence capable of interpreting context, nuance, and evolving states—building tools designed to support everyday care, safe personal reflection, and meaningful human connection without compromising privacy.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Early Access & Waitlist -->
+    <section class="wall-section-block" id="sectionEarlyAccess" data-index="2" aria-label="Early Access">
+      <span class="wall-label">EARLY ACCESS</span>
+      <h2 class="wall-headline">
+        <span class="hl-line">Be the first to explore</span>
+        <span class="hl-line hl-accent">when we launch.</span>
+      </h2>
+
+      <div class="wall-copy-container">
+        <p class="wall-subtext">
+          We are currently developing initial prototypes alongside researchers, clinicians, and early design partners.
+        </p>
+        <p class="wall-subtext-secondary">
+          Join our private waiting list to receive early announcements, research updates, and first-access invitations as our products enter preview.
+        </p>
+
+        <!-- Minimalist Waitlist Form -->
+        <form class="wall-waitlist-form" id="productsWaitlistForm" novalidate aria-label="Join early access waitlist">
+          <div class="waitlist-input-group">
+            <input 
+              type="email" 
+              id="waitlistEmail" 
+              name="email" 
+              class="waitlist-input" 
+              placeholder="Enter your email address" 
+              required 
+              autocomplete="email"
+              aria-label="Email address for early access waitlist"
+            >
+            <button type="submit" class="waitlist-submit-btn" aria-label="Submit email to join waiting list">
+              <span>Join waiting list</span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </button>
+          </div>
+          <div class="waitlist-feedback" id="waitlistFeedback" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Content Scroll Viewport: Page never scrolls, only this internal runway drives the wall sections -->
+  <div class="products-scroll-viewport" id="productsScrollViewport" aria-hidden="true">
+    <div class="scroll-screen" data-index="0"></div>
+    <div class="scroll-screen" data-index="1"></div>
+    <div class="scroll-screen" data-index="2"></div>
+  </div>
+
+  <!-- Script for Mobile Drawer, Early Access Waitlist & Content Scroll Controller -->
+  <script src="products.js?v=9"></script>
+</body>
+</html>

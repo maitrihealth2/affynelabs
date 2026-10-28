@@ -584,6 +584,318 @@
       window.addEventListener('resize', handleScroll, { passive: true });
       updateWordsOnScroll();
     });
+
+    // 12. Initialize 3D Cylindrical Carousel (What We Do Section)
+    setup3DCylindricalCarousel();
+  }
+
+  /* ==========================================================================
+     3D CYLINDRICAL CAROUSEL ENGINE (affynelabs WHAT WE DO — INFINITE LOOP)
+     ========================================================================== */
+  let carouselAutoplayTimer = null;
+  let carouselIntersectionObserver = null;
+
+  function setup3DCylindricalCarousel() {
+    const wrapper = document.getElementById('carousel3DWrapper');
+    const stage = document.getElementById('carousel3DStage');
+    const cylinder = document.getElementById('carousel3DCylinder');
+    const panels = document.querySelectorAll('.carousel-panel');
+    const prevBtn = document.getElementById('carouselPrevBtn');
+    const nextBtn = document.getElementById('carouselNextBtn');
+    const paginationTabs = document.querySelectorAll('.pagination-step');
+    const segmentFill0 = document.getElementById('segmentFill0');
+    const segmentFill1 = document.getElementById('segmentFill1');
+    const autoplayToggleBtn = document.getElementById('btnAutoplayToggle');
+    const autoplayStateLabel = document.getElementById('autoplayStateLabel');
+    const autoplayStateIcon = document.getElementById('autoplayStateIcon');
+    const section = document.getElementById('what-we-do');
+
+    if (!wrapper || !cylinder || !panels.length) return;
+
+    // Clean up any previous timers / observers
+    if (carouselAutoplayTimer) {
+      clearInterval(carouselAutoplayTimer);
+      carouselAutoplayTimer = null;
+    }
+    if (carouselIntersectionObserver) {
+      carouselIntersectionObserver.disconnect();
+      carouselIntersectionObserver = null;
+    }
+
+    // Measure active cylinder radius from CSS variable to avoid inline calc parse discrepancies
+    function getCylinderRadius() {
+      if (!stage) return 410;
+      const raw = window.getComputedStyle(stage).getPropertyValue('--cylinder-radius').trim();
+      const parsed = parseFloat(raw);
+      return isNaN(parsed) || parsed <= 0 ? 410 : parsed;
+    }
+
+    // Infinite Cylindrical State
+    // Initial active slot is 1 (Panel 02: Safety-Centred AI - matching reference center)
+    let currentStep = 1;
+    let currentAngle = -currentStep * 60;
+    let isUserPaused = false; // Enabled by default for automatic scrolling
+    let isHovered = false;
+    let isSectionVisible = true;
+    const AUTOPLAY_INTERVAL = 3200; // 3.2s cadence for automatic scrolling
+
+    // Update visibility and depth classes for all 6 slots
+    function updateSlotStates() {
+      const radius = getCylinderRadius();
+      // Apply clean translateZ and rotateY with exact pixel radius
+      cylinder.style.transform = `translateZ(-${radius}px) rotateY(${currentAngle}deg)`;
+
+      // Determine which 3-item panel is active (0 = 01, 1 = 02, 2 = 03)
+      const activePanelIndex = ((currentStep % 3) + 3) % 3;
+
+      panels.forEach((panel) => {
+        const slot = parseInt(panel.dataset.slotIndex, 10);
+        // Calculate apparent angle relative to viewer (0 to 359 deg)
+        const rel = ((slot * 60 + currentAngle) % 360 + 360) % 360;
+
+        panel.classList.remove('is-front', 'is-side', 'is-back');
+
+        if (rel === 0) {
+          panel.classList.add('is-front');
+          panel.setAttribute('aria-hidden', 'false');
+        } else if (rel === 60 || rel === 300) {
+          panel.classList.add('is-side');
+          panel.setAttribute('aria-hidden', 'false');
+        } else {
+          panel.classList.add('is-back');
+          panel.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      // Synchronize Pagination (01, 02, 03)
+      paginationTabs.forEach((tab) => {
+        const targetIdx = parseInt(tab.dataset.targetIndex, 10);
+        const isActive = targetIdx === activePanelIndex;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      if (segmentFill0) {
+        segmentFill0.classList.toggle('filled', activePanelIndex >= 1);
+      }
+      if (segmentFill1) {
+        segmentFill1.classList.toggle('filled', activePanelIndex >= 2);
+      }
+    }
+
+    // Step Forward Infinitely
+    function advanceNext() {
+      currentStep++;
+      currentAngle = -currentStep * 60;
+      updateSlotStates();
+    }
+
+    // Step Backward Infinitely
+    function advancePrev() {
+      currentStep--;
+      currentAngle = -currentStep * 60;
+      updateSlotStates();
+    }
+
+    // Navigate to specific 01, 02, 03 target in the shortest direction
+    function navigateToPanel(targetIdx) {
+      const currentPanelIndex = ((currentStep % 3) + 3) % 3;
+      let diff = (targetIdx - currentPanelIndex) % 3;
+      if (diff === 2) diff = -1;
+      if (diff === -2) diff = 1;
+
+      currentStep += diff;
+      currentAngle = -currentStep * 60;
+      updateSlotStates();
+      resetTimer();
+    }
+
+    // Update Autoplay UI Button
+    function updateAutoplayUI() {
+      if (!autoplayToggleBtn || !autoplayStateLabel || !autoplayStateIcon) return;
+
+      if (isUserPaused) {
+        autoplayStateLabel.textContent = 'PLAY';
+        autoplayStateIcon.innerHTML = `
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="6 3 20 12 6 21 6 3"></polygon>
+          </svg>`;
+        autoplayToggleBtn.setAttribute('aria-label', 'Resume automatic rotation');
+        autoplayToggleBtn.setAttribute('title', 'Resume automatic rotation');
+      } else {
+        autoplayStateLabel.textContent = 'PAUSE';
+        autoplayStateIcon.innerHTML = `
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="5" y="4" width="4" height="16" rx="1"></rect>
+            <rect x="15" y="4" width="4" height="16" rx="1"></rect>
+          </svg>`;
+        autoplayToggleBtn.setAttribute('aria-label', 'Pause automatic rotation');
+        autoplayToggleBtn.setAttribute('title', 'Pause automatic rotation');
+      }
+    }
+
+    // Continuous Autoplay Timer Engine
+    function startTimer() {
+      stopTimer();
+      if (isUserPaused) return;
+
+      carouselAutoplayTimer = setInterval(() => {
+        if (!isUserPaused && !isHovered && isSectionVisible) {
+          advanceNext();
+        }
+      }, AUTOPLAY_INTERVAL);
+    }
+
+    function stopTimer() {
+      if (carouselAutoplayTimer) {
+        clearInterval(carouselAutoplayTimer);
+        carouselAutoplayTimer = null;
+      }
+    }
+
+    function resetTimer() {
+      stopTimer();
+      if (!isUserPaused && isSectionVisible) {
+        startTimer();
+      }
+    }
+
+    // Navigation Buttons
+    prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      advancePrev();
+      resetTimer();
+    });
+
+    nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      advanceNext();
+      resetTimer();
+    });
+
+    // Panel direct click: clicking side panel rotates it to center
+    panels.forEach((p) => {
+      p.addEventListener('click', () => {
+        const slot = parseInt(p.dataset.slotIndex, 10);
+        const rel = ((slot * 60 + currentAngle) % 360 + 360) % 360;
+        if (rel === 60) {
+          advanceNext();
+          resetTimer();
+        } else if (rel === 300) {
+          advancePrev();
+          resetTimer();
+        }
+      });
+
+      // Pause only when user hovers directly over panels to read
+      p.addEventListener('mouseenter', () => {
+        isHovered = true;
+      });
+      p.addEventListener('mouseleave', () => {
+        isHovered = false;
+      });
+    });
+
+    // Pagination Tabs Click
+    paginationTabs.forEach((tab) => {
+      tab.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const target = parseInt(tab.dataset.targetIndex, 10);
+        navigateToPanel(target);
+      });
+    });
+
+    // Autoplay Toggle Button
+    autoplayToggleBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isUserPaused = !isUserPaused;
+      updateAutoplayUI();
+      if (isUserPaused) {
+        stopTimer();
+      } else {
+        startTimer();
+      }
+    });
+
+    // Keyboard accessibility
+    wrapper.setAttribute('tabindex', '0');
+    wrapper.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        advancePrev();
+        resetTimer();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        advanceNext();
+        resetTimer();
+      } else if (e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault();
+        isUserPaused = !isUserPaused;
+        updateAutoplayUI();
+        if (isUserPaused) stopTimer();
+        else startTimer();
+      }
+    });
+
+    // Touch Swipe Gestures
+    let touchStartX = 0;
+    let touchStartY = 0;
+    wrapper.addEventListener('touchstart', (e) => {
+      if (e.touches && e.touches[0]) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', (e) => {
+      if (e.changedTouches && e.changedTouches[0]) {
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        const deltaY = e.changedTouches[0].clientY - touchStartY;
+
+        if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+          if (deltaX < 0) {
+            advanceNext();
+          } else {
+            advancePrev();
+          }
+          resetTimer();
+        }
+      }
+    }, { passive: true });
+
+    // Intersection Observer to run when section is in view
+    if ('IntersectionObserver' in window && section) {
+      carouselIntersectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            isSectionVisible = true;
+            if (!isUserPaused && !isHovered) {
+              startTimer();
+            }
+          } else {
+            isSectionVisible = false;
+            stopTimer();
+          }
+        });
+      }, {
+        threshold: 0,
+        rootMargin: '240px 0px 240px 0px'
+      });
+
+      carouselIntersectionObserver.observe(section);
+    }
+
+    // Dynamic resize handler for responsive cylinder radius updates
+    window.addEventListener('resize', () => {
+      updateSlotStates();
+    }, { passive: true });
+
+    // Initialize state & start automatic rotation immediately
+    updateSlotStates();
+    updateAutoplayUI();
+    if (!isUserPaused) {
+      startTimer();
+    }
   }
 
   /* ==========================================================================

@@ -481,7 +481,8 @@ ul, ol {
   padding: 10px 22px;
 }
 
-.nav__v2 {
+.nav__v2,
+.nav__v3 {
   background-color: rgba(255, 255, 255, 0.9);
   color: var(--color-navy);
   border: 1px solid var(--color-border);
@@ -491,7 +492,8 @@ ul, ol {
   transition: all var(--transition-fast);
 }
 
-.nav__v2:hover {
+.nav__v2:hover,
+.nav__v3:hover {
   background-color: var(--color-white);
   border-color: var(--color-primary-blue);
   color: var(--color-primary-blue);
@@ -1556,6 +1558,19 @@ ul, ol {
 /* --------------------------------------------------------------------------
    18. Responsive Media Queries
    -------------------------------------------------------------------------- */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .nav__links {
+    gap: var(--space-4);
+  }
+  .nav__actions {
+    gap: var(--space-2);
+  }
+  .nav__cta {
+    padding: 8px 16px;
+    font-size: var(--text-xs);
+  }
+}
+
 @media (max-width: 1024px) {
   .section--hero {
     height: auto;

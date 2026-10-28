@@ -1,0 +1,567 @@
+/* ==========================================================================
+   AffyneLabs - Products Page Styles
+   Fixed Architectural Room: Page is 100% Locked, Content Alone Scrolls
+   ========================================================================== */
+
+:root {
+  --prod-navy: #091724;
+  --prod-navy-muted: rgba(9, 23, 36, 0.82);
+  --prod-blue-accent: #1e5ba0;
+  --prod-blue-soft: #3b82f6;
+  --prod-cream-tint: #f5f2eb;
+  
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --transition-smooth: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Base Setup: Whole Page is strictly LOCKED & IMMOBILE
+   ========================================================================== */
+html,
+body.products-page {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* WHOLE PAGE NEVER SCROLLS */
+  position: fixed;
+  inset: 0;
+  background-color: #0b1522;
+  color: var(--prod-navy);
+  font-family: var(--font-sans);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body.products-page::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* ==========================================================================
+   Site Header (White Text Color matching Home & About)
+   ========================================================================== */
+body.products-page .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.4rem, 3vh, 2.2rem) var(--header-padding-x);
+  background: transparent;
+  pointer-events: none;
+}
+
+body.products-page .brand-wordmark,
+body.products-page .nav-link,
+body.products-page .mobile-nav-toggle {
+  color: #ffffff;
+  pointer-events: auto;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7), 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+body.products-page .brand-wordmark {
+  font-family: var(--font-sans);
+  font-size: clamp(1.45rem, 1.65vw, 1.75rem);
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: -0.025em;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+body.products-page .brand-wordmark::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background-color: #ffffff;
+  margin-top: 5px;
+  opacity: 0.9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+body.products-page .main-nav {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+body.products-page .nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: clamp(1.75rem, 3.2vw, 3.25rem);
+  margin: 0;
+  padding: 0;
+}
+
+body.products-page .nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #ffffff;
+  opacity: 0.92;
+  text-decoration: none;
+  padding: 0.35rem 0;
+  position: relative;
+  transition: opacity var(--transition-smooth), color var(--transition-smooth);
+}
+
+body.products-page .nav-link:hover {
+  opacity: 1;
+  color: #ffffff;
+}
+
+body.products-page .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: #ffffff;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--transition-smooth);
+  opacity: 0.9;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+body.products-page .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ==========================================================================
+   Fixed Architectural Background Room
+   ========================================================================== */
+.products-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: #0b1522;
+}
+
+.products-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+  display: block;
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .products-bg-img {
+    object-position: center 50%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .products-bg-img {
+    object-position: center 46%;
+  }
+}
+
+.products-backdrop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 48% 48%, rgba(255, 255, 255, 0.02) 0%, rgba(11, 21, 34, 0.05) 100%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Wall Stage: Exactly Centered in the Middle of the Cream Wall
+   ========================================================================== */
+.products-wall-stage {
+  position: fixed;
+  top: 50%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  width: min(580px, 46vw);
+  max-width: 580px;
+  min-height: 380px;
+  z-index: 20;
+  pointer-events: none; /* Let scroll events pass through to content runway */
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Wall Section Blocks: Absolute locked in the center of the wall
+   ========================================================================== */
+.wall-section-block {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.wall-section-block.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Make only interactive form controls clickable; headings/copy allow pass-through scroll */
+.wall-section-block.is-active .waitlist-input-group,
+.wall-section-block.is-active .waitlist-input,
+.wall-section-block.is-active .waitlist-submit-btn {
+  pointer-events: auto;
+  position: relative;
+  z-index: 35;
+}
+
+/* Eyebrow Label with Depth Shadow */
+.wall-label {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #1a2e42;
+  margin-bottom: 0.85rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
+/* Main Headline (Cormorant Garamond with Rich Depth Shadows) */
+.wall-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.35rem, 3.5vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: #081522;
+  margin-top: 0;
+  margin-bottom: 1.35rem;
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.65),
+    0 3px 10px rgba(0, 0, 0, 0.38),
+    0 8px 24px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
+.wall-headline .hl-line {
+  display: block;
+}
+
+.wall-headline .hl-accent {
+  font-style: italic;
+  color: #1a5695;
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.65),
+    0 3px 10px rgba(26, 86, 149, 0.42),
+    0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* Supporting Narrative Typography */
+.wall-copy-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  width: 100%;
+}
+
+.wall-subtext {
+  font-family: var(--font-sans);
+  font-size: clamp(0.96rem, 1.05vw, 1.1rem);
+  font-weight: 500;
+  line-height: 1.68;
+  color: #081522;
+  margin: 0;
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+}
+
+.wall-subtext-secondary {
+  font-family: var(--font-sans);
+  font-size: clamp(0.92rem, 0.98vw, 1.04rem);
+  font-weight: 500;
+  line-height: 1.65;
+  color: #122232;
+  margin: 0;
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Minimalist Waitlist Form with Shadow Depth
+   ========================================================================== */
+.wall-waitlist-form {
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 520px;
+}
+
+.waitlist-input-group {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(14, 30, 46, 0.18);
+  border-radius: 9999px;
+  padding: 0.35rem 0.4rem 0.35rem 1.25rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22), 0 2px 6px rgba(0, 0, 0, 0.14);
+  transition: border-color var(--transition-smooth), background var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.waitlist-input-group:focus-within {
+  background: #ffffff;
+  border-color: var(--prod-blue-accent);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(30, 91, 160, 0.25);
+}
+
+.waitlist-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--prod-navy);
+  min-width: 0;
+}
+
+.waitlist-input::placeholder {
+  color: rgba(14, 30, 46, 0.55);
+}
+
+.waitlist-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--prod-navy);
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.65rem 1.35rem;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background-color var(--transition-smooth), transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.waitlist-submit-btn:hover {
+  background-color: var(--prod-blue-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(30, 91, 160, 0.45);
+}
+
+.waitlist-submit-btn svg {
+  display: inline-block;
+  transition: transform var(--transition-smooth);
+}
+
+.waitlist-submit-btn:hover svg {
+  transform: translateX(3px);
+}
+
+.waitlist-feedback {
+  margin-top: 0.65rem;
+  font-size: 0.84rem;
+  padding-left: 1rem;
+  font-family: var(--font-sans);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.waitlist-feedback.success {
+  color: #14532d;
+  font-weight: 600;
+}
+
+.waitlist-feedback.error {
+  color: #991b1b;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Content Scroll Viewport: Internal Scroll Runway
+   Scrolls ONLY the content sections across the wall, page stays immobile
+   ========================================================================== */
+.products-scroll-viewport {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y mandatory;
+  z-index: 25;
+  pointer-events: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.products-scroll-viewport::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.scroll-screen {
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 1280px) {
+  .products-wall-stage {
+    left: 47%;
+    width: min(540px, 50vw);
+  }
+}
+
+@media (max-width: 900px) {
+  body.products-page .site-header {
+    padding: 1.4rem var(--content-padding-x);
+  }
+
+  body.products-page .main-nav {
+    display: none;
+  }
+
+  body.products-page .mobile-nav-toggle {
+    display: flex;
+  }
+
+  /* Center the camera on the cream wall on mobile */
+  .products-bg-img {
+    object-position: 50% center;
+  }
+
+  /* Exactly in the middle of the screen/wall */
+  .products-wall-stage {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 3rem);
+    max-width: 480px;
+    min-height: 340px;
+  }
+
+  .wall-headline {
+    font-size: clamp(2rem, 6.5vw, 2.6rem);
+    margin-bottom: 1.15rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .products-wall-stage {
+    left: 50%;
+    width: calc(100% - 2.5rem);
+    max-width: 420px;
+    min-height: 320px;
+  }
+
+  .wall-headline {
+    font-size: clamp(1.85rem, 6.8vw, 2.25rem);
+    margin-bottom: 1rem;
+  }
+
+  .wall-subtext {
+    font-size: 0.94rem;
+    line-height: 1.58;
+  }
+
+  .wall-subtext-secondary {
+    font-size: 0.90rem;
+    line-height: 1.55;
+  }
+
+  .waitlist-input-group {
+    padding: 0.3rem 0.35rem 0.3rem 1.1rem;
+  }
+
+  .waitlist-input {
+    font-size: 0.88rem;
+  }
+
+  .waitlist-submit-btn {
+    padding: 0.6rem 1.1rem;
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .products-wall-stage {
+    left: 50%;
+    width: calc(100% - 2rem);
+    max-width: 360px;
+  }
+
+  .wall-headline {
+    font-size: clamp(1.7rem, 7.5vw, 2rem);
+  }
+
+  .waitlist-input-group {
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .waitlist-input {
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+  }
+
+  .waitlist-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion Fallback
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .products-scroll-viewport {
+    scroll-snap-type: none;
+  }
+
+  .wall-section-block {
+    transition: opacity 0.3s ease;
+  }
+}

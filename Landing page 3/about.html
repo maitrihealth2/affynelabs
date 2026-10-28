@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — AffyneLabs</title>
+  <meta name="description" content="Discover AffyneLabs: building privacy-first, AI-driven solutions to make mental healthcare safer, more accessible, and profoundly human.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="about.css">
+</head>
+<body class="about-page">
+
+  <header class="site-header" id="header" role="banner">
+    <a href="index.html" class="brand-wordmark" aria-label="AffyneLabs Home">affynelabs</a>
+    <nav class="main-nav" id="desktopNav" aria-label="Primary Navigation">
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="products.html" class="nav-link">Products</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+      </ul>
+    </nav>
+    <button class="mobile-nav-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileOverlay">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+
+  <div class="mobile-menu-overlay" id="mobileOverlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="mobile-menu-card" id="mobileMenuCard">
+      <div class="mobile-menu-header">
+        <span class="mobile-menu-title">Navigation</span>
+      </div>
+      <ul class="mobile-nav-list">
+        <li>
+          <a href="index.html" class="mobile-nav-link">
+            <span>Home</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4-4-4-4"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="products.html" class="mobile-nav-link">
+            <span>Products</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4-4-4-4"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="contact.html" class="mobile-nav-link">
+            <span>Contact Us</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4-4-4-4"/></svg>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-menu-footer">
+        <span class="mobile-brand-tag">AffyneLabs</span>
+      </div>
+    </div>
+  </div>
+
+  <main class="about-scroll-track" id="aboutScrollTrack" aria-label="About AffyneLabs">
+
+    <div class="about-sticky-scene" id="aboutStickyScene">
+
+      <div class="cinema-backdrop" id="cinemaBackdrop">
+        <video class="scene-video" id="aboutVideo" autoplay loop muted playsinline preload="auto" poster="assets/about%20image.png" aria-hidden="true">
+          <source src="assets/about-loop.webm" type="video/webm">
+          <img src="assets/about%20image.png" alt="" class="video-fallback">
+        </video>
+        <div class="scene-vignette" aria-hidden="true"></div>
+      </div>
+
+      <div class="wall-stage" id="wallStage">
+        <div class="wall-plane" id="wallPlane">
+
+          <section class="wall-section wall-sec-0 is-active" id="secWhoWeAre" aria-label="Who We Are">
+            <span class="wall-label">WHO WE ARE</span>
+            <h1 class="wall-headline">
+              <span class="hl-line">Built on affinity.</span>
+              <span class="hl-line hl-accent">Guided by intelligence.</span>
+            </h1>
+            <div class="wall-body-wrap">
+              <p class="wall-subtext">
+                Affyne Labs is built from two ideas: <strong>Affinity</strong> — human connection, trust, attachment and empathy — and <strong>Intelligence</strong> — the ability to perceive, understand, and recognize patterns in context.
+              </p>
+              <p class="wall-subtext-secondary">
+                Labs reflects how we intend to build: through exploration, experimentation, research, and iteration.
+              </p>
+            </div>
+            <a href="#" class="btn-wall-cta" id="storyBtn" aria-label="Explore our story">
+              <span>Our Story</span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+          </section>
+
+          <section class="wall-section wall-sec-1" id="secAbout" aria-label="About Affyne Labs">
+            <span class="wall-label">ABOUT AFFYNE LABS</span>
+            <h2 class="wall-headline">
+              <span class="hl-line">A HealthTech company</span>
+              <span class="hl-line hl-accent">exploring human understanding.</span>
+            </h2>
+            <div class="wall-body-wrap">
+              <p class="wall-subtext">
+                Affyne Labs is a HealthTech innovation company exploring the intersection of artificial intelligence, human understanding, and wellbeing.
+              </p>
+              <div class="wall-callout-card">
+                <p class="wall-subtext-highlight">
+                  Our first application is mental health and emotional wellbeing — that is where we start, not where we stop.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="wall-section wall-sec-2 wall-sec-reveal" id="secMission" aria-label="Our Mission">
+            <span class="wall-label">OUR MISSION</span>
+            <h2 class="wall-headline">
+              <span class="hl-line">Technology that understands</span>
+              <span class="hl-line hl-accent">people more deeply.</span>
+            </h2>
+            <div class="wall-reveal-flow">
+              <p class="wall-subtext">
+                To make technology understand people more deeply, and use that understanding to support human connection more meaningfully.
+              </p>
+              <p class="wall-subtext-secondary">
+                Technology has become increasingly capable of processing information, but people are more than information — context, emotion, relationships, behaviour, and history all shape what someone communicates.
+              </p>
+              <div class="wall-callout-card" id="missionCallout">
+                <p class="wall-subtext-highlight">
+                  Affyne Labs exists to account for these dimensions, responsibly.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="wall-section wall-sec-3 wall-sec-reveal" id="secVision" aria-label="Our Vision">
+            <span class="wall-label">OUR VISION</span>
+            <h2 class="wall-headline">
+              <span class="hl-line">Human Understanding</span>
+              <span class="hl-line hl-accent">Intelligence.</span>
+            </h2>
+            <div class="wall-reveal-flow">
+              <p class="wall-subtext">
+                To build Human Understanding Intelligence — technology capable of interpreting human communication, context, behaviour, and evolving states, in ways that enable more meaningful human experiences and support.
+              </p>
+              <div class="wall-callout-card" id="visionCallout">
+                <p class="wall-subtext-highlight">
+                  Mental health is our first domain of application. It is not the limit of what we intend to explore.
+                </p>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+
+
+    </div>
+
+  </main>
+
+  <script src="about.js"></script>
+</body>
+</html>
+

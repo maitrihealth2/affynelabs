@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — AffyneLabs</title>
+  <meta name="description" content="Get in touch with AffyneLabs to build a safer tomorrow, together. Reach out for research collaborations, early access, and partnerships.">
+  
+  <!-- Google Fonts: Cormorant Garamond (Editorial Serif) & Manrope (Clean Sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Shared Design Tokens & Dedicated Contact Page Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="contact.css?v=1">
+</head>
+<body class="contact-page">
+
+  <!-- Fixed Scenic Terrace & Ocean Background (assets/contact.png) -->
+  <div class="contact-backdrop" aria-hidden="true">
+    <img 
+      src="assets/contact.png" 
+      alt="Contemporary oceanfront terrace overlooking deep blue water under sunny skies" 
+      class="contact-bg-img"
+    >
+  </div>
+
+  <!-- Transparent Site Header (Consistent with Home, About, and Products) -->
+  <header class="site-header" id="header" role="banner">
+    <!-- Top-left Branding -->
+    <a href="index.html" class="brand-wordmark" aria-label="AffyneLabs Home">affynelabs</a>
+
+    <!-- Exactly 3 Navigation Links: Home, About, Products -->
+    <nav class="main-nav" id="desktopNav" aria-label="Primary Navigation">
+      <ul class="nav-list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="products.html" class="nav-link">Products</a></li>
+      </ul>
+    </nav>
+
+    <!-- Mobile Navigation Toggle -->
+    <button class="mobile-nav-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileOverlay">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-menu-overlay" id="mobileOverlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="mobile-menu-card" id="mobileMenuCard">
+      <div class="mobile-menu-header">
+        <span class="mobile-menu-title">Navigation</span>
+      </div>
+      <ul class="mobile-nav-list">
+        <li>
+          <a href="index.html" class="mobile-nav-link">
+            <span>Home</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4-4-4-4"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="about.html" class="mobile-nav-link">
+            <span>About</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4-4-4-4"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="products.html" class="mobile-nav-link">
+            <span>Products</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4-4-4-4"/></svg>
+          </a>
+        </li>
+      </ul>
+      <div class="mobile-menu-footer">
+        <span class="mobile-brand-tag">AffyneLabs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Contact Content Stage (Positioned in the open sky area, preserving chairs & ocean) -->
+  <main class="contact-main" id="mainContent">
+    <div class="contact-container">
+      <div class="contact-grid">
+        
+        <!-- Left Column: Editorial Eyebrow & Headline -->
+        <div class="contact-left-col">
+          <div class="eyebrow-wrapper">
+            <span class="contact-eyebrow">CONTACT US</span>
+            <span class="eyebrow-divider" aria-hidden="true"></span>
+          </div>
+
+          <h1 class="contact-headline">
+            <span class="hl-line">Let’s build a</span>
+            <span class="hl-line">safer tomorrow,</span>
+            <span class="hl-line hl-accent">together.</span>
+          </h1>
+        </div>
+
+        <!-- Right Column: Minimalist Frosted Contact Form -->
+        <div class="contact-right-col">
+          <form class="contact-form" id="contactForm" novalidate aria-label="Contact form">
+            
+            <div class="form-field-group">
+              <label for="contactName" class="sr-only">Your Name</label>
+              <input 
+                type="text" 
+                id="contactName" 
+                name="name" 
+                class="contact-input" 
+                placeholder="Your Name" 
+                required 
+                autocomplete="name"
+                aria-required="true"
+              >
+              <span class="field-error-msg" id="nameError" aria-live="polite"></span>
+            </div>
+
+            <div class="form-field-group">
+              <label for="contactEmail" class="sr-only">Your Email</label>
+              <input 
+                type="email" 
+                id="contactEmail" 
+                name="email" 
+                class="contact-input" 
+                placeholder="Your Email" 
+                required 
+                autocomplete="email"
+                aria-required="true"
+              >
+              <span class="field-error-msg" id="emailError" aria-live="polite"></span>
+            </div>
+
+            <div class="form-field-group">
+              <label for="contactMessage" class="sr-only">Your Message</label>
+              <textarea 
+                id="contactMessage" 
+                name="message" 
+                class="contact-textarea" 
+                placeholder="Your Message" 
+                rows="4" 
+                required
+                aria-required="true"
+              ></textarea>
+              <span class="field-error-msg" id="messageError" aria-live="polite"></span>
+            </div>
+
+            <!-- Primary Send Action Button -->
+            <div class="form-action-row">
+              <button type="submit" class="btn-send-message" id="sendBtn" aria-label="Send message">
+                <span class="btn-label">Send Message</span>
+                <svg class="btn-arrow" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M3 8h10M9 4l4 4-4 4"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Inline Submission Feedback Notice -->
+            <div class="form-status-feedback" id="formStatusFeedback" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Dedicated Contact Controller & Form Validation -->
+  <script src="contact.js?v=1"></script>
+</body>
+</html>
