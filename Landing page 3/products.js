@@ -3,7 +3,10 @@
  * Page is 100% fixed/locked. Only the content on the wall scrolls.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+window.initProductsPage = function () {
+  // Guard: only run on products page
+  if (!document.getElementById('productsScrollTrack')) return;
+
   // ==========================================================================
   // Mobile Menu Toggle
   // ==========================================================================
@@ -266,4 +269,10 @@ document.addEventListener('DOMContentLoaded', () => {
   currentP = targetP;
   updateSections(currentP);
   requestAnimationFrame(tick);
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', window.initProductsPage);
+} else {
+  window.initProductsPage();
+}

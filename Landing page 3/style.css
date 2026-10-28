@@ -747,8 +747,85 @@ button:focus-visible {
   }
 }
 
+/* ==========================================================================
+   Connected Smooth Page Swipe Transitions (No middle screen)
+   Both pages move connected edge-to-edge as one continuous surface
+   ========================================================================== */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.38s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+  mix-blend-mode: normal !important;
+  height: 100%;
+  overflow: clip;
+}
+
+/* Forward Navigation (e.g. Home -> About -> Products -> Contact) */
+/* Current page slides to left, New page enters from right (connected) */
+html[data-nav-dir="forward"]::view-transition-old(root) {
+  animation-name: pt-slide-out-left;
+}
+html[data-nav-dir="forward"]::view-transition-new(root) {
+  animation-name: pt-slide-in-right;
+}
+
+/* Backward Navigation (e.g. Contact -> Products -> About -> Home) */
+/* Current page slides to right, New page enters from left (connected) */
+html[data-nav-dir="back"]::view-transition-old(root) {
+  animation-name: pt-slide-out-right;
+}
+html[data-nav-dir="back"]::view-transition-new(root) {
+  animation-name: pt-slide-in-left;
+}
+
+@keyframes pt-slide-out-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes pt-slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pt-slide-out-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pt-slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 /* Reduced Motion Mode */
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

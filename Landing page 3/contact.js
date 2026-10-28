@@ -3,7 +3,10 @@
  * Form validation, submission handling, and responsive mobile navigation
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+window.initContactPage = function () {
+  // Guard: only run on contact page
+  if (!document.getElementById('contactForm')) return;
+
   // ==========================================================================
   // Mobile Navigation Drawer Toggle
   // ==========================================================================
@@ -199,4 +202,10 @@ document.addEventListener('DOMContentLoaded', () => {
       sendBtn.innerHTML = originalBtnHtml;
     }
   });
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', window.initContactPage);
+} else {
+  window.initContactPage();
+}

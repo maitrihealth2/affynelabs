@@ -10,7 +10,7 @@
  * a smoothed lerp on every requestAnimationFrame tick.
  */
 
-(function () {
+window.initAboutPage = function () {
   'use strict';
 
   /* ── Guard: only run on the about page ── */
@@ -397,5 +397,10 @@
      KICKOFF
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   requestAnimationFrame(tick);
+};
 
-})();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', window.initAboutPage);
+} else {
+  window.initAboutPage();
+}

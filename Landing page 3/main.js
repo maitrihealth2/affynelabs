@@ -2,7 +2,7 @@
  * AffyneLabs - Homepage Scripts
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+window.initHomePage = function () {
   const toggleBtn = document.getElementById('mobileMenuToggle');
   const overlay = document.getElementById('mobileOverlay');
 
@@ -14,24 +14,30 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = isOpen ? 'hidden' : '';
     };
 
-    toggleBtn.addEventListener('click', () => toggleMenu());
+    toggleBtn.onclick = () => toggleMenu();
 
     // Close mobile menu on overlay click outside links
-    overlay.addEventListener('click', (e) => {
+    overlay.onclick = (e) => {
       if (e.target === overlay) {
         toggleMenu(false);
       }
-    });
+    };
 
     // Close on Escape key
-    document.addEventListener('keydown', (e) => {
+    document.onkeydown = (e) => {
       if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
         toggleMenu(false);
         toggleBtn.focus();
       }
-    });
+    };
   }
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', window.initHomePage);
+} else {
+  window.initHomePage();
+}
 
 /**
  * Handle Join Waiting List submission
