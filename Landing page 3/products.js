@@ -5,7 +5,7 @@
 
 window.initProductsPage = function () {
   // Guard: only run on products page
-  if (!document.getElementById('productsScrollTrack')) return;
+  if (!document.getElementById('productsScrollViewport')) return;
 
   // ==========================================================================
   // Mobile Menu Toggle
@@ -84,6 +84,15 @@ window.initProductsPage = function () {
   const sections = Array.from(document.querySelectorAll('.wall-section-block'));
 
   if (!viewport || sections.length === 0) return;
+
+  if (window._prodCleanup) {
+    window._prodCleanup();
+    window._prodCleanup = null;
+  }
+  if (window._prodRafId) {
+    cancelAnimationFrame(window._prodRafId);
+    window._prodRafId = null;
+  }
 
   let targetP = 0;   // raw scroll progress (0 → 1)
   let currentP = 0;  // lerped progress for smooth animation
@@ -196,7 +205,7 @@ window.initProductsPage = function () {
       currentP = targetP;
       updateSections(currentP);
     }
-    requestAnimationFrame(tick);
+    window._prodRafId = requestAnimationFrame(tick);
   }
 
   // Smooth scroll helper to step index (0, 1, or 2)
@@ -214,8 +223,7 @@ window.initProductsPage = function () {
   }
 
   // Wheel listener: ensure smooth steps on desktop mouse wheel
-  window.addEventListener('wheel', (e) => {
-    // If mobile menu is open or user is focusing an input, let default handle
+  const handleWheel = (e) => {
     if (overlay && overlay.classList.contains('is-open')) return;
     if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
       return;
@@ -233,20 +241,18 @@ window.initProductsPage = function () {
         scrollToStep(currentStep - 1);
       }
     }
-  }, { passive: true });
+  };
 
-  // Native scroll listener on viewport (handles mobile touch swipe & snap)
-  viewport.addEventListener('scroll', () => {
+  const handleScroll = () => {
     calcProgress();
-  }, { passive: true });
+  };
 
-  window.addEventListener('resize', () => {
+  const handleResize = () => {
     calcProgress();
     updateSections(currentP);
-  }, { passive: true });
+  };
 
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
+  const handleKeydown = (e) => {
     if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
       return;
     }
@@ -262,13 +268,25 @@ window.initProductsPage = function () {
         scrollToStep(currentStep - 1);
       }
     }
-  });
+  };
+
+  window.addEventListener('wheel', handleWheel, { passive: true });
+  viewport.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleResize, { passive: true });
+  document.addEventListener('keydown', handleKeydown);
+
+  window._prodCleanup = () => {
+    window.removeEventListener('wheel', handleWheel);
+    viewport.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('resize', handleResize);
+    document.removeEventListener('keydown', handleKeydown);
+  };
 
   // Initial calculation and kick-off
   calcProgress();
   currentP = targetP;
   updateSections(currentP);
-  requestAnimationFrame(tick);
+  window._prodRafId = requestAnimationFrame(tick);
 };
 
 if (document.readyState === 'loading') {

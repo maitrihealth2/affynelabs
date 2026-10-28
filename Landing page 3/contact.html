@@ -12,20 +12,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Shared Design Tokens & Dedicated Contact Page Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
   <link rel="stylesheet" href="about.css">
   <link rel="stylesheet" href="products.css?v=9">
-  <link rel="stylesheet" href="contact.css?v=1">
+  <link rel="stylesheet" href="contact.css?v=2">
 </head>
 <body class="contact-page">
 
-  <!-- Fixed Scenic Terrace & Ocean Background (assets/contact.png) -->
+  <!-- Fixed Scenic Terrace & Ocean Background (Responsive: assets/contact.png on desktop, assets/contactus(mobile).png on mobile) -->
   <div class="contact-backdrop" aria-hidden="true">
-    <img 
-      src="assets/contact.png" 
-      alt="Contemporary oceanfront terrace overlooking deep blue water under sunny skies" 
-      class="contact-bg-img"
-    >
+    <picture class="contact-bg-picture">
+      <source media="(max-width: 768px), (max-aspect-ratio: 1/1)" srcset="assets/contactus(mobile).png">
+      <img 
+        src="assets/contact.png" 
+        alt="Contemporary oceanfront terrace overlooking deep blue water under sunny skies" 
+        class="contact-bg-img"
+      >
+    </picture>
   </div>
 
   <!-- Transparent Site Header (Consistent with Home, About, and Products) -->
@@ -82,91 +85,54 @@
         <span class="mobile-brand-tag">AffyneLabs</span>
       </div>
     </div>
-  </div>
-
-  <!-- Main Contact Content Stage (Positioned in the open sky area, preserving chairs & ocean) -->
+  </div>  <!-- Main Contact Content Stage (Positioned in the open sky area, preserving chairs & ocean) -->
   <main class="contact-main" id="mainContent">
-    <div class="contact-container">
-      <div class="contact-grid">
-        
-        <!-- Left Column: Editorial Eyebrow & Headline -->
-        <div class="contact-left-col">
-          <div class="eyebrow-wrapper">
-            <span class="contact-eyebrow">CONTACT US</span>
-            <span class="eyebrow-divider" aria-hidden="true"></span>
-          </div>
+    <div class="contact-hero-stage">
+      
+      <!-- Center Editorial Headline -->
+      <h1 class="contact-hero-headline">
+        <span class="contact-hero-top">Let’s start</span>
+        <span class="contact-hero-bottom">a conversation.</span>
+      </h1>
 
-          <h1 class="contact-headline">
-            <span class="hl-line">Let’s build a</span>
-            <span class="hl-line">safer tomorrow,</span>
-            <span class="hl-line hl-accent">together.</span>
-          </h1>
-        </div>
-
-        <!-- Right Column: Minimalist Frosted Contact Form -->
-        <div class="contact-right-col">
-          <form class="contact-form" id="contactForm" novalidate aria-label="Contact form">
-            
-            <div class="form-field-group">
-              <label for="contactName" class="sr-only">Your Name</label>
-              <input 
-                type="text" 
-                id="contactName" 
-                name="name" 
-                class="contact-input" 
-                placeholder="Your Name" 
-                required 
-                autocomplete="name"
-                aria-required="true"
-              >
-              <span class="field-error-msg" id="nameError" aria-live="polite"></span>
-            </div>
-
-            <div class="form-field-group">
-              <label for="contactEmail" class="sr-only">Your Email</label>
-              <input 
-                type="email" 
-                id="contactEmail" 
-                name="email" 
-                class="contact-input" 
-                placeholder="Your Email" 
-                required 
-                autocomplete="email"
-                aria-required="true"
-              >
-              <span class="field-error-msg" id="emailError" aria-live="polite"></span>
-            </div>
-
-            <div class="form-field-group">
-              <label for="contactMessage" class="sr-only">Your Message</label>
-              <textarea 
-                id="contactMessage" 
-                name="message" 
-                class="contact-textarea" 
-                placeholder="Your Message" 
-                rows="4" 
-                required
-                aria-required="true"
-              ></textarea>
-              <span class="field-error-msg" id="messageError" aria-live="polite"></span>
-            </div>
-
-            <!-- Primary Send Action Button -->
-            <div class="form-action-row">
-              <button type="submit" class="btn-send-message" id="sendBtn" aria-label="Send message">
-                <span class="btn-label">Send Message</span>
-                <svg class="btn-arrow" width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M3 8h10M9 4l4 4-4 4"/>
-                </svg>
-              </button>
-            </div>
-
-            <!-- Inline Submission Feedback Notice -->
-            <div class="form-status-feedback" id="formStatusFeedback" role="status" aria-live="polite"></div>
-          </form>
-        </div>
-
+      <!-- Contact Us Direct Action (Launches email directly) -->
+      <div class="contact-action-wrapper">
+        <a href="mailto:contact@affynelabs.com" class="contact-direct-link" id="contactEmailBtn" aria-label="Contact us directly via email">
+          <span class="contact-direct-label">Contact us</span>
+          <svg class="contact-direct-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2.5 8h11M9 3.5l4.5 4.5-4.5 4.5"/>
+          </svg>
+        </a>
       </div>
+
+      <!-- Social Media Icons Row -->
+      <div class="contact-social-row" aria-label="Social media profiles">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/affynelabs/" target="_blank" rel="noopener noreferrer" class="contact-social-link" aria-label="AffyneLabs on Instagram">
+          <svg class="social-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/affynelabs/" target="_blank" rel="noopener noreferrer" class="contact-social-link" aria-label="AffyneLabs on LinkedIn">
+          <svg class="social-svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+
+        <!-- X (Twitter) -->
+        <a href="https://x.com/Affynelabs" target="_blank" rel="noopener noreferrer" class="contact-social-link" aria-label="AffyneLabs on X">
+          <svg class="social-svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+      </div>
+
     </div>
   </main>
 

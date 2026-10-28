@@ -142,10 +142,34 @@ window.initAboutPage = function () {
   const visionWords  = splitSectionWords(document.getElementById('secVision'));
 
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     SCROLL PROGRESS
+     SCROLL PROGRESS & RESPONSIVE STATE
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
   let targetP  = 0;  /* raw scroll progress  0→1 */
   let currentP = 0;  /* lerped progress */
+  let lastP    = -1; /* previous rendered progress for dirty-checking */
+
+  let rp = {};
+  function updateResponsiveParams() {
+    const w = window.innerWidth;
+    const isMobile = w <= 768;
+    const isTablet = w <= 1024 && !isMobile;
+
+    rp = {
+      isMobile,
+      isTablet,
+      /* Full immersive camera push-in all the way to the wall */
+      bgScaleDelta: isMobile ? 0.60 : isTablet ? 0.88 : 1.15,
+      /* Gentle natural camera yaw (degrees) - clean perspective with zero whip */
+      initRotY: isMobile ? 3.5 : isTablet ? 5.5 : 7.5,
+      /* Subtle chin-up camera pitch */
+      initRotX: isMobile ? -0.4 : isTablet ? -0.6 : -0.8,
+      /* Text plane optical scale: zooms naturally towards camera as we approach the wall */
+      planeScaleStart: isMobile ? 0.88 : 0.82,
+      planeScaleEnd: 1.04,
+      /* Lateral drift set to 0 so text stays locked onto the wall anchor */
+      shiftXEnd: 0,
+    };
+  }
 
   function calcTargetProgress() {
     const maxScroll = track.scrollHeight - window.innerHeight;
@@ -153,15 +177,34 @@ window.initAboutPage = function () {
     targetP = Math.min(1, Math.max(0, window.scrollY / maxScroll));
   }
 
-  window.addEventListener('scroll', calcTargetProgress, { passive: true });
-  window.addEventListener('resize', calcTargetProgress, { passive: true });
-  calcTargetProgress();
+  /* Clean up any previous listeners if page was revisited via SPA */
+  if (window._aboutScrollHandler) {
+    window.removeEventListener('scroll', window._aboutScrollHandler);
+    window.removeEventListener('resize', window._aboutResizeHandler);
+  }
+  if (window._aboutRafId) {
+    cancelAnimationFrame(window._aboutRafId);
+    window._aboutRafId = null;
+  }
+
+  const handleResize = () => {
+    updateResponsiveParams();
+    calcTargetProgress();
+  };
+
+  window._aboutScrollHandler = calcTargetProgress;
+  window._aboutResizeHandler = handleResize;
+
+  window.addEventListener('scroll', window._aboutScrollHandler, { passive: true });
+  window.addEventListener('resize', window._aboutResizeHandler, { passive: true });
+  handleResize();
 
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      EASING HELPERS
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  function easeInOutCubic(t) {
-    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  function easeGlide(t) {
+    /* Smooth sinusoidal glide with zero velocity spikes or jerk */
+    return 0.5 - 0.5 * Math.cos(Math.PI * t);
   }
 
   function easeOutCubic(t) {
@@ -177,13 +220,13 @@ window.initAboutPage = function () {
       if (i === activeIdx) {
         sec.classList.add('is-active');
         sec.style.opacity   = opacity.toFixed(4);
-        sec.style.transform = `translateY(calc(-50% + ${shiftY}px))`;
+        sec.style.transform = `translate3d(0, calc(-50% + ${shiftY}px), 0)`;
         sec.style.visibility = 'visible';
         sec.style.pointerEvents = 'auto';
       } else {
         sec.classList.remove('is-active');
         sec.style.opacity   = '0';
-        sec.style.transform = 'translateY(-50%)';
+        sec.style.transform = 'translate3d(0, -50%, 0)';
         sec.style.visibility = 'hidden';
         sec.style.pointerEvents = 'none';
       }
@@ -230,19 +273,6 @@ window.initAboutPage = function () {
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      MAIN ANIMATION LOOP
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-
-  /*
-    Phase thresholds (in overall scroll progress 0→1):
-
-    0.000 → PUSH_END  :  Phase A – camera push-in
-    PUSH_END → 1.000  :  Phase B – content on wall
-
-    Section allocation within Phase B:
-    sec 0 : 0.00 → 0.15
-    sec 1 : 0.15 → 0.32
-    sec 2 : 0.32 → 0.66  (large plateau for word reveal + reading)
-    sec 3 : 0.66 → 1.00  (final section, never dissolves away)
-  */
   const PUSH_END = 0.20;
 
   const SEC_RANGES = [
@@ -255,111 +285,88 @@ window.initAboutPage = function () {
   /* Dissolve starts at this fraction of a section's local progress */
   const DISSOLVE_AT = 0.82;
 
-  function getResponsiveParams() {
-    const w = window.innerWidth;
-    const isMobile = w <= 768;
-    const isTablet = w <= 1024 && !isMobile;
-
-    return {
-      isMobile,
-      isTablet,
-      /* How much backdrop scales during push-in (total delta above 1.0) */
-      bgScaleDelta: isMobile ? 0.55 : isTablet ? 0.85 : 1.10,
-      /* Initial Y-rotation on the wall text plane (degrees) - natural cinematic perspective */
-      initRotY: isMobile ? 7 : isTablet ? 9 : 11,
-      /* Initial X-rotation (slight chin-up perspective) */
-      initRotX: isMobile ? -0.8 : isTablet ? -1.0 : -1.2,
-      /* Initial skewY */
-      initSkew: isMobile ? -0.5 : isTablet ? -0.6 : -0.7,
-      /* Max-width at the start of Phase A */
-      planeWidthStart: isMobile ? Math.min(w - 36, 350) : isTablet ? Math.min(w * 0.45, 480) : Math.min(w * 0.40, 520),
-      /* Max-width when camera reaches the wall */
-      planeWidthEnd: isMobile ? Math.min(w - 36, 440) : isTablet ? Math.min(w * 0.65, 780) : Math.min(w * 0.68, 920),
-      /* translateX shift as camera approaches (makes text centre-up nicely on the wall) */
-      shiftXEnd: isMobile ? 0.6 : isTablet ? 1.2 : 1.8,   /* vw */
-    };
-  }
-
   function tick() {
-    /* Smooth lerp — 0.07 feels cinematic without being sluggish */
-    currentP += (targetP - currentP) * 0.07;
-
-    const rp = getResponsiveParams();
-
-    if (currentP <= PUSH_END) {
-      /* ────────────────────────────────────────────
-         PHASE A: CAMERA PUSH-IN
-         ──────────────────────────────────────────── */
-      const pA = Math.min(1, Math.max(0, currentP / PUSH_END));
-      const eA = easeInOutCubic(pA);
-
-      /* Backdrop: scale from 1.0 towards 1.0 + bgScaleDelta */
-      const scale = 1.0 + eA * rp.bgScaleDelta;
-      backdrop.style.transform = `scale(${scale})`;
-
-      /* Wall plane: straighten perspective as camera approaches */
-      const rotY  = rp.initRotY  * (1 - eA);
-      const rotX  = rp.initRotX  * (1 - eA);
-      const skewY = rp.initSkew  * (1 - eA);
-      const shiftX = rp.shiftXEnd * eA;
-      const planeScale = 1.0 + eA * 0.04;
-
-      const pw = rp.planeWidthStart + eA * (rp.planeWidthEnd - rp.planeWidthStart);
-      wallPlane.style.maxWidth = `${pw}px`;
-      wallPlane.style.transform =
-        `translateX(${shiftX}vw) scale(${planeScale}) rotateY(${rotY}deg) rotateX(${rotX}deg) skewY(${skewY}deg)`;
-
-      /* Section 0 stays fully visible during push-in */
-      renderSection(0, 1.0, 0);
-
+    /* Smooth lerp with epsilon snapping to eliminate subpixel float micro-vibration */
+    const diff = targetP - currentP;
+    if (Math.abs(diff) < 0.00004) {
+      currentP = targetP;
     } else {
-      /* ────────────────────────────────────────────
-         PHASE B: CONTENT NAVIGATION
-         ──────────────────────────────────────────── */
-
-      /* Camera locked at wall */
-      const finalScale = 1.0 + rp.bgScaleDelta;
-      backdrop.style.transform = `scale(${finalScale})`;
-      wallPlane.style.maxWidth  = `${rp.planeWidthEnd}px`;
-      wallPlane.style.transform =
-        `translateX(${rp.shiftXEnd}vw) scale(1.04) rotateY(0deg) rotateX(0deg) skewY(0deg)`;
-
-      /* Normalise progress within Phase B */
-      const pB = (currentP - PUSH_END) / (1.0 - PUSH_END);  /* 0→1 */
-
-      /* Which section are we in? */
-      let activeIdx    = 0;
-      let localP       = 0;
-
-      for (let i = 0; i < SEC_RANGES.length; i++) {
-        const r = SEC_RANGES[i];
-        if (pB >= r.start && (pB < r.end || i === SEC_RANGES.length - 1)) {
-          activeIdx = i;
-          localP = (r.end > r.start)
-            ? Math.min(1, Math.max(0, (pB - r.start) / (r.end - r.start)))
-            : 1;
-          break;
-        }
-      }
-
-      /* Word reveals for Mission / Vision */
-      updateWordReveals(activeIdx, localP);
-
-      /* Dissolve outgoing section into wall surface */
-      let opacity = 1.0;
-      let shiftY  = 0;
-
-      const isLastSection = (activeIdx === SEC_RANGES.length - 1);
-      if (!isLastSection && localP > DISSOLVE_AT) {
-        const fadeP  = (localP - DISSOLVE_AT) / (1.0 - DISSOLVE_AT);
-        opacity = 1.0 - fadeP;
-        shiftY  = -14 * easeOutCubic(fadeP);  /* dissolves slightly into wall */
-      }
-
-      renderSection(activeIdx, opacity, shiftY);
+      currentP += diff * 0.075;
     }
 
-    requestAnimationFrame(tick);
+    /* Only update DOM when value actually moves */
+    if (Math.abs(currentP - lastP) > 0.00001) {
+      lastP = currentP;
+
+      if (currentP <= PUSH_END) {
+        /* ────────────────────────────────────────────
+           PHASE A: CAMERA PUSH-IN (Smooth Glide)
+           ──────────────────────────────────────────── */
+        const pA = Math.min(1, Math.max(0, currentP / PUSH_END));
+        const eA = easeGlide(pA);
+
+        /* Backdrop: GPU-composited 3D scale with gentle Steadicam push */
+        const scale = 1.0 + eA * rp.bgScaleDelta;
+        backdrop.style.transform = `translate3d(0, 0, 0) scale3d(${scale.toFixed(5)}, ${scale.toFixed(5)}, 1)`;
+
+        /* Wall plane: clean 3D camera orientation gliding straight towards the wall */
+        const rotY  = (rp.initRotY * (1 - eA)).toFixed(4);
+        const rotX  = (rp.initRotX * (1 - eA)).toFixed(4);
+        const planeScale = (rp.planeScaleStart + eA * (rp.planeScaleEnd - rp.planeScaleStart)).toFixed(5);
+
+        wallPlane.style.transform =
+          `translate3d(0, 0, 0) scale3d(${planeScale}, ${planeScale}, 1) rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+
+        /* Section 0 stays fully visible during push-in */
+        renderSection(0, 1.0, 0);
+
+      } else {
+        /* ────────────────────────────────────────────
+           PHASE B: CONTENT NAVIGATION
+           ──────────────────────────────────────────── */
+        /* Camera locked at wall */
+        const finalScale = (1.0 + rp.bgScaleDelta).toFixed(5);
+        backdrop.style.transform = `translate3d(0, 0, 0) scale3d(${finalScale}, ${finalScale}, 1)`;
+        wallPlane.style.transform =
+          `translate3d(0, 0, 0) scale3d(${rp.planeScaleEnd}, ${rp.planeScaleEnd}, 1) rotateY(0deg) rotateX(0deg)`;
+
+        /* Normalise progress within Phase B */
+        const pB = (currentP - PUSH_END) / (1.0 - PUSH_END);  /* 0→1 */
+
+        /* Which section are we in? */
+        let activeIdx = 0;
+        let localP    = 0;
+
+        for (let i = 0; i < SEC_RANGES.length; i++) {
+          const r = SEC_RANGES[i];
+          if (pB >= r.start && (pB < r.end || i === SEC_RANGES.length - 1)) {
+            activeIdx = i;
+            localP = (r.end > r.start)
+              ? Math.min(1, Math.max(0, (pB - r.start) / (r.end - r.start)))
+              : 1;
+            break;
+          }
+        }
+
+        /* Word reveals for Mission / Vision */
+        updateWordReveals(activeIdx, localP);
+
+        /* Dissolve outgoing section into wall surface */
+        let opacity = 1.0;
+        let shiftY  = 0;
+
+        const isLastSection = (activeIdx === SEC_RANGES.length - 1);
+        if (!isLastSection && localP > DISSOLVE_AT) {
+          const fadeP  = (localP - DISSOLVE_AT) / (1.0 - DISSOLVE_AT);
+          opacity = 1.0 - fadeP;
+          shiftY  = -14 * easeOutCubic(fadeP);
+        }
+
+        renderSection(activeIdx, opacity, shiftY);
+      }
+    }
+
+    window._aboutRafId = requestAnimationFrame(tick);
   }
 
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -396,7 +403,7 @@ window.initAboutPage = function () {
   /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      KICKOFF
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-  requestAnimationFrame(tick);
+  window._aboutRafId = requestAnimationFrame(tick);
 };
 
 if (document.readyState === 'loading') {

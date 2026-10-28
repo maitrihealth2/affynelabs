@@ -5,9 +5,10 @@
 
 /* ── Page variables ── */
 :root {
-  --about-navy:        #0e1e2e;
-  --about-navy-muted:  rgba(14, 30, 46, 0.70);
-  --about-blue:        #2b6cb0;
+  --about-navy:        #102B49;
+  --about-navy-body:   #172B40;
+  --about-navy-muted:  rgba(23, 43, 64, 0.88);
+  --about-blue:        #1766B1;
   --about-cream:       #f6f1ea;
 }
 
@@ -18,11 +19,20 @@ html, body {
 }
 *::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
-/* ── Body reset for about ── */
+/* ── HTML & Body reset for about ── */
+html:has(body.about-page) {
+  overflow-y: auto !important;
+  height: auto !important;
+  position: static !important;
+}
+
 body.about-page {
+  min-height: 100%;
+  position: relative;
   background-color: var(--about-cream);
-  color: var(--about-navy);
+  color: var(--about-navy-body);
   overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -48,21 +58,12 @@ body.about-page .mobile-nav-toggle {
 
 /* Dark navy text on cream wall */
 body.about-page .brand-wordmark { color: var(--about-navy); }
-body.about-page .nav-link        { color: var(--about-navy); opacity: 0.82; font-weight: 500; }
+body.about-page .nav-link        { color: var(--about-navy-body); opacity: 0.88; font-weight: 500; }
 body.about-page .nav-link:hover  { opacity: 1; }
 body.about-page .nav-link::after { background-color: var(--about-navy); }
 body.about-page .mobile-nav-toggle { color: var(--about-navy); }
 
-/* Decorative rule under wordmark */
-body.about-page .brand-wordmark::after {
-  content: '';
-  display: block;
-  width: 22px;
-  height: 1.5px;
-  background: var(--about-navy);
-  margin-top: 5px;
-  opacity: 0.55;
-}
+/* Decorative rule under wordmark removed as requested */
 
 /* ═══════════════════════════════════════════════════════════════
    SCROLL TRACK  &  STICKY SCENE
@@ -102,12 +103,12 @@ body.about-page .brand-wordmark::after {
   /*
     transform-origin anchored ~25% from left edge, ~42% from top.
     This keeps the cream wall centred during scale push-in.
-    Tune these values if the video crop changes.
   */
   transform-origin: 25% 42%;
   will-change: transform;
-  /* Start slightly scaled so scale(1) = comfortable initial framing */
-  transform: scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .scene-video {
@@ -120,6 +121,9 @@ body.about-page .brand-wordmark::after {
   object-position: 30% center;
   pointer-events: none;
   z-index: 1;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .video-fallback {
@@ -130,6 +134,9 @@ body.about-page .brand-wordmark::after {
   object-fit: cover;
   object-position: 30% center;
   z-index: 0;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Very subtle warm vignette — does not alter the scene noticeably */
@@ -160,22 +167,48 @@ body.about-page .brand-wordmark::after {
   padding-top: 4.5rem; /* clear header */
   /* Perspective depth for rotateY */
   perspective: 1400px;
+  perspective-origin: 36% 50%;
   pointer-events: none;
 }
 
-/* ── Wall Plane ── the flat surface that gets skewed then straightens ── */
+/* ── Wall Plane ── the flat surface that receives the cinematic push-in ── */
 .wall-plane {
   position: relative;
   /*
-    Height so absolute-positioned sections have a containing block.
-    The plane itself is never taller than the viewport.
+    Stable width prevents layout reflow jitter. Push-in zoom is handled
+    smoothly via GPU-accelerated transforms rather than changing maxWidth.
   */
   width: 100%;
-  max-width: 600px;   /* Initial: text fits inside perspective-angled view */
+  max-width: 620px;
   min-height: clamp(340px, 60vh, 560px);
   transform-style: preserve-3d;
-  will-change: transform, max-width;
+  transform-origin: 25% 42%;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   pointer-events: auto;
+}
+
+/* ── Localized Warm-Ivory Translucent Veil (10-18% feathered overlay) ── */
+.wall-plane::before {
+  content: '';
+  position: absolute;
+  /* Extends gently beyond text to feather naturally into the sunlit wall */
+  inset: -3.5rem -4.5rem -3.5rem -3rem;
+  border-radius: 40px;
+  /* Subtle warm-ivory translucent gradient feathered to 0% at edges */
+  background: radial-gradient(
+    ellipse 85% 75% at 40% 46%,
+    rgba(247, 243, 236, 0.18) 0%,
+    rgba(246, 241, 234, 0.13) 48%,
+    rgba(246, 241, 234, 0.05) 75%,
+    rgba(246, 241, 234, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(14px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -186,7 +219,7 @@ body.about-page .brand-wordmark::after {
   top: 50%;
   left: 0;
   width: 100%;
-  transform: translateY(-50%);
+  transform: translate3d(0, -50%, 0);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -194,6 +227,9 @@ body.about-page .brand-wordmark::after {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  z-index: 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   /* NO CSS transition — JS drives opacity directly for precise control */
 }
 
@@ -213,9 +249,7 @@ body.about-page .brand-wordmark::after {
   letter-spacing: 0.2em;
   color: var(--about-navy);
   margin-bottom: 1rem;
-  text-shadow:
-    0 1px 3px rgba(0,0,0, 0.35),
-    0 2px 8px rgba(0,0,0, 0.15);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 /* ── Main headline ── */
@@ -227,20 +261,14 @@ body.about-page .brand-wordmark::after {
   color: var(--about-navy);
   letter-spacing: -0.015em;
   margin-bottom: 1.5rem;
-  text-shadow:
-    0 1px 2px rgba(0,0,0, 0.60),
-    0 3px 10px rgba(0,0,0, 0.32),
-    0 8px 28px rgba(0,0,0, 0.14);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
 }
 
 .wall-headline .hl-line  { display: block; }
 .wall-headline .hl-accent {
   font-style: italic;
   color: var(--about-blue);
-  text-shadow:
-    0 1px 2px rgba(0,0,0, 0.55),
-    0 3px 10px rgba(43,108,176, 0.40),
-    0 8px 24px rgba(0,0,0, 0.14);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35);
 }
 
 /* ── Body text wrapper ── */
@@ -255,25 +283,21 @@ body.about-page .brand-wordmark::after {
 /* ── Supporting paragraphs ── */
 .wall-subtext {
   font-family: var(--font-sans);
-  font-size: clamp(0.93rem, 1.0vw, 1.08rem);
-  font-weight: 500;
-  line-height: 1.68;
-  color: var(--about-navy);
-  text-shadow:
-    0 1px 2px rgba(0,0,0, 0.45),
-    0 2px 8px rgba(0,0,0, 0.20);
+  font-size: clamp(0.94rem, 1.02vw, 1.08rem);
+  font-weight: 550;
+  line-height: 1.74;
+  color: var(--about-navy-body);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35);
 }
 
 .wall-subtext-secondary {
   font-family: var(--font-sans);
-  font-size: clamp(0.9rem, 0.95vw, 1.02rem);
+  font-size: clamp(0.91rem, 0.96vw, 1.03rem);
   font-weight: 500;
-  line-height: 1.65;
-  color: var(--about-navy);
-  opacity: 0.82;
-  text-shadow:
-    0 1px 2px rgba(0,0,0, 0.40),
-    0 2px 8px rgba(0,0,0, 0.18);
+  line-height: 1.72;
+  color: var(--about-navy-body);
+  opacity: 0.92;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35);
 }
 
 /* ── Callout card ── */
@@ -284,13 +308,11 @@ body.about-page .brand-wordmark::after {
 
 .wall-subtext-highlight {
   font-family: var(--font-sans);
-  font-size: clamp(0.93rem, 1.0vw, 1.06rem);
-  font-weight: 500;
-  line-height: 1.62;
-  color: var(--about-navy);
-  text-shadow:
-    0 1px 2px rgba(0,0,0, 0.45),
-    0 2px 8px rgba(0,0,0, 0.20);
+  font-size: clamp(0.94rem, 1.02vw, 1.08rem);
+  font-weight: 550;
+  line-height: 1.68;
+  color: var(--about-navy-body);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.35);
 }
 
 /* ── CTA button ── */
@@ -298,7 +320,7 @@ body.about-page .brand-wordmark::after {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(255,255,255, 0.88);
+  background: #ffffff;
   color: var(--about-navy);
   font-family: var(--font-sans);
   font-size: 0.9rem;
@@ -306,15 +328,19 @@ body.about-page .brand-wordmark::after {
   text-decoration: none;
   padding: 0.68rem 1.55rem;
   border-radius: 9999px;
-  border: 1px solid rgba(14,30,46, 0.1);
-  box-shadow: 0 4px 16px rgba(14,30,46, 0.08);
+  border: 1px solid rgba(16, 43, 73, 0.12);
+  box-shadow: 0 4px 16px rgba(16, 43, 73, 0.08);
   transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
 }
-.btn-wall-cta svg { transition: transform 0.22s ease; }
+.btn-wall-cta svg {
+  color: var(--about-navy);
+  stroke: var(--about-navy);
+  transition: transform 0.22s ease;
+}
 .btn-wall-cta:hover {
   background: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(14,30,46, 0.13);
+  box-shadow: 0 8px 28px rgba(16, 43, 73, 0.14);
 }
 .btn-wall-cta:hover svg { transform: translateX(3px); }
 
@@ -349,7 +375,7 @@ body.about-page .brand-wordmark::after {
 
 /* Callout card in reveal sections: starts faint, brightens on activation */
 .wall-sec-reveal .wall-callout-card {
-  border-left-color: rgba(43,108,176, 0.22);
+  border-left-color: rgba(23, 102, 177, 0.25);
   transition: border-left-color 0.4s ease;
 }
 .wall-sec-reveal .wall-callout-card.is-active {
@@ -438,6 +464,11 @@ body.about-page .brand-wordmark::after {
     transform-style: preserve-3d;
   }
 
+  .wall-plane::before {
+    inset: -2.25rem -1.75rem -2.25rem -1.5rem;
+    filter: blur(10px);
+  }
+
   .wall-section {
     position: absolute;
     top: 50%;
@@ -463,21 +494,25 @@ body.about-page .brand-wordmark::after {
 
   .wall-subtext {
     font-size: clamp(0.92rem, 3.8vw, 1.02rem);
-    line-height: 1.58;
+    line-height: 1.66;
+    font-weight: 550;
   }
 
   .wall-subtext-secondary {
     font-size: clamp(0.88rem, 3.5vw, 0.96rem);
-    line-height: 1.54;
+    line-height: 1.62;
+    font-weight: 500;
   }
 
   .wall-callout-card {
     padding-left: 1rem;
+    border-left: 2px solid var(--about-blue);
   }
 
   .wall-subtext-highlight {
     font-size: clamp(0.9rem, 3.6vw, 1.0rem);
-    line-height: 1.55;
+    line-height: 1.62;
+    font-weight: 550;
   }
 
   .btn-wall-cta {

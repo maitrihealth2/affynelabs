@@ -237,10 +237,10 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   height: 100dvh;
-  /* Soft, ambient sheer veil that keeps the background architectural room visible */
-  background: rgba(7, 16, 27, 0.42);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  /* Soft, clean ambient sheer veil */
+  background: rgba(15, 28, 44, 0.22);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 140;
   flex-direction: column;
   justify-content: flex-start;
@@ -250,7 +250,7 @@ button:focus-visible {
   padding-left: 1rem;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s ease;
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.24s ease;
   box-sizing: border-box;
 }
 
@@ -260,23 +260,20 @@ button:focus-visible {
   pointer-events: auto;
 }
 
-/* Floating Glass Card */
+/* Clean, Plain Minimal Floating Card */
 .mobile-menu-card {
-  width: min(290px, 100%);
-  background: rgba(13, 25, 39, 0.90);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 20px;
+  width: min(240px, 100%);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
   box-shadow: 
-    0 24px 50px -10px rgba(0, 0, 0, 0.55),
-    0 4px 16px rgba(0, 0, 0, 0.2),
-    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-  padding: 0.85rem;
+    0 16px 36px -6px rgba(10, 24, 40, 0.14),
+    0 4px 12px rgba(10, 24, 40, 0.04);
+  padding: 0.5rem;
   box-sizing: border-box;
-  transform: translateY(-12px) scale(0.96);
+  transform: translateY(-8px) scale(0.97);
   opacity: 0;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
   pointer-events: auto;
 }
 
@@ -285,28 +282,15 @@ button:focus-visible {
   opacity: 1;
 }
 
+/* Simplified clean presentation - remove bulky headers and footers */
 .mobile-menu-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.35rem 0.65rem 0.55rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 0.45rem;
-}
-
-.mobile-menu-title {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  display: none;
 }
 
 .mobile-menu-overlay .mobile-nav-list {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -317,72 +301,59 @@ button:focus-visible {
   font-family: var(--font-sans);
   font-size: 0.95rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
+  color: #12283e;
   text-decoration: none;
-  padding: 0.72rem 0.9rem;
-  min-height: 44px;
+  padding: 0.7rem 0.9rem;
+  min-height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 12px;
-  transition: background-color var(--transition-smooth), color var(--transition-smooth), transform var(--transition-smooth);
+  border-radius: 10px;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
   box-sizing: border-box;
 }
 
 .mobile-menu-overlay .mobile-nav-link svg {
-  color: rgba(255, 255, 255, 0.35);
+  color: #94a3b8;
   transition: transform var(--transition-smooth), color var(--transition-smooth);
 }
 
 .mobile-menu-overlay .mobile-nav-link:hover,
 .mobile-menu-overlay .mobile-nav-link:active {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+  background: #f1f5f9;
+  color: #0f172a;
 }
 
 .mobile-menu-overlay .mobile-nav-link:hover svg,
 .mobile-menu-overlay .mobile-nav-link:active svg {
-  transform: translateX(3px);
-  color: #ffffff;
+  transform: translateX(2px);
+  color: #0f172a;
 }
 
 .mobile-menu-overlay .mobile-nav-link.active {
-  background: rgba(30, 91, 160, 0.28);
-  color: #60a5fa;
+  background: #eff6ff;
+  color: #1e5ba0;
   font-weight: 600;
-  border: 1px solid rgba(96, 165, 250, 0.25);
 }
 
 .mobile-menu-overlay .mobile-nav-link.active svg {
-  color: #60a5fa;
+  color: #1e5ba0;
 }
 
 .mobile-menu-card .btn-cta {
   width: 100%;
   justify-content: center;
-  margin-top: 0.55rem;
-  padding: 0.65rem 1.25rem;
+  margin-top: 0.4rem;
+  padding: 0.65rem 1.15rem;
   font-size: 0.88rem;
-  border-radius: 12px;
+  border-radius: 10px;
   box-sizing: border-box;
+  background-color: #102B49;
+  color: #ffffff;
 }
 
 .mobile-menu-footer {
-  margin-top: 0.55rem;
-  padding-top: 0.55rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 0.65rem;
-  padding-right: 0.65rem;
-}
-
-.mobile-brand-tag {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.38);
-  letter-spacing: 0.02em;
+  display: none;
 }
 
 /* ==========================================================================
@@ -495,19 +466,21 @@ button:focus-visible {
 .waitlist-form {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: 9999px;
   padding: 5px 6px 5px 18px;
   max-width: 490px;
   width: 100%;
-  box-shadow: none;
+  box-shadow: 0 4px 20px rgba(10, 24, 40, 0.08);
   transition: border-color var(--transition-smooth), background-color var(--transition-smooth);
 }
 
 .waitlist-form:focus-within {
-  border-color: rgba(255, 255, 255, 0.45);
-  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.65);
+  background-color: rgba(255, 255, 255, 0.26);
 }
 
 .waitlist-input-container {
@@ -519,7 +492,7 @@ button:focus-visible {
 }
 
 .waitlist-icon {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.92);
   flex-shrink: 0;
 }
 
@@ -535,8 +508,9 @@ button:focus-visible {
 }
 
 .waitlist-input::placeholder {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.88);
   font-weight: 400;
+  text-shadow: 0 1px 3px rgba(10, 24, 40, 0.25);
 }
 
 .btn-waitlist {
@@ -714,9 +688,11 @@ button:focus-visible {
     border-radius: 18px;
     padding: 0.45rem;
     gap: 0.45rem;
-    background: rgba(14, 30, 46, 0.45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 24px rgba(10, 24, 40, 0.12);
   }
 
   .waitlist-input-container {

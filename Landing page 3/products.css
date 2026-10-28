@@ -19,9 +19,9 @@
 /* ==========================================================================
    Base Setup: Whole Page is strictly LOCKED & IMMOBILE
    ========================================================================== */
-html,
 body.products-page {
   height: 100%;
+  height: 100svh;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -73,20 +73,7 @@ body.products-page .brand-wordmark {
   font-weight: 600;
   text-decoration: none;
   letter-spacing: -0.025em;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-body.products-page .brand-wordmark::after {
-  content: '';
-  display: block;
-  width: 24px;
-  height: 1.5px;
-  background-color: #ffffff;
-  margin-top: 5px;
-  opacity: 0.9;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  display: inline-block;
 }
 
 body.products-page .main-nav {
