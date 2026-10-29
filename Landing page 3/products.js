@@ -307,16 +307,16 @@ window.initProductsPage = function () {
 
   window.addEventListener('wheel', handleWheel, { passive: true });
   viewport.addEventListener('scroll', handleScroll, { passive: true });
-  viewport.addEventListener('touchstart', handleTouchStart, { passive: true });
-  viewport.addEventListener('touchend', handleTouchEnd, { passive: true });
+  window.addEventListener('touchstart', handleTouchStart, { passive: true });
+  window.addEventListener('touchend', handleTouchEnd, { passive: true });
   window.addEventListener('resize', handleResize, { passive: true });
   document.addEventListener('keydown', handleKeydown);
 
   window._prodCleanup = () => {
     window.removeEventListener('wheel', handleWheel);
     viewport.removeEventListener('scroll', handleScroll);
-    viewport.removeEventListener('touchstart', handleTouchStart);
-    viewport.removeEventListener('touchend', handleTouchEnd);
+    window.removeEventListener('touchstart', handleTouchStart);
+    window.removeEventListener('touchend', handleTouchEnd);
     window.removeEventListener('resize', handleResize);
     document.removeEventListener('keydown', handleKeydown);
   };

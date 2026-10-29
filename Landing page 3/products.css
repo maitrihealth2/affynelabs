@@ -22,12 +22,7 @@
 html:has(body.products-page),
 html.products-page {
   height: 100% !important;
-  height: 100vh !important;
   height: 100dvh !important;
-  min-height: 100% !important;
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
-  min-height: -webkit-fill-available !important;
   width: 100% !important;
   overflow: hidden !important;
   position: fixed !important;
@@ -37,12 +32,7 @@ html.products-page {
 
 body.products-page {
   height: 100%;
-  height: 100vh;
   height: 100dvh;
-  min-height: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-  min-height: -webkit-fill-available;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -160,14 +150,9 @@ body.products-page .nav-link:hover::after {
   right: 0;
   bottom: 0;
   width: 100%;
-  width: 100vw;
   height: 100%;
   height: 100vh;
   height: 100dvh;
-  min-height: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
-  min-height: -webkit-fill-available;
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
@@ -183,7 +168,6 @@ body.products-page .nav-link:hover::after {
   bottom: 0;
   width: 100%;
   height: 100%;
-  min-height: 100%;
   object-fit: cover;
   object-position: center 50%;
   display: block;
@@ -222,7 +206,7 @@ body.products-page .nav-link:hover::after {
   width: min(580px, 46vw);
   max-width: 580px;
   min-height: 380px;
-  z-index: 20;
+  z-index: 30;
   pointer-events: none; /* Let scroll events pass through to content runway */
   box-sizing: border-box;
 }
@@ -444,18 +428,14 @@ body.products-page .nav-link:hover::after {
   right: 0;
   bottom: 0;
   width: 100%;
-  width: 100vw;
   height: 100%;
   height: 100vh;
   height: 100dvh;
-  min-height: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: y mandatory;
-  z-index: 25;
+  z-index: 20;
   pointer-events: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -473,7 +453,6 @@ body.products-page .nav-link:hover::after {
   height: 100%;
   height: 100vh;
   height: 100dvh;
-  min-height: 100%;
   width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
