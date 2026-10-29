@@ -270,14 +270,53 @@ window.initProductsPage = function () {
     }
   };
 
+  // Touch swipe handling for mobile devices
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  const handleTouchStart = (e) => {
+    if (e.touches && e.touches.length === 1) {
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (overlay && overlay.classList.contains('is-open')) return;
+    if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+      return;
+    }
+    if (!e.changedTouches || e.changedTouches.length === 0) return;
+
+    const diffY = touchStartY - e.changedTouches[0].clientY;
+    const diffX = touchStartX - e.changedTouches[0].clientX;
+
+    if (Math.abs(diffY) > 30 && Math.abs(diffY) > Math.abs(diffX) * 1.2) {
+      const now = Date.now();
+      if (now - wheelDebounce < 400 || isNavigating) return;
+
+      if (diffY > 0 && currentStep < 2) {
+        wheelDebounce = now;
+        scrollToStep(currentStep + 1);
+      } else if (diffY < 0 && currentStep > 0) {
+        wheelDebounce = now;
+        scrollToStep(currentStep - 1);
+      }
+    }
+  };
+
   window.addEventListener('wheel', handleWheel, { passive: true });
   viewport.addEventListener('scroll', handleScroll, { passive: true });
+  viewport.addEventListener('touchstart', handleTouchStart, { passive: true });
+  viewport.addEventListener('touchend', handleTouchEnd, { passive: true });
   window.addEventListener('resize', handleResize, { passive: true });
   document.addEventListener('keydown', handleKeydown);
 
   window._prodCleanup = () => {
     window.removeEventListener('wheel', handleWheel);
     viewport.removeEventListener('scroll', handleScroll);
+    viewport.removeEventListener('touchstart', handleTouchStart);
+    viewport.removeEventListener('touchend', handleTouchEnd);
     window.removeEventListener('resize', handleResize);
     document.removeEventListener('keydown', handleKeydown);
   };

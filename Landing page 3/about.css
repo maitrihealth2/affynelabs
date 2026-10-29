@@ -20,10 +20,13 @@ html, body {
 *::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
 /* ── HTML & Body reset for about ── */
-html:has(body.about-page) {
+html:has(body.about-page),
+html.about-page {
   overflow-y: auto !important;
+  overflow-x: hidden !important;
   height: auto !important;
   position: static !important;
+  overscroll-behavior-y: none;
 }
 
 body.about-page {
@@ -31,8 +34,9 @@ body.about-page {
   position: relative;
   background-color: var(--about-cream);
   color: var(--about-navy-body);
-  overflow-x: clip;
+  overflow-x: hidden;
   overflow-y: visible;
+  overscroll-behavior-y: none;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -81,9 +85,9 @@ body.about-page .mobile-nav-toggle { color: var(--about-navy); }
   height: 800vh;
 }
 
-/* The sticky cinematic viewport */
+/* The fixed cinematic viewport — pinned firmly in view while the runway scrolls */
 .about-sticky-scene {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
